@@ -12,5 +12,7 @@ public interface BatchRepository extends CrudRepository<Batch, Long> {
 	Batch findBatchByBeerType(BeerType beerType);
 	
 	Set<Batch> findAllByBeerTypeLike(BeerType beerType);
-
+	
+	Set<Batch> findByOrderByBatchNumberAsc();
+	
 }

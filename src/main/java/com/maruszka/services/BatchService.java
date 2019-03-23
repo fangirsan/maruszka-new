@@ -10,5 +10,7 @@ public interface BatchService extends CrudService<Batch, Long> {
 	Batch findBatchByBeerType(BeerType beerType);
 	
 	Set<Batch> findAllByBeerTypeLike(BeerType beerType);
+
+	Set<Batch> findByOrderByBatchNumberAsc();
 		
 }

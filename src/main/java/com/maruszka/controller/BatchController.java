@@ -23,7 +23,7 @@ public class BatchController {
 	@GetMapping("/list")
 	public String getBatches(Model theModel) {
 		
-		Set<Batch> theBatches = batchService.findAll();
+		Set<Batch> theBatches = batchService.findByOrderByBatchNumberAsc();
 		
 		theModel.addAttribute("batches", theBatches);
 		

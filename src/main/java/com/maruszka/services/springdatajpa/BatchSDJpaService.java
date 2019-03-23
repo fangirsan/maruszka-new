@@ -71,4 +71,9 @@ public class BatchSDJpaService implements BatchService {
 		return batchRepository.findAllByBeerTypeLike(beerType);
 	}
 
+	@Override
+	public Set<Batch> findByOrderByBatchNumberAsc() {
+		return batchRepository.findByOrderByBatchNumberAsc();
+	}
+
 }
