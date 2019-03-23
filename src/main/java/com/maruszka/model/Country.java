@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,9 @@ import lombok.ToString;
 @Setter
 @Getter
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
 @Entity
+@Builder
 @ToString
 @Table(name="country")
 public class Country extends BaseEntity {

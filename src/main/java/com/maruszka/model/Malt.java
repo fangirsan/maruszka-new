@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -19,14 +20,14 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @Entity
-//@ToString
+@ToString
 @Table(name="malt")
 public class Malt extends BaseEntity {
 	
 	@Column(name="malt_name")
 	private String maltName;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="producer_id")
 	private Producer producer;
 	
@@ -39,7 +40,7 @@ public class Malt extends BaseEntity {
 	@Column(name="malt_usage")
 	private String maltUsage;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="country_id")
 	private Country country;
 	
@@ -57,11 +58,11 @@ public class Malt extends BaseEntity {
 		this.country = country;
 	}
 
-	@Override
-	public String toString() {
-		return "Malt [maltName=" + maltName + ", producer=" + producer + ", maltFilling=" + maltFilling + ", maltEbc="
-				+ maltEbc + ", maltUsage=" + maltUsage + ", country=" + country + ", batches=" + batches + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Malt [maltName=" + maltName + ", producer=" + producer + ", maltFilling=" + maltFilling + ", maltEbc="
+//				+ maltEbc + ", maltUsage=" + maltUsage + ", country=" + country + ", batches=" + batches + "]";
+//	}
 	
 	
 }

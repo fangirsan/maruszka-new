@@ -28,33 +28,34 @@
 			<div class="main">
 
 				<div class="page-title">
-					<p th:text="#{malts.title}"/>
+					<p th:text="#{malt.title}"/>
 				</div>
 
 				<table class="table">
 					<thead class="thead">
 						<tr>
-							<th>Batch number</th>
-							<th>Beer type</th>
-							<th>Yeast</th>
+							<th>Malt name</th>
+							<th>Malt Producer</th>
+							<th>Malt Country</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 						<tr th:remove="all">
-							<td>1</td>
-							<td>Stout</td>
-							<td>WB-06</td>
+							<td>Strzegom jasny</td>
+							<td>Strzegom</td>
+							<td>Polska</td>
 						</tr>
 						<tr th:remove="all">
-							<td>2</td>
-							<td>Russian Imperial Stout</td>
-							<td>T-58</td>
+							<td>Pale Ale</td>
+							<td>Malteurop</td>
+							<td>Polska</td>
 						</tr>
-						<tr th:each="batch: ${batches}">
-							<td th:text="${batch.batchNumber}" />
-							<td th:text="${batch.beerType.beerType}" />
-							<td th:text="${batch.yeast.yeastName}" />
+						<tr th:each="malt: ${malts}">
+							<td th:text="${malt.maltName}" />
+							<td th:text="${malt.producer.producerName}" />
+							<td th:text="${malt.country.countryCode}" />
+	
 						</tr>
 					</tbody>
 				</table>

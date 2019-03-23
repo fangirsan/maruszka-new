@@ -109,6 +109,11 @@ public class DataLoader implements CommandLineRunner{
 		
 		Malt malt2 = Malt.builder()
 				.maltName("Strzegom")
+				.maltFilling(100)
+				.maltEbc(3)
+				.maltUsage("All")
+				.country(countryService.findByCountryName("Poland"))
+				.producer(producerService.findByProducerName("Malt Europ"))
 				.build();
 		maltService.save(malt2);
 		log.info("Malts loadaed...");
