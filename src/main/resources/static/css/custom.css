@@ -1,0 +1,104 @@
+*::before, *::after {
+	box-sizing: border-box;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: black;
+	font-family: 'Courier', monospace;
+}
+
+.wrapper {
+	border-radius: 10px;
+	background-color: #333333;
+	color: #ffffff;
+	padding: 15px;
+	width: 85%;
+	margin: 7px auto;
+}
+
+.header {
+	
+}
+
+.menu {
+	
+}
+
+.inner-menu {
+	
+}
+
+.main {
+	
+}
+
+.footer {
+	padding: 0px;
+	text-align: center;
+}
+
+.footer p {
+	padding: 0;
+	margin: 0px;
+	height: 50%;
+}
+
+ul {
+	margin: 0 auto;
+	padding: 0px;
+	list-style-type: none;
+	overflow: hidden;
+	background-color: #333333;
+	text-align: center;
+}
+
+li {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+li a {
+	display: block;
+	border: 2px solid black;
+	border-radius: 15px;
+	color: white;
+	text-align: center;
+	padding: 15px;
+	width: 100px;
+	text-decoration: none;
+}
+
+li a:hover {
+	color: white;
+	background-color: #757272;
+	text-decoration: none;
+}
+
+li a:focus {
+	color: white;
+	background-color: #757272;
+	text-decoration: none;
+}
+
+table {
+	margin: 0px auto; text-align : center;
+	border-collapse: collapse;
+	width: 100%;
+	/*this makes equals spacing in columns*/
+	table-layout: fixed; 
+	text-align: center;
+}
+
+table, td, th {
+	border: 1px solid black;
+}
+
+.thead {
+	column-span: 100%;
+	text-align: center;
+}

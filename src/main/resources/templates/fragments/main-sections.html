@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="#{index.page.title}">Page Title</title>
+
+    <link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" media="screen"
+            th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}"/>
+
+    <script src="../static/js/jquery-2.1.4.min.js"
+          th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+
+    <style th:remove="all">
+	</style>
+
+
+</head>
+<body>
+
+<div class="wrapper" th:fragment="header">
+      <div class="header">
+            <h1>Maruszka Home Brewery</h1>
+            <p class="lead">Home Page</p>
+      </div>
+</div>
+
+<div class="wrapper" th:fragment="menu">
+	<div class="menu">
+		<div class="inner-menu">
+			<ul>
+				<li><a th:href="@{/batch/list}">Batch</a></li>
+				<li><a href="#news">News</a></li>
+				<li><a href="#contact">Contact</a></li>
+				<li><a href="#about">About</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper" th:fragment="footer">
+	<div class="footer">
+		<p>Here goes footer</p>
+	</div>
+</div>
+
+
+</body>
+</html>
