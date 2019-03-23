@@ -36,6 +36,15 @@ body {
 	
 }
 
+.page-title {
+	background-color: #757272;
+	margin: 0px 40%;
+	text-align: center;
+	display: block;
+	border-radius: 15px;
+	font-size: 200%;
+}
+
 .footer {
 	padding: 0px;
 	text-align: center;
@@ -86,10 +95,11 @@ li a:focus {
 }
 
 table {
-	margin: 0px auto; text-align : center;
+	margin: 0px auto;
+	text-align: center;
 	border-collapse: collapse;
 	/*this makes equals spacing in columns*/
-	table-layout: fixed; 
+	table-layout: fixed;
 	text-align: center;
 }
 
