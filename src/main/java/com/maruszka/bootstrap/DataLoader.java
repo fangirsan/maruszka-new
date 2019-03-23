@@ -143,6 +143,11 @@ public class DataLoader implements CommandLineRunner{
 				.beerType("Stout")
 				.build();
 		beerTypeService.save(beerType);
+		
+		beerType = BeerType.builder()
+				.beerType("Russian Imperial Stout")
+				.build();
+		beerTypeService.save(beerType);
 		log.info("BeerType loaded...");
 		
 		// Batch
@@ -156,6 +161,15 @@ public class DataLoader implements CommandLineRunner{
 		Batch batch = Batch.builder()
 				.batchNumber(1)
 				.beerType(beerTypeService.findByBeerType("Stout"))
+				.hops(hops)
+				.yeast(yeastService.findByYeastName("US-05"))
+				.malts(malts)
+				.build();
+		batchService.save(batch);
+		
+		batch = Batch.builder()
+				.batchNumber(2)
+				.beerType(beerTypeService.findById(2L))
 				.hops(hops)
 				.yeast(yeastService.findByYeastName("US-05"))
 				.malts(malts)
