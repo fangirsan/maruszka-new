@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.maruszka.model.Malt;
@@ -29,5 +30,12 @@ public class MaltController {
 		
 		return "malt-list";
 	}
-	
+		
+	@RequestMapping("{id}/update")
+	public String updateMalt(@PathVariable String id, Model model) {
+		
+		model.addAttribute("malt", maltService.findById(Long.valueOf(id)));
+		
+		return "malt-form";
+	}
 }
