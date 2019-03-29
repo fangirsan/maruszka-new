@@ -51,7 +51,7 @@ public class MaltController {
 		model.addAttribute("malt", maltService.findById(Long.valueOf(id)));
 		
 		Set<Country> countries = countryService.findAll();
-		model.addAttribute("country", countries);
+		model.addAttribute("countries", countries);
 		
 		return "malt-form";
 	}
