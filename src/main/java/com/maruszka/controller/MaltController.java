@@ -1,5 +1,6 @@
 package com.maruszka.controller;
 
+import java.util.Collection;
 import java.util.Set;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.maruszka.model.Country;
 import com.maruszka.model.Malt;
@@ -27,6 +29,12 @@ public class MaltController {
 		this.countryService = countryService;
 	}
 	
+	// Method invoked in first place, adding "countries" to all models
+	@ModelAttribute("countries")
+	public Collection<Country> populateCountries() {
+		return countryService.findAll();
+	}
+	
 	@GetMapping("/list")
 	public String getMalts(Model theModel) {
 		
@@ -36,6 +44,13 @@ public class MaltController {
 		
 		return "malt-list";
 	}
+	
+	@GetMapping("/{id}")
+    public ModelAndView showMalt(@PathVariable("id") Long id) {
+        ModelAndView mav = new ModelAndView("malt-show");
+        mav.addObject(maltService.findById(id));
+        return mav;
+    }
 		
 	@RequestMapping("/{id}/malt-show")
     public String showById(@PathVariable String id, Model model){
@@ -50,20 +65,17 @@ public class MaltController {
 		
 		model.addAttribute("malt", maltService.findById(Long.valueOf(id)));
 		
-		Set<Country> countries = countryService.findAll();
-		model.addAttribute("countries", countries);
+//		Set<Country> countries = countryService.findAll();
+//		model.addAttribute("countries", countries);
 		
 		return "malt-form";
 	}
 	
-	@PostMapping
-    @RequestMapping
+	@PostMapping //"malt" is in the request mapping for entire class
     public String saveOrUpdate(@ModelAttribute Malt malt) {
-    	
 		Malt savedMalt = maltService.save(malt);
     	
     	return "redirect:/malt/" + savedMalt.getId() + "/malt-show";
-//		return "malt-list";
     }
 	
 }

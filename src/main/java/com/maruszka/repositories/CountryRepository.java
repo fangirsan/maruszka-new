@@ -11,6 +11,6 @@ public interface CountryRepository extends CrudRepository<Country, Long> {
 	Country findByCountryName(String countryName);
 	
 	List<Country> findAllByCountryNameLike(String countryName);
-	
+
 	//TODO: add searching by countryCode
 }

@@ -17,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Builder
-@ToString
+//@ToString
 @Table(name="country")
 public class Country extends BaseEntity {
 
@@ -34,5 +34,8 @@ public class Country extends BaseEntity {
 		this.countryCode = countryCode;
 	}
 	
+	public String toString( ) {
+		return countryName;
+	}
 	
 }

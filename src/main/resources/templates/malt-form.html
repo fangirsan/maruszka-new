@@ -54,11 +54,11 @@
 							<div class="form-field-input">
 								<!-- >input type="text" class="form-control"
 									th:field="*{country.countryCode}" /-->
-								<select class="form-control" th:field="*{id}">
+								<select class="form-control" th:field="*{country.id}">
 							    <option value="0">Select country</option>
 								    <option th:each="country : ${countries}"
-			                            th:value="${country.id}"
-			                            th:utext="${country.countryName}">
+			                            th:value="${country?.id}"
+			                            th:text="${country?.countryName}">
 						    		</option>
 							    </select>
 							</div>
@@ -77,7 +77,7 @@
 								<label>Malt usage:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="number" class="form-control"
+								<input type="text" class="form-control"
 									th:field="*{maltUsage}" />
 							</div>
 						</div>

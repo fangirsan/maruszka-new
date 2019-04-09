@@ -6,9 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -31,9 +28,7 @@ public class Malt extends BaseEntity {
 	@Column(name="malt_name")
 	private String maltName;
 
-	@ManyToOne(fetch=FetchType.EAGER,
-			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-					CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="producer_id")
 	private Producer producer;
 
@@ -46,9 +41,7 @@ public class Malt extends BaseEntity {
 	@Column(name="malt_usage")
 	private String maltUsage;
 
-	@ManyToOne(fetch=FetchType.EAGER,
-			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-					CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="country_id")
 	private Country country;
 

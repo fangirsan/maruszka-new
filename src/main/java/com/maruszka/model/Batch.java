@@ -7,16 +7,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +22,8 @@ import lombok.ToString;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+//@AllArgsConstructor
+//@Builder
 @Entity
 @ToString
 @Table(name="batch")
@@ -57,6 +53,14 @@ public class Batch extends BaseEntity {
 				inverseJoinColumns = @JoinColumn(name="malt_id"))
 	private Set<Malt> malts = new HashSet<>();
 
-		
-	
+	@Builder
+	public Batch(Long id, Integer batchNumber, BeerType beerType, Yeast yeast, Set<Hop> hops, Set<Malt> malts) {
+		super(id);
+		this.batchNumber = batchNumber;
+		this.beerType = beerType;
+		this.yeast = yeast;
+		this.hops = hops;
+		this.malts = malts;
+	}
+
 }
