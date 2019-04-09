@@ -31,8 +31,8 @@ public class MaltController {
 	
 	// Method invoked in first place, adding "countries" to all models
 	@ModelAttribute("countries")
-	public Collection<Country> populateCountries() {
-		return countryService.findAll();
+	public Set<Country> populateCountries() {
+		return countryService.findByOrderByCountryNameAsc();
 	}
 	
 	@GetMapping("/list")

@@ -1,6 +1,6 @@
 package com.maruszka.repositories;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,7 +10,9 @@ public interface CountryRepository extends CrudRepository<Country, Long> {
 
 	Country findByCountryName(String countryName);
 	
-	List<Country> findAllByCountryNameLike(String countryName);
+	Set<Country> findAllByCountryNameLike(String countryName);
+
+	Set<Country> findByOrderByCountryNameAsc();
 
 	//TODO: add searching by countryCode
 }

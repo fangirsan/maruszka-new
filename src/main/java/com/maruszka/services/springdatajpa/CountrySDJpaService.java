@@ -1,8 +1,6 @@
 package com.maruszka.services.springdatajpa;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.annotation.Profile;
@@ -56,8 +54,13 @@ public class CountrySDJpaService implements CountryService {
 	}
 
 	@Override
-	public List<Country> findAllByCountryNameLike(String countryName) {
+	public Set<Country> findAllByCountryNameLike(String countryName) {
 		return countryRepository.findAllByCountryNameLike(countryName);
+	}
+
+	@Override
+	public Set<Country> findByOrderByCountryNameAsc() {
+		return countryRepository.findByOrderByCountryNameAsc();
 	}
 
 }

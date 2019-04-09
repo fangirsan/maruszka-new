@@ -52,8 +52,6 @@
 								<label>Country:</label>
 							</div>
 							<div class="form-field-input">
-								<!-- >input type="text" class="form-control"
-									th:field="*{country.countryCode}" /-->
 								<select class="form-control" th:field="*{country.id}">
 							    <option value="0">Select country</option>
 								    <option th:each="country : ${countries}"
