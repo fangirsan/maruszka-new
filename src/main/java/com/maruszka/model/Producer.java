@@ -18,7 +18,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @Entity
-@ToString
+//@ToString
 @Table(name="producer")
 public class Producer extends BaseEntity{
 
@@ -36,5 +36,8 @@ public class Producer extends BaseEntity{
 		this.product = product;
 	}
 	
+	public String toString() {
+		return producerName;
+	}
 	
 }
