@@ -58,5 +58,10 @@ public class ProcuerSDJpaService implements ProducerService {
 	public List<Producer> findAllByProducerNameLike(String maltProducerName) {
 		return producerRepository.findAllByProducerNameLike(maltProducerName);
 	}
+	
+	@Override
+	public Set<Producer> findByOrderByProducerNameAsc() {
+		return producerRepository.findByOrderByProducerNameAsc();
+	}
 
 }

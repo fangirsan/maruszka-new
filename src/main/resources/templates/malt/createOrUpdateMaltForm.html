@@ -28,7 +28,7 @@
 					<p th:text="#{malt.form.title}" />
 				</div>
 				<div class="form">
-					<form th:object="${malt}" th:action="@{/malt/}" method="post">
+					<form th:object="${malt}" th:action="@{${'/malt/' + malt.id + '/edit'}}" method="post">
 						<input type="hidden" th:field="*{id}" />
 						<div class="form-row">
 							<div class="form-field-name">
@@ -43,8 +43,15 @@
 								<label>Producer:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="text" class="form-control"
-									th:field="*{producer.producerName}" />
+								<select class="form-control" th:field="*{producer.id}">
+								<option value="0">Select producer</option>
+									<option th:each="producer : ${producers}"
+										th:value="${producer?.id}"
+										th:text="${producer?.producerName}">
+									</option>
+								</select>
+								<!-- input type="text" class="form-control"
+									th:field="*{producer.producerName}" /-->
 							</div>
 						</div>
 						<div class="form-row">
@@ -84,7 +91,8 @@
 								<label>Malt EBC:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="number" class="form-control" th:field="*{maltEbc}" />
+								<input type="number" class="form-control"
+									th:field="*{maltEbc}" />
 							</div>
 						</div>
 						<div class="form-row">

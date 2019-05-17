@@ -19,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.maruszka.model.Country;
 import com.maruszka.model.Malt;
+import com.maruszka.model.Producer;
 import com.maruszka.services.CountryService;
 import com.maruszka.services.MaltService;
+import com.maruszka.services.ProducerService;
 
 @Controller
 @RequestMapping("/malt")
@@ -30,10 +32,12 @@ public class MaltController {
 	
 	private MaltService maltService;
 	private CountryService countryService;
+	private ProducerService producerService;
 
-	public MaltController(MaltService maltService, CountryService countryService) {
+	public MaltController(MaltService maltService, CountryService countryService, ProducerService producerService) {
 		this.maltService = maltService;
 		this.countryService = countryService;
+		this.producerService = producerService;
 	}
 	
 	@InitBinder
@@ -45,6 +49,11 @@ public class MaltController {
 	@ModelAttribute("countries")
 	public Set<Country> populateCountries() {
 		return countryService.findByOrderByCountryNameAsc();
+	}
+	
+	@ModelAttribute("producers")
+	public Set<Producer> populateProducers() {
+		return producerService.findByOrderByProducerNameAsc();
 	}
 	
 	@RequestMapping("/find")
