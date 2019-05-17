@@ -11,6 +11,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,7 +44,9 @@ public class Malt extends BaseEntity {
 	@Column(name="malt_usage")
 	private String maltUsage;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY,
+			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+					  CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
 	@JoinColumn(name="country_id")
 	private Country country;
 

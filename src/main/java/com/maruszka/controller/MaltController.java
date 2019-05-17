@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maruszka.model.Country;
@@ -140,5 +141,13 @@ public class MaltController {
 	    	return "redirect:/malt/" + savedMalt.getId();
 		}
     }
+	
+	@RequestMapping("/delete/{maltId}")
+	public String deleteMalt(@PathVariable("maltId") Long maltId ) {
+		
+		maltService.deleteById(maltId);
+		
+		return "redirect:/list";
+	}
 	
 }
