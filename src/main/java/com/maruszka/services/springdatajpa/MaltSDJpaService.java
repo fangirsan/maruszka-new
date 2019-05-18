@@ -15,6 +15,9 @@ import com.maruszka.repositories.BatchRepository;
 import com.maruszka.repositories.MaltRepository;
 import com.maruszka.services.MaltService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 @Profile("springdatajpa")
 public class MaltSDJpaService implements MaltService {
@@ -58,6 +61,8 @@ public class MaltSDJpaService implements MaltService {
 		
 		if (batches != null) {
 			for (Batch tempBatch : batches) {
+				log.debug("Deleting malt from batch number: " + tempBatch.getBatchNumber());
+				
 				Optional<Malt> maltOptional = tempBatch
 						.getMalts()
 						.stream()
