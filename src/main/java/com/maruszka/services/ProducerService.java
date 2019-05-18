@@ -12,6 +12,6 @@ public interface ProducerService extends CrudService<Producer, Long> {
 	List<Producer> findAllByProducerNameLike(String producerName);
 	
 	Set<Producer> findByOrderByProducerNameAsc();
-	
+
 	// TODO: refactor to be a generic producer
 }

@@ -141,4 +141,12 @@ public class MaltController {
 		}
     }
 	
+	@RequestMapping("/delete/{maltId}")
+	public String deleteMalt(@PathVariable("maltId") Long maltId ) {
+
+		maltService.deleteById(maltId);
+
+		return "redirect:/malt/list";
+	}
+	
 }
