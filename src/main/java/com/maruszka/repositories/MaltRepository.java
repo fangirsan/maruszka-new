@@ -1,6 +1,7 @@
 package com.maruszka.repositories;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -11,4 +12,6 @@ public interface MaltRepository extends CrudRepository<Malt, Long> {
 	Malt findByMaltName(String maltName);
 	
 	List<Malt> findAllByMaltNameLike(String maltName);
+
+	Set<Malt> findByOrderByMaltNameAsc();
 }

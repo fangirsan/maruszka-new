@@ -2,13 +2,16 @@ package com.maruszka.services.springdatajpa;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import com.maruszka.model.Batch;
 import com.maruszka.model.Malt;
+import com.maruszka.repositories.BatchRepository;
 import com.maruszka.repositories.MaltRepository;
 import com.maruszka.services.MaltService;
 
@@ -16,11 +19,13 @@ import com.maruszka.services.MaltService;
 @Profile("springdatajpa")
 public class MaltSDJpaService implements MaltService {
 
-	@Autowired
-	private final MaltRepository maltRepository;
+	private MaltRepository maltRepository;
+	private BatchRepository batchRepository;
 	
-	public MaltSDJpaService(MaltRepository maltRepository) {
+	@Autowired
+	public MaltSDJpaService(MaltRepository maltRepository, BatchRepository batchRepository) {
 		this.maltRepository = maltRepository;
+		this.batchRepository = batchRepository;
 	}
 
 	@Override
@@ -47,13 +52,37 @@ public class MaltSDJpaService implements MaltService {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		maltRepository.deleteById(id);
+	public void deleteById(Long maltIdToDelete) {
+		
+		Set<Batch> batches = batchRepository.findByMalts_id(maltIdToDelete);
+		
+		if (batches != null) {
+			for (Batch tempBatch : batches) {
+				Optional<Malt> maltOptional = tempBatch
+						.getMalts()
+						.stream()
+						.filter(malt -> malt.getId().equals(maltIdToDelete))
+						.findFirst();
+				
+				if (maltOptional.isPresent()) {
+					Malt maltToDelete = maltOptional.get();
+					maltToDelete.setBatches(null);
+					tempBatch.getMalts().remove(maltOptional.get());
+					batchRepository.save(tempBatch);
+				}
+			}
+			maltRepository.deleteById(maltIdToDelete);
+		}
 	}
 
 	@Override
 	public Malt findByMaltName(String maltName) {
 		return maltRepository.findByMaltName(maltName);
+	}
+	
+	@Override
+	public Set<Malt> findByOrderByMaltNameAsc() {
+		return maltRepository.findByOrderByMaltNameAsc();
 	}
 
 	@Override

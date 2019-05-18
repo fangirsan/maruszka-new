@@ -116,6 +116,16 @@ public class DataLoader implements CommandLineRunner{
 				.producer(producerService.findByProducerName("Malt Europ"))
 				.build();
 		maltService.save(malt2);
+		
+		Malt malt3 = Malt.builder()
+				.maltName("Jęczmień palony")
+				.maltFilling(10)
+				.maltEbc(1200)
+				.maltUsage("Dark beers")
+				.country(countryService.findByCountryName("Poland"))
+				.producer(producerService.findByProducerName("Malt Europ"))
+				.build();
+		maltService.save(malt3);
 		log.info("Malts loadaed...");
 		
 		// Hop
@@ -170,6 +180,7 @@ public class DataLoader implements CommandLineRunner{
 				.yeast(yeastService.findByYeastName("US-05"))
 				.malts(malts)
 				.build();
+		batch.getMalts().add(malt3);
 		batchService.save(batch);
 		
 		batch = Batch.builder()
