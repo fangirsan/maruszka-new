@@ -28,9 +28,7 @@
 					<p th:text="#{malt.form.title}" />
 				</div>
 				<div class="form">
-					<!-- form th:object="${malt}" th:modelAttribute="malt" method="post"-->
 					<form th:object="${malt}" th:action="@{'/malt/saveMalt'}" method="post">
- 					<!--form th:object="${malt}" th:action="@{${'/malt/' + malt.id + '/edit'}}" method="post"-->
 						<input type="hidden" name ="id" th:field="*{id}">
 						<div class="form-row">
 							<div class="form-field-name">

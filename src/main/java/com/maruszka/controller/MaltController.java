@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -104,7 +106,6 @@ public class MaltController {
 	}
 	
 	@GetMapping("/new")
-//	@GetMapping("/showAddMaltForm")
 	public String initCreationForm(Model model) {
 		
 		Malt malt = new Malt();
@@ -114,21 +115,17 @@ public class MaltController {
 	}
 	
 	@PostMapping("/new")
-//	@PostMapping("/saveMalt")
-//	public String  processCreationForm(@Valid Malt malt, BindingResult result, ModelMap model) {
-	public String  processCreationForm(@Valid @ModelAttribute("malt") Malt malt, BindingResult result) {
+	public String  processCreationForm(@Valid @ModelAttribute("malt") Malt malt, BindingResult result, ModelMap model) {
 		
-//		if (StringUtils.hasLength(malt.getMaltName()) && !malt.isNew()) {
-//			result.rejectValue("maltName", "duplicate", "already exists");
-//		}
+		if (StringUtils.hasLength(malt.getMaltName()) && !malt.isNew()) {
+			result.rejectValue("maltName", "duplicate", "already exists");
+		}
 		
 		if (result.hasErrors()) {
-//			model.put("malt", malt);
+			model.put("malt", malt);
 			return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
 		} else {
 			Malt savedMalt = this.maltService.save(malt);
-//			return "redirect:/malt/" + savedMalt.getId();
-//			maltService.save(malt);
 			return "redirect:/malt/malt-list";
 		}
 	}
@@ -140,19 +137,14 @@ public class MaltController {
 		return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
 	}
 	
-//	@PostMapping("/{maltId}/edit") //"malt" is in the request mapping for entire class
 	@PostMapping("/saveMalt")
-//    public String processUpdateMaltForm(@Valid Malt malt, BindingResult result, @PathVariable("maltId") Long maltId) {
 	public String processUpdateMaltForm(@Valid Malt malt, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
 		} else {
-//			malt.setId(maltId);
 			Malt savedMalt = maltService.save(malt);
-//	    	return "redirect:/malt/" + savedMalt.getId();
 			return "redirect:/malt/list";
-//			return "redirect:/malt/" + savedMalt.getId();
 		}
     }
 	
