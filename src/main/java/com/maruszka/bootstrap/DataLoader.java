@@ -96,36 +96,42 @@ public class DataLoader implements CommandLineRunner{
 		log.info("Producers loadaed...");
 		
 		// Malt
-		Malt malt = Malt.builder()
-				.id(1L)
-				.maltName("Pale Ale")
-				.maltFilling(100)
-				.maltEbc(3)
-				.maltUsage("All")
-				.country(countryService.findByCountryName("Poland"))
-				.producer(producerService.findByProducerName("Malt Europ"))
-				.build();
+//		Malt malt = Malt.builder()
+//				.maltName("Pale Ale")
+//				.maltFilling(100)
+//				.maltEbc(3)
+//				.maltUsage("All")
+//				.country(countryService.findByCountryName("Poland"))
+//				.producer(producerService.findByProducerName("Malt Europ"))
+//				.build();
+		Malt malt = new Malt();
+		malt.setMaltName("Pale Ale");
+		malt.setMaltFilling(100);
+		malt.setMaltEbc(3);
+		malt.setMaltUsage("All");
+		malt.setCountry(countryService.findByCountryName("Poland"));
+		malt.setProducer(producerService.findByProducerName("Malt Europ"));
 		maltService.save(malt);
 		
-		Malt malt2 = Malt.builder()
-				.maltName("Strzegom")
-				.maltFilling(100)
-				.maltEbc(3)
-				.maltUsage("All")
-				.country(countryService.findByCountryName("Poland"))
-				.producer(producerService.findByProducerName("Malt Europ"))
-				.build();
-		maltService.save(malt2);
+//		Malt malt2 = Malt.builder()
+//				.maltName("Strzegom")
+//				.maltFilling(100)
+//				.maltEbc(3)
+//				.maltUsage("All")
+//				.country(countryService.findByCountryName("Poland"))
+//				.producer(producerService.findByProducerName("Malt Europ"))
+//				.build();
+//		maltService.save(malt2);
 		
-		Malt malt3 = Malt.builder()
-				.maltName("Jęczmień palony")
-				.maltFilling(10)
-				.maltEbc(1200)
-				.maltUsage("Dark beers")
-				.country(countryService.findByCountryName("Poland"))
-				.producer(producerService.findByProducerName("Malt Europ"))
-				.build();
-		maltService.save(malt3);
+//		Malt malt3 = Malt.builder()
+//				.maltName("Jęczmień palony")
+//				.maltFilling(10)
+//				.maltEbc(1200)
+//				.maltUsage("Dark beers")
+//				.country(countryService.findByCountryName("Poland"))
+//				.producer(producerService.findByProducerName("Malt Europ"))
+//				.build();
+//		maltService.save(malt3);
 		log.info("Malts loadaed...");
 		
 		// Hop
@@ -180,7 +186,7 @@ public class DataLoader implements CommandLineRunner{
 				.yeast(yeastService.findByYeastName("US-05"))
 				.malts(malts)
 				.build();
-		batch.getMalts().add(malt3);
+//		batch.getMalts().add(malt);
 		batchService.save(batch);
 		
 		batch = Batch.builder()

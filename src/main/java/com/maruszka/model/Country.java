@@ -16,7 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder
+//@Builder
 //@ToString
 @Table(name="country")
 public class Country extends BaseEntity {

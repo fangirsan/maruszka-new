@@ -28,14 +28,17 @@
 					<p th:text="#{malt.form.title}" />
 				</div>
 				<div class="form">
-					<form th:object="${malt}" th:action="@{${'/malt/' + malt.id + '/edit'}}" method="post">
-						<input type="hidden" th:field="*{id}" />
+					<!-- form th:object="${malt}" th:modelAttribute="malt" method="post"-->
+					<form th:object="${malt}" th:action="@{'/malt/saveMalt'}" method="post">
+ 					<!--form th:object="${malt}" th:action="@{${'/malt/' + malt.id + '/edit'}}" method="post"-->
+						<input type="hidden" name ="id" th:field="*{id}">
 						<div class="form-row">
 							<div class="form-field-name">
 								<label>Malt name:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="text" class="form-control" th:field="*{maltName}" />
+								<input type="text" class="form-control"
+									th:field="*{maltName}" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -73,7 +76,7 @@
 								<label>Malt filling:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="text" class="form-control"
+								<input type="number" class="form-control"
 									th:field="*{maltFilling}" />
 							</div>
 						</div>

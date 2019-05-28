@@ -1,140 +1,160 @@
-*::before,
-*::after {
-  box-sizing: border-box;
+*::before, *::after {
+	box-sizing: border-box;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  background-color: black;
-  font-family: 'Courier', monospace;
+	background-color: black;
+	font-family: 'Courier', monospace;
 }
 
 .wrapper {
-  border-radius: 10px;
-  background-color: #333333;
-  color: #ffffff;
-  padding: 15px;
-  width: 85%;
-  margin: 7px auto;
+	border-radius: 10px;
+	background-color: #333333;
+	color: #ffffff;
+	padding: 15px;
+	width: 85%;
+	margin: 7px auto;
 }
 
-.header {}
+.header {
+	
+}
 
-.menu {}
+.menu {
+	
+}
 
-.inner-menu {}
+.inner-menu {
+	
+}
 
-.main {}
+.main {
+	
+}
 
 .page-title {
-  background-color: #757272;
-  margin: 20px 35% 40px 35%;
-  text-align: center;
-  display: block;
-  border-radius: 15px;
-  font-size: 200%;
+	background-color: #757272;
+	margin: 20px 35% 40px 35%;
+	text-align: center;
+	display: block;
+	border-radius: 15px;
+	font-size: 200%;
 }
 
 .footer {
-  padding: 0px;
-  text-align: center;
+	padding: 0px;
+	text-align: center;
 }
 
 .footer p {
-  padding: 0;
-  margin: 0px;
-  height: 50%;
+	padding: 0;
+	margin: 0px;
+	height: 50%;
 }
 
 ul {
-  margin: 0 auto;
-  padding: 0px;
-  list-style-type: none;
-  overflow: hidden;
-  background-color: #333333;
-  text-align: center;
+	margin: 0 auto;
+	padding: 0px;
+	list-style-type: none;
+	overflow: hidden;
+	background-color: #333333;
+	text-align: center;
 }
 
 li {
-  display: inline-block;
-  margin-left: 10px;
-  margin-right: 10px;
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 li a {
-  display: block;
-  border: 2px solid black;
-  border-radius: 15px;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  width: 100px;
-  text-decoration: none;
+	display: block;
+	border: 2px solid black;
+	border-radius: 15px;
+	color: white;
+	text-align: center;
+	padding: 15px;
+	width: 100px;
+	text-decoration: none;
 }
 
 li a:hover {
-  color: white;
-  background-color: #757272;
-  text-decoration: none;
+	color: white;
+	background-color: #757272;
+	text-decoration: none;
 }
 
 li a:focus {
-  color: white;
-  background-color: #757272;
-  text-decoration: none;
+	color: white;
+	background-color: #757272;
+	text-decoration: none;
 }
 
 table {
-  margin: 0px auto;
-  text-align: center;
-  border-collapse: collapse;
-  /*this makes equals spacing in columns*/
-  table-layout: fixed;
+	margin: 0px auto;
+	text-align: center;
+	border-collapse: collapse;
+	/*this makes equals spacing in columns*/
+	table-layout: fixed;
 }
 
 th {
-  text-align: center;
+	text-align: center;
 }
 
 .form {
-  margin: 0% 10%;
-  border: 1px solid #757272;
-  padding: 0 10%;
+	margin: 0% 10%;
+	border: 1px solid #757272;
+	padding: 0 10%;
 }
 
 .form-row {
-  font-size: 0;
+	font-size: 0;
 }
 
-.form-field-name,
-.form-field-input {
-  display: inline-block;
-  margin-top: 8px;
-  width: 49%;
-  font-size: initial;
+.form-field-name, .form-field-input {
+	display: inline-block;
+	margin-top: 8px;
+	width: 49%;
+	font-size: initial;
 }
 
 .form-field-name {
-  text-align: right;
-  padding-right: 15%;
+	text-align: right;
+	padding-right: 15%;
 }
 
 .form-field-input {
-  text-align: left;
-  padding-left: 5%;
+	text-align: left;
+	padding-left: 5%;
 }
 
 .form-field-submit {
-  text-align: right;
+	text-align: right;
 }
 
 .submit-button {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  color: white;
-  background-color: #757272;
-  font-size: initial;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	color: white;
+	background-color: #757272;
+	font-size: initial;
+}
+
+.simpple-button, .simple-button:hover {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	border: 2px outset;
+	padding: 1px 4px;
+	color: white;
+	background-color: #757272;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 16px;
+	text-decoration: none;
+	display: inline;
 }

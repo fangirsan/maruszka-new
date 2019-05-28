@@ -7,10 +7,10 @@ import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,10 +40,10 @@ public class MaltController {
 		this.producerService = producerService;
 	}
 	
-	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id");
-	}
+//	@InitBinder
+//	public void setAllowedFields(WebDataBinder dataBinder) {
+//		dataBinder.setDisallowedFields("id");
+//	}
 	
 	// Method invoked in first place, adding "countries" to all models
 	@ModelAttribute("countries")
@@ -59,7 +59,7 @@ public class MaltController {
 	@RequestMapping("/find")
 	public String findMalts(Model model) {
 		
-		model.addAttribute("malt", Malt.builder().build());
+		model.addAttribute("malt", new Malt());
 		return "malt/malt-list";
 	}
 	
@@ -104,21 +104,32 @@ public class MaltController {
 	}
 	
 	@GetMapping("/new")
+//	@GetMapping("/showAddMaltForm")
 	public String initCreationForm(Model model) {
 		
-		model.addAttribute("malt", Malt.builder().build());
+		Malt malt = new Malt();
+		model.addAttribute("malt", malt);
 		
 		return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
 	}
 	
 	@PostMapping("/new")
-	public String  processCreationForm(@Valid Malt malt, BindingResult result) {
+//	@PostMapping("/saveMalt")
+//	public String  processCreationForm(@Valid Malt malt, BindingResult result, ModelMap model) {
+	public String  processCreationForm(@Valid @ModelAttribute("malt") Malt malt, BindingResult result) {
+		
+//		if (StringUtils.hasLength(malt.getMaltName()) && !malt.isNew()) {
+//			result.rejectValue("maltName", "duplicate", "already exists");
+//		}
 		
 		if (result.hasErrors()) {
+//			model.put("malt", malt);
 			return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
 		} else {
-			Malt savedMalt = maltService.save(malt);
-			return "redirect:/malt/" + savedMalt.getId();
+			Malt savedMalt = this.maltService.save(malt);
+//			return "redirect:/malt/" + savedMalt.getId();
+//			maltService.save(malt);
+			return "redirect:/malt/malt-list";
 		}
 	}
 	
@@ -129,15 +140,19 @@ public class MaltController {
 		return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
 	}
 	
-	@PostMapping("/{maltId}/edit") //"malt" is in the request mapping for entire class
-    public String processUpdateMaltForm(@Valid Malt malt, BindingResult result, @PathVariable("maltId") Long maltId) {
+//	@PostMapping("/{maltId}/edit") //"malt" is in the request mapping for entire class
+	@PostMapping("/saveMalt")
+//    public String processUpdateMaltForm(@Valid Malt malt, BindingResult result, @PathVariable("maltId") Long maltId) {
+	public String processUpdateMaltForm(@Valid Malt malt, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
 		} else {
-			malt.setId(maltId);
+//			malt.setId(maltId);
 			Malt savedMalt = maltService.save(malt);
-	    	return "redirect:/malt/" + savedMalt.getId();
+//	    	return "redirect:/malt/" + savedMalt.getId();
+			return "redirect:/malt/list";
+//			return "redirect:/malt/" + savedMalt.getId();
 		}
     }
 	
