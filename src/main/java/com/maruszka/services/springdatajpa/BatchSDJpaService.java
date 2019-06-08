@@ -3,8 +3,6 @@ package com.maruszka.services.springdatajpa;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -19,8 +17,8 @@ import com.maruszka.services.BatchService;
 @Profile("springdatajpa")
 public class BatchSDJpaService implements BatchService {
 
-	BatchRepository batchRepository;
-	BeerTypeRepository beerTypeRepository;
+	private final BatchRepository batchRepository;
+	private final BeerTypeRepository beerTypeRepository;
 	
 	public BatchSDJpaService(BatchRepository batchRepository, BeerTypeRepository beerTypeRepository) {
 		this.batchRepository = batchRepository;

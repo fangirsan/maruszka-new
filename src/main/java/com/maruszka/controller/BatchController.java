@@ -12,9 +12,9 @@ import com.maruszka.services.BatchService;
 
 @Controller
 @RequestMapping("/batch")
-public class BatchController {
+class BatchController {
 
-	private BatchService batchService;
+	private final BatchService batchService;
 
 	public BatchController(BatchService batchService) {
 		this.batchService = batchService;

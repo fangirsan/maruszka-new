@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.transaction.Transactional;
-
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,7 @@ import com.maruszka.services.HopService;
 @Profile("springdatajpa")
 public class HopSDJpaService implements HopService {
 
-	HopRepository hopRepository;
+	private final HopRepository hopRepository;
 	
 	public HopSDJpaService(HopRepository hopRepository) {
 		this.hopRepository = hopRepository;

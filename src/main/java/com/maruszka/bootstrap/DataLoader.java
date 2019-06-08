@@ -32,178 +32,178 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @Transactional
-public class DataLoader implements CommandLineRunner{
+class DataLoader implements CommandLineRunner{
 
-	private final MaltService maltService;
-	private final ProducerService producerService;
-	private final CountryService countryService;
-	private final HopService hopService;
-	private final YeastService yeastService;
-	private final BeerTypeService beerTypeService;
-	private final BatchService batchService;
-	
-	public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
-			HopService hopService, YeastService yeastService, BeerTypeService beerTypeService, BatchService batchService) {
-		this.maltService = maltService;
-		this.producerService = maltProducerService;
-		this.countryService = countryService;
-		this.hopService = hopService;
-		this.yeastService = yeastService;
-		this.beerTypeService = beerTypeService;
-		this.batchService = batchService;
-	}
+    private final MaltService maltService;
+    private final ProducerService producerService;
+    private final CountryService countryService;
+    private final HopService hopService;
+    private final YeastService yeastService;
+    private final BeerTypeService beerTypeService;
+    private final BatchService batchService;
 
-	@Override
-	public void run(String... args) throws Exception {
+    public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
+                       HopService hopService, YeastService yeastService, BeerTypeService beerTypeService, BatchService batchService) {
+        this.maltService = maltService;
+        this.producerService = maltProducerService;
+        this.countryService = countryService;
+        this.hopService = hopService;
+        this.yeastService = yeastService;
+        this.beerTypeService = beerTypeService;
+        this.batchService = batchService;
+    }
 
-		int maltCount = maltService.findAll().size();
-		
-		if (maltCount == 0) {
-			log.info("Loading data...");
-			loadData();
-		}
-	}
+    @Override
+    public void run(String... args) {
 
-	private void loadData() {
-		
-		// Country
-		Country country = new Country();
-		country.setCountryCode("PL");
-		country.setCountryName("Poland");
-		countryService.save(country);
-		
-		Country country2 = Country.builder().id(2L).countryCode("DK").countryName("Denmark").build();
-		countryService.save(country2);
-		
-		Country country3 = Country.builder().id(3L).countryCode("USA").countryName("United States of America").build();
-		countryService.save(country3);
-		log.info("Countries loadaed...");
-		
-		// Producer
-		Producer producer = Producer.builder()
-				.id(1L)
-				.producerName("Malt Europ")
-				.product(ProducerType.Malt)
-				.build();
-		producerService.save(producer);
-		
-		Producer producer2 = Producer.builder()
-				.id(2L)
-				.producerName("Fermentis")
-				.product(ProducerType.Hop)
-				.build();
-		producerService.save(producer2);
-		log.info("Producers loadaed...");
-		
-		// Malt
-//		Malt malt = Malt.builder()
-//				.maltName("Pale Ale")
-//				.maltFilling(100)
-//				.maltEbc(3)
-//				.maltUsage("All")
-//				.country(countryService.findByCountryName("Poland"))
-//				.producer(producerService.findByProducerName("Malt Europ"))
-//				.build();
-		Malt malt = new Malt();
-		malt.setMaltName("Pale Ale");
-		malt.setMaltFilling(100);
-		malt.setMaltEbc(3);
-		malt.setMaltUsage("All");
-		malt.setCountry(countryService.findByCountryName("Poland"));
-		malt.setProducer(producerService.findByProducerName("Malt Europ"));
-		maltService.save(malt);
-		
-//		Malt malt2 = Malt.builder()
-//				.maltName("Strzegom")
-//				.maltFilling(100)
-//				.maltEbc(3)
-//				.maltUsage("All")
-//				.country(countryService.findByCountryName("Poland"))
-//				.producer(producerService.findByProducerName("Malt Europ"))
-//				.build();
-//		maltService.save(malt2);
-		
-//		Malt malt3 = Malt.builder()
-//				.maltName("Jęczmień palony")
-//				.maltFilling(10)
-//				.maltEbc(1200)
-//				.maltUsage("Dark beers")
-//				.country(countryService.findByCountryName("Poland"))
-//				.producer(producerService.findByProducerName("Malt Europ"))
-//				.build();
-//		maltService.save(malt3);
-		log.info("Malts loadaed...");
-		
-		// Hop
-		Hop hop = Hop.builder()
-				.hopName("Citra")
-				.bitteringHop(true)
-				.aromaHop(true)
-				.alphaAcidMin(new BigDecimal("12.3"))
-				.alphaAcidMax(new BigDecimal("15.3"))
-				.country(countryService.findByCountryName("United States of America"))
-				.build();
-		hopService.save(hop);
-		log.info("Hops loadaed...");
-		
-		// Yeast
-		Yeast yeast = Yeast.builder()
-				.yeastName("US-05")
-				.alcoholToleracne(9)
-				.flocculation(YeastFlocculation.MEDIUM)
-				.fermentationTempMin(15)
-				.fermentationTempMax(24)
-				.yeastType(YeastType.DRY)
-				.producer(producerService.findByProducerName("Fermentis"))
-				.build();
-		yeastService.save(yeast);
-		log.info("Yeasts loadaed...");
-		
-		// BeerType
-		BeerType beerType = BeerType.builder()
-				.beerType("Stout")
-				.build();
-		beerTypeService.save(beerType);
-		
-		beerType = BeerType.builder()
-				.beerType("Russian Imperial Stout")
-				.build();
-		beerTypeService.save(beerType);
-		log.info("BeerType loaded...");
-		
-		// Batch
-		Set<Hop> hops = new HashSet<Hop>();
-		hops.add(hopService.findByHopName("Citra"));
-		
-		Set<Malt> malts = new HashSet<Malt>();
-		malts.add(maltService.findByMaltName("Pale Ale"));
-		malts.add(maltService.findById(2L));
-		
-		Batch batch = Batch.builder()
-				.batchNumber(1)
-				.beerType(beerTypeService.findByBeerType("Stout"))
-				.hops(hops)
-				.yeast(yeastService.findByYeastName("US-05"))
-				.malts(malts)
-				.build();
-//		batch.getMalts().add(malt);
-		batchService.save(batch);
-		
-		batch = Batch.builder()
-				.batchNumber(2)
-				.beerType(beerTypeService.findById(2L))
-				.hops(hops)
-				.yeast(yeastService.findByYeastName("US-05"))
-				.malts(malts)
-				.build();
-		batchService.save(batch);
-		log.info("Batch loaded...");
-		
-		log.info("Loading data complete");
-		
-		Batch beer = batchService.findBatchByBeerType(beerTypeService.findByBeerType("Stout"));
-		log.info(beer.toString());
-		
-	}
-	
+        int maltCount = maltService.findAll().size();
+
+        if (maltCount == 0) {
+            log.info("Loading data...");
+            loadData();
+        }
+    }
+
+    public void loadData() {
+
+        // Country
+        Country country = new Country();
+        country.setCountryCode("PL");
+        country.setCountryName("Poland");
+        countryService.save(country);
+
+        Country country2 = Country.builder().id(2L).countryCode("DK").countryName("Denmark").build();
+        countryService.save(country2);
+
+        Country country3 = Country.builder().id(3L).countryCode("USA").countryName("United States of America").build();
+        countryService.save(country3);
+        log.info("Countries loadaed...");
+
+        // Producer
+        Producer producer = Producer.builder()
+                .id(1L)
+                .producerName("Malt Europ")
+                .product(ProducerType.Malt)
+                .build();
+        producerService.save(producer);
+
+        Producer producer2 = Producer.builder()
+                .id(2L)
+                .producerName("Fermentis")
+                .product(ProducerType.Hop)
+                .build();
+        producerService.save(producer2);
+        log.info("Producers loadaed...");
+
+        // Malt
+        Malt malt = Malt.builder()
+                .maltName("Pale Ale")
+                .maltFilling(100)
+                .maltEbc(3)
+                .maltUsage("All")
+                .country(countryService.findByCountryName("Poland"))
+                .producer(producerService.findByProducerName("Malt Europ"))
+                .build();
+//		Malt malt = new Malt();
+//		malt.setMaltName("Pale Ale");
+//		malt.setMaltFilling(100);
+//		malt.setMaltEbc(3);
+//		malt.setMaltUsage("All");
+//		malt.setCountry(countryService.findByCountryName("Poland"));
+//		malt.setProducer(producerService.findByProducerName("Malt Europ"));
+//		maltService.save(malt);
+
+        Malt malt2 = Malt.builder()
+                .maltName("Strzegom")
+                .maltFilling(100)
+                .maltEbc(3)
+                .maltUsage("All")
+                .country(countryService.findByCountryName("Poland"))
+                .producer(producerService.findByProducerName("Malt Europ"))
+                .build();
+        maltService.save(malt2);
+
+        Malt malt3 = Malt.builder()
+                .maltName("Jęczmień palony")
+                .maltFilling(10)
+                .maltEbc(1200)
+                .maltUsage("Dark beers")
+                .country(countryService.findByCountryName("Poland"))
+                .producer(producerService.findByProducerName("Malt Europ"))
+                .build();
+        maltService.save(malt3);
+        log.info("Malts loadaed...");
+
+        // Hop
+        Hop hop = Hop.builder()
+                .hopName("Citra")
+                .bitteringHop(true)
+                .aromaHop(true)
+                .alphaAcidMin(new BigDecimal("12.3"))
+                .alphaAcidMax(new BigDecimal("15.3"))
+                .country(countryService.findByCountryName("United States of America"))
+                .build();
+        hopService.save(hop);
+        log.info("Hops loadaed...");
+
+        // Yeast
+        Yeast yeast = Yeast.builder()
+                .yeastName("US-05")
+                .alcoholToleracne(9)
+                .flocculation(YeastFlocculation.MEDIUM)
+                .fermentationTempMin(15)
+                .fermentationTempMax(24)
+                .yeastType(YeastType.DRY)
+                .producer(producerService.findByProducerName("Fermentis"))
+                .build();
+        yeastService.save(yeast);
+        log.info("Yeasts loadaed...");
+
+        // BeerType
+        BeerType beerType = BeerType.builder()
+                .beerType("Stout")
+                .build();
+        beerTypeService.save(beerType);
+
+        beerType = BeerType.builder()
+                .beerType("Russian Imperial Stout")
+                .build();
+        beerTypeService.save(beerType);
+        log.info("BeerType loaded...");
+
+        // Batch
+        Set<Hop> hops = new HashSet<Hop>();
+        hops.add(hopService.findByHopName("Citra"));
+
+        Set<Malt> malts = new HashSet<Malt>();
+        malts.add(maltService.findByMaltName("Pale Ale"));
+        malts.add(maltService.findById(2L));
+
+        Batch batch = Batch.builder()
+                .batchNumber(1)
+                .beerType(beerTypeService.findByBeerType("Stout"))
+                .hops(hops)
+                .yeast(yeastService.findByYeastName("US-05"))
+                .malts(malts)
+                .build();
+        batch.getMalts().add(malt);
+        batchService.save(batch);
+
+        batch = Batch.builder()
+                .batchNumber(2)
+                .beerType(beerTypeService.findById(2L))
+                .hops(hops)
+                .yeast(yeastService.findByYeastName("US-05"))
+                .malts(malts)
+                .build();
+        batchService.save(batch);
+        log.info("Batch loaded...");
+
+        log.info("Loading data complete");
+
+        Batch beer = batchService.findBatchByBeerType(beerTypeService.findByBeerType("Stout"));
+        log.info(beer.toString());
+
+    }
+
 }

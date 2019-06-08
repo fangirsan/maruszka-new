@@ -2,13 +2,9 @@ package com.maruszka.model;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -18,11 +14,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-//@Setter
-//@Getter
-//@NoArgsConstructor
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 //@ToString
 @Table(name="malt")
@@ -53,8 +48,7 @@ public class Malt  extends BaseEntity{
 	private Set<Batch> batches;
 
 	
-//	@Builder
-//	Long id, 
+	@Builder
 	public Malt(Long id, String maltName, String producerName, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
 		super(id);
 		this.maltName = maltName;
@@ -66,78 +60,78 @@ public class Malt  extends BaseEntity{
 	}
 
 
-	public Malt() {
-	}
-
-
-	public String getMaltName() {
-		return maltName;
-	}
-
-
-	public void setMaltName(String maltName) {
-		this.maltName = maltName;
-	}
-
-
-	public Producer getProducer() {
-		return producer;
-	}
-
-
-	public void setProducer(Producer producer) {
-		this.producer = producer;
-	}
-
-
-	public int getMaltFilling() {
-		return maltFilling;
-	}
-
-
-	public void setMaltFilling(int maltFilling) {
-		this.maltFilling = maltFilling;
-	}
-
-
-	public int getMaltEbc() {
-		return maltEbc;
-	}
-
-
-	public void setMaltEbc(int maltEbc) {
-		this.maltEbc = maltEbc;
-	}
-
-
-	public String getMaltUsage() {
-		return maltUsage;
-	}
-
-
-	public void setMaltUsage(String maltUsage) {
-		this.maltUsage = maltUsage;
-	}
-
-
-	public Country getCountry() {
-		return country;
-	}
-
-
-	public void setCountry(Country country) {
-		this.country = country;
-	}
-
-
-	public Set<Batch> getBatches() {
-		return batches;
-	}
-
-
-	public void setBatches(Set<Batch> batches) {
-		this.batches = batches;
-	}
+//	public Malt() {
+//	}
+//
+//
+//	public String getMaltName() {
+//		return maltName;
+//	}
+//
+//
+//	public void setMaltName(String maltName) {
+//		this.maltName = maltName;
+//	}
+//
+//
+//	public Producer getProducer() {
+//		return producer;
+//	}
+//
+//
+//	public void setProducer(Producer producer) {
+//		this.producer = producer;
+//	}
+//
+//
+//	public int getMaltFilling() {
+//		return maltFilling;
+//	}
+//
+//
+//	public void setMaltFilling(int maltFilling) {
+//		this.maltFilling = maltFilling;
+//	}
+//
+//
+//	public int getMaltEbc() {
+//		return maltEbc;
+//	}
+//
+//
+//	public void setMaltEbc(int maltEbc) {
+//		this.maltEbc = maltEbc;
+//	}
+//
+//
+//	public String getMaltUsage() {
+//		return maltUsage;
+//	}
+//
+//
+//	public void setMaltUsage(String maltUsage) {
+//		this.maltUsage = maltUsage;
+//	}
+//
+//
+//	public Country getCountry() {
+//		return country;
+//	}
+//
+//
+//	public void setCountry(Country country) {
+//		this.country = country;
+//	}
+//
+//
+//	public Set<Batch> getBatches() {
+//		return batches;
+//	}
+//
+//
+//	public void setBatches(Set<Batch> batches) {
+//		this.batches = batches;
+//	}
 
 
 	@Override

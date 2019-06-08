@@ -11,7 +11,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
-public class SpringMvcConfiguration implements WebMvcConfigurer{
+class SpringMvcConfiguration implements WebMvcConfigurer{
 
 	Locale pl = new Locale.Builder().setLanguage("pl").build();
 	
@@ -23,7 +23,7 @@ public class SpringMvcConfiguration implements WebMvcConfigurer{
 	}
 
 	@Bean
-	public LocaleChangeInterceptor localeChangeInterceptor() {
+    public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
 		lci.setParamName("lang");
 		return lci;

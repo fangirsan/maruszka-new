@@ -15,7 +15,7 @@ import com.maruszka.services.ProducerService;
 @Profile("springdatajpa")
 public class ProcuerSDJpaService implements ProducerService {
 
-	ProducerRepository producerRepository;
+	private final ProducerRepository producerRepository;
 	
 	public ProcuerSDJpaService(ProducerRepository maltProducerRepository) {
 		this.producerRepository = maltProducerRepository;

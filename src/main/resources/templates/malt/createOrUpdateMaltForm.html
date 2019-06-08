@@ -36,7 +36,14 @@
 							</div>
 							<div class="form-field-input">
 								<input type="text" class="form-control"
-									th:field="*{maltName}" />
+									th:field="*{maltName}" th:errorclass="has-error"/>
+							</div>
+							<div class="form-field-input">
+								<span th:if="${#fields.hasErrors('maltName')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('maltName')}" th:text="${err}"/> 
+									</ul>
+								</span>
 							</div>
 						</div>
 						<div class="form-row">

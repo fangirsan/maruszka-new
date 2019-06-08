@@ -22,11 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 @Profile("springdatajpa")
 public class MaltSDJpaService implements MaltService {
 
-	private MaltRepository maltRepository;
-	private BatchRepository batchRepository;
+	private final MaltRepository maltRepository;
+	private final BatchRepository batchRepository;
 	
 	@Autowired
-	public MaltSDJpaService(MaltRepository maltRepository, BatchRepository batchRepository) {
+	private MaltSDJpaService(MaltRepository maltRepository, BatchRepository batchRepository) {
 		this.maltRepository = maltRepository;
 		this.batchRepository = batchRepository;
 	}
