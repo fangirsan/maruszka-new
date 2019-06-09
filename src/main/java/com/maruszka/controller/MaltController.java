@@ -88,10 +88,12 @@ public class MaltController {
     }
 
     @GetMapping("/{maltId}")
-    public ModelAndView showMalt(@PathVariable("maltId") Long maltId) {
+//    public ModelAndView showMalt(@PathVariable("maltId") String maltId) {
+        public ModelAndView showMalt(@PathVariable("maltId") Long maltId) {
 
         ModelAndView mav = new ModelAndView("malt/malt-show");
         mav.addObject(maltService.findById(maltId));
+
         return mav;
     }
 
@@ -175,4 +177,18 @@ public class MaltController {
         return modelAndView;
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberFormat(Exception exception) {
+
+        log.error("Handling Number Format Exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("400error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+    }
 }
