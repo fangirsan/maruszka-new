@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import com.maruszka.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class MaltSDJpaService implements MaltService {
 	private final BatchRepository batchRepository;
 	
 	@Autowired
-	private MaltSDJpaService(MaltRepository maltRepository, BatchRepository batchRepository) {
+	public MaltSDJpaService(MaltRepository maltRepository, BatchRepository batchRepository) {
 		this.maltRepository = maltRepository;
 		this.batchRepository = batchRepository;
 	}
@@ -41,7 +42,16 @@ public class MaltSDJpaService implements MaltService {
 
 	@Override
 	public Malt findById(Long id) {
-		return maltRepository.findById(id).orElse(null);
+
+//		return maltRepository.findById(id).orElse(null);
+
+		Optional<Malt> maltOptional = maltRepository.findById(id);
+
+		if (!maltOptional.isPresent()) {
+			throw new NotFoundException("Malt not found");
+		}
+
+		return maltOptional.get();
 	}
 
 	@Override
