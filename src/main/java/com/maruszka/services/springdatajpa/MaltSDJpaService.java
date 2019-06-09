@@ -48,7 +48,7 @@ public class MaltSDJpaService implements MaltService {
 		Optional<Malt> maltOptional = maltRepository.findById(id);
 
 		if (!maltOptional.isPresent()) {
-			throw new NotFoundException("Malt not found");
+			throw new NotFoundException("Malt not found. For Id value: " + id.toString());
 		}
 
 		return maltOptional.get();

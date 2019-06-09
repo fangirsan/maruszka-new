@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.maruszka.exceptions.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -162,4 +163,14 @@ class MaltControllerTest {
 		
 		verify(maltService).save(ArgumentMatchers.any());
 	}
+
+	@Test
+	public void testGetMaltNotFound() throws Exception {
+		when(maltService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+		mockMvc.perform(get("/malt/10"))
+				.andExpect(status().isNotFound())
+				.andExpect(view().name("404error"));
+	}
+
 }
