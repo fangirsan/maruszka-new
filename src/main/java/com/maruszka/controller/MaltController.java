@@ -1,30 +1,28 @@
 package com.maruszka.controller;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.validation.Valid;
-
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
+import com.maruszka.exceptions.NotFoundException;
 import com.maruszka.model.Country;
 import com.maruszka.model.Malt;
 import com.maruszka.model.Producer;
 import com.maruszka.services.CountryService;
 import com.maruszka.services.MaltService;
 import com.maruszka.services.ProducerService;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
+
+@Slf4j
 @Controller
 @RequestMapping("/malt")
 public class MaltController {
@@ -91,6 +89,7 @@ public class MaltController {
 
     @GetMapping("/{maltId}")
     public ModelAndView showMalt(@PathVariable("maltId") Long maltId) {
+
         ModelAndView mav = new ModelAndView("malt/malt-show");
         mav.addObject(maltService.findById(maltId));
         return mav;
@@ -159,6 +158,21 @@ public class MaltController {
         maltService.deleteById(maltId);
 
         return "redirect:/malt/list";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound(Exception exception) {
+
+        log.error("Handling not found exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
     }
 
 }
