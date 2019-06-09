@@ -9,24 +9,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
-//@ToString
+@ToString
 @Table(name="malt")
 public class Malt  extends BaseEntity{
 
-
+	@NotBlank
+	@Size(min=3, max=50)
 	@Column(name="malt_name")
 	private String maltName;
 
+	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="producer_id")
 	private Producer producer;
@@ -34,12 +34,16 @@ public class Malt  extends BaseEntity{
 	@Column(name="malt_filling")
 	private int maltFilling;
 
+	@NotNull
+	@Min(1)
+	@Max(2000)
 	@Column(name="malt_ebc")
 	private int maltEbc;
 
 	@Column(name="malt_usage")
 	private String maltUsage;
 
+	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="country_id")
 	private Country country;
@@ -49,7 +53,7 @@ public class Malt  extends BaseEntity{
 
 	
 	@Builder
-	public Malt(Long id, String maltName, String producerName, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
+	public Malt(Long id, String maltName, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
 		super(id);
 		this.maltName = maltName;
 		this.producer = producer;
@@ -60,85 +64,11 @@ public class Malt  extends BaseEntity{
 	}
 
 
-//	public Malt() {
+//	@Override
+//	public String toString() {
+//		return "Malt [maltName=" + maltName + ", producer=" + producer + ", maltFilling=" + maltFilling + ", maltEbc="
+//				+ maltEbc + ", maltUsage=" + maltUsage + ", country=" + country + ", batches=" + batches + "]";
 //	}
-//
-//
-//	public String getMaltName() {
-//		return maltName;
-//	}
-//
-//
-//	public void setMaltName(String maltName) {
-//		this.maltName = maltName;
-//	}
-//
-//
-//	public Producer getProducer() {
-//		return producer;
-//	}
-//
-//
-//	public void setProducer(Producer producer) {
-//		this.producer = producer;
-//	}
-//
-//
-//	public int getMaltFilling() {
-//		return maltFilling;
-//	}
-//
-//
-//	public void setMaltFilling(int maltFilling) {
-//		this.maltFilling = maltFilling;
-//	}
-//
-//
-//	public int getMaltEbc() {
-//		return maltEbc;
-//	}
-//
-//
-//	public void setMaltEbc(int maltEbc) {
-//		this.maltEbc = maltEbc;
-//	}
-//
-//
-//	public String getMaltUsage() {
-//		return maltUsage;
-//	}
-//
-//
-//	public void setMaltUsage(String maltUsage) {
-//		this.maltUsage = maltUsage;
-//	}
-//
-//
-//	public Country getCountry() {
-//		return country;
-//	}
-//
-//
-//	public void setCountry(Country country) {
-//		this.country = country;
-//	}
-//
-//
-//	public Set<Batch> getBatches() {
-//		return batches;
-//	}
-//
-//
-//	public void setBatches(Set<Batch> batches) {
-//		this.batches = batches;
-//	}
-
-
-	@Override
-	public String toString() {
-		return "Malt [maltName=" + maltName + ", producer=" + producer + ", maltFilling=" + maltFilling + ", maltEbc="
-				+ maltEbc + ", maltUsage=" + maltUsage + ", country=" + country + ", batches=" + batches + "]";
-	}
 
 	
 }
