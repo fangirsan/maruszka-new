@@ -88,7 +88,6 @@ public class MaltController {
     }
 
     @GetMapping("/{maltId}")
-//    public ModelAndView showMalt(@PathVariable("maltId") String maltId) {
         public ModelAndView showMalt(@PathVariable("maltId") Long maltId) {
 
         ModelAndView mav = new ModelAndView("malt/malt-show");
@@ -114,28 +113,6 @@ public class MaltController {
         return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
     }
 
-//    @PostMapping("/new")
-//    public String processCreationForm(@Valid @ModelAttribute("malt") Malt malt, BindingResult result, ModelMap model) {
-//
-//        if (StringUtils.hasLength(malt.getMaltName()) && !malt.isNew()) {
-//            result.rejectValue("maltName", "duplicate", "already exists");
-//        }
-//
-//        if (result.hasErrors()) {
-//            model.put("malt", malt);
-//            return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
-//        } else {
-//            try {
-//                Malt savedMalt = this.maltService.save(malt);
-//                return "redirect:/malt/malt-list";
-//            } catch (ConstraintViolationException e) {
-//                result.rejectValue("maltName", "duplicate", "Duplicate name");
-//                return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
-//            }
-//
-//        }
-//    }
-
     @GetMapping("/{maltId}/edit")
     public String initUpdateMaltForm(@PathVariable("maltId") Long maltId, Model model) {
 
@@ -144,7 +121,7 @@ public class MaltController {
     }
 
     @PostMapping("/saveMalt")
-    public String processUpdateMaltForm(@Valid @ModelAttribute("malt") Malt malt, BindingResult bindingResult) {
+    public String saveOrUpdateMalt(@Valid @ModelAttribute("malt") Malt malt, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {
@@ -153,7 +130,6 @@ public class MaltController {
             return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
         } else {
             Malt savedMalt = maltService.save(malt);
-//            return "redirect:/malt/list";
             return "redirect:/malt/" + savedMalt.getId();
         }
     }
