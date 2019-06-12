@@ -1,6 +1,5 @@
 package com.maruszka.controller;
 
-import com.maruszka.exceptions.NotFoundException;
 import com.maruszka.model.Country;
 import com.maruszka.model.Malt;
 import com.maruszka.model.Producer;
@@ -9,15 +8,15 @@ import com.maruszka.services.MaltService;
 import com.maruszka.services.ProducerService;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.http.HttpStatus;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
@@ -121,7 +120,7 @@ public class MaltController {
     }
 
     @PostMapping("/saveMalt")
-    public String saveOrUpdateMalt(@Valid @ModelAttribute("malt") Malt malt, BindingResult bindingResult) {
+    public String saveOrUpdate(@Valid @ModelAttribute("malt") Malt malt, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {
@@ -129,8 +128,21 @@ public class MaltController {
             });
             return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
         } else {
-            Malt savedMalt = maltService.save(malt);
-            return "redirect:/malt/" + savedMalt.getId();
+            try {
+                Malt savedMalt = maltService.save(malt);
+                return "redirect:/malt/" + savedMalt.getId();
+            }  catch (Exception e) {
+                if (e instanceof ConstraintViolationException || e instanceof DataIntegrityViolationException) {
+                    if (malt.getProducer().getId() == 0) {
+                        bindingResult.rejectValue("producer", "ConstraintViolationException");
+                    }
+                    if (malt.getCountry().getId() == 0) {
+                        bindingResult.rejectValue("country", "ConstraintViolationException");
+                    }
+                    return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
+                }
+                return null;
+            }
         }
     }
 
