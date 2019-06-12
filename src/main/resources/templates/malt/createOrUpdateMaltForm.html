@@ -41,7 +41,7 @@
 							<div class="form-field-input">
 								<span th:if="${#fields.hasErrors('maltName')}">
 									<ul>
-										<li th:each="err : ${#fields.errors('maltName')}" th:text="${err}"/> 
+										<li th:each="err : ${#fields.errors('maltName')}" th:text="${'- ' + err}"/>
 									</ul>
 								</span>
 							</div>
@@ -51,15 +51,20 @@
 								<label>Producer:</label>
 							</div>
 							<div class="form-field-input">
-								<select class="form-control" th:field="*{producer.id}">
+								<select class="form-control" th:field="*{producer.id}" th:errorclass="has-error">
 								<option value="0">Select producer</option>
 									<option th:each="producer : ${producers}"
 										th:value="${producer?.id}"
 										th:text="${producer?.producerName}">
 									</option>
 								</select>
-								<!-- input type="text" class="form-control"
-									th:field="*{producer.producerName}" /-->
+							</div>
+							<div class="form-field-input">
+								<span th:if="${#fields.hasErrors('producer')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('producer')}" th:text="${'- ' + err}"/>
+									</ul>
+								</span>
 							</div>
 						</div>
 						<div class="form-row">
@@ -67,13 +72,20 @@
 								<label>Country:</label>
 							</div>
 							<div class="form-field-input">
-								<select class="form-control" th:field="*{country.id}">
+								<select class="form-control" th:field="*{country.id}" th:errorclass="has-error">
 							    <option value="0">Select country</option>
 								    <option th:each="country : ${countries}"
 			                            th:value="${country?.id}"
 			                            th:text="${country?.countryName}">
 						    		</option>
 							    </select>
+							</div>
+							<div class="form-field-input">
+								<span th:if="${#fields.hasErrors('country')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('country')}" th:text="${'- ' + err}"/>
+									</ul>
+								</span>
 							</div>
 						</div>
 						<div class="form-row">

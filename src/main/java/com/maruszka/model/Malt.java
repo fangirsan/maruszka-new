@@ -2,13 +2,7 @@ package com.maruszka.model;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import lombok.*;
@@ -22,7 +16,6 @@ import lombok.*;
 public class Malt  extends BaseEntity{
 
 	@NotBlank
-	@Size(min=3, max=50)
 	@Column(name="malt_name")
 	private String maltName;
 
@@ -34,9 +27,9 @@ public class Malt  extends BaseEntity{
 	@Column(name="malt_filling")
 	private int maltFilling;
 
-	@NotNull
-	@Min(1)
-	@Max(2000)
+//	@NotNull
+//	@Min(1)
+//	@Max(2000)
 	@Column(name="malt_ebc")
 	private int maltEbc;
 
