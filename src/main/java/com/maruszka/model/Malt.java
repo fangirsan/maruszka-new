@@ -16,7 +16,8 @@ import org.hibernate.validator.constraints.UniqueElements;
 @Table(name="malt")
 public class Malt  extends BaseEntity{
 
-	@NotBlank(message="Name must not be blank")
+//	@NotBlank(message="Name must not be blank")
+	@NotBlank(message="{NotBlank.malt.maltName}")
 	@Column(name="malt_name", unique = true)
 	private String maltName;
 

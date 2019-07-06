@@ -140,7 +140,8 @@ public class MaltController {
                         bindingResult.rejectValue("country", "ConstraintViolationException");
                     }
                     if (maltService.findAllMaltNames().contains(malt.getMaltName())) {
-                        bindingResult.rejectValue("maltName", "ConstraintViolationException");
+                        bindingResult.rejectValue("maltName", "duplicate", "Duplicate name");
+                        log.info("Malt with given name: [" + malt.getMaltName() + "] already exist");
                     }
                     return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
                 }
