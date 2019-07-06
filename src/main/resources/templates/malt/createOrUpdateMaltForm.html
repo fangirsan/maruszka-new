@@ -30,6 +30,7 @@
 				<div class="form">
 					<form th:object="${malt}" th:action="@{'/malt/saveMalt'}" method="post">
 						<input type="hidden" name ="id" th:field="*{id}">
+
 						<div class="form-row">
 							<div class="form-field-name">
 								<label>Malt name:</label>
@@ -38,15 +39,15 @@
 								<input type="text" class="form-control"
 									th:field="*{maltName}" th:errorclass="has-error"/>
 							</div>
-							<span th:if="${#fields.hasErrors('maltName')}">
-								<div class="form-error">
+<!--							<span th:if="${#fields.hasErrors('maltName')}">-->
+								<div class="form-error" th:if="${#fields.hasErrors('maltName')}">
 	<!--								<span th:if="${#fields.hasErrors('maltName')}">-->
 										<ul>
 											<li th:each="err : ${#fields.errors('maltName')}" th:text="${err}"/>
 										</ul>
 	<!--								</span>-->
 								</div>
-							</span>
+<!--							</span>-->
 						</div>
 
 						<div class="form-row">
@@ -88,6 +89,7 @@
 									th:field="*{maltFilling}" />
 							</div>
 						</div>
+
 						<div class="form-row">
 							<div class="form-field-name">
 								<label>Malt usage:</label>
@@ -97,6 +99,7 @@
 									th:field="*{maltUsage}" />
 							</div>
 						</div>
+
 						<div class="form-row">
 							<div class="form-field-name">
 								<label>Malt EBC:</label>
@@ -106,6 +109,7 @@
 									th:field="*{maltEbc}" />
 							</div>
 						</div>
+
 						<div class="form-row">
 							<div class="form-field-submit">
 <!--								<button class="btn btn-default" type="submit">Submit</button>-->

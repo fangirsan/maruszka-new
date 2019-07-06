@@ -110,7 +110,7 @@ th {
 }
 
 .form-field-name,
-.form-field-input{
+.form-field-input {
 	display: inline-block;
 	margin-top: 8px;
 	width: 49%;
@@ -121,13 +121,10 @@ th {
 .form-field-name {
 	text-align: right;
 	padding-right: 5%;
-	vertical-align:top;
 }
 
 .form-field-input {
 	text-align: left;
-	padding-left: 5%;
-	vertical-align:top;
 }
 
 .form-field-submit {
@@ -157,7 +154,6 @@ a.simple-button {
 	color: #ff6767;
 	width: 50%;
 	border: 2px solid #757272;
-	/*margin-left: 51%;*/
 	margin: 5px 8px 0 auto;
 }
 
