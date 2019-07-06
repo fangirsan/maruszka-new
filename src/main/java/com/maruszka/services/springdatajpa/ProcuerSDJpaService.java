@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.maruszka.model.Enums.ProducerType;
+import org.apache.tomcat.jni.Proc;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,11 @@ public class ProcuerSDJpaService implements ProducerService {
 	@Override
 	public Set<Producer> findByOrderByProducerNameAsc() {
 		return producerRepository.findByOrderByProducerNameAsc();
+	}
+
+	@Override
+	public Set<Producer> findProducerByProduct(ProducerType product) {
+		return producerRepository.findProducerByProduct(product);
 	}
 
 }

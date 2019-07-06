@@ -1,6 +1,7 @@
 package com.maruszka.controller;
 
 import com.maruszka.model.Country;
+import com.maruszka.model.Enums.ProducerType;
 import com.maruszka.model.Malt;
 import com.maruszka.model.Producer;
 import com.maruszka.services.CountryService;
@@ -49,10 +50,11 @@ public class MaltController {
         return countryService.findByOrderByCountryNameAsc();
     }
 
+//    @ModelAttribute("producers")
+//    public Set<Producer> populateProducers() { return producerService.findByOrderByProducerNameAsc(); }
+
     @ModelAttribute("producers")
-    public Set<Producer> populateProducers() {
-        return producerService.findByOrderByProducerNameAsc();
-    }
+    public Set<Producer> populateProducers() { return producerService.findProducerByProduct(ProducerType.Malt); }
 
     @RequestMapping("/find")
     public String findMalts(Model model) {
@@ -141,7 +143,7 @@ public class MaltController {
                     }
                     if (maltService.findAllMaltNames().contains(malt.getMaltName())) {
                         bindingResult.rejectValue("maltName", "duplicate", "Duplicate name");
-                        log.info("Malt with given name: [" + malt.getMaltName() + "] already exist");
+                        log.info("Malt with given name: [" + malt.getMaltName() + "] already exists");
                     }
                     return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
                 }

@@ -3,6 +3,7 @@ package com.maruszka.services;
 import java.util.List;
 import java.util.Set;
 
+import com.maruszka.model.Enums.ProducerType;
 import com.maruszka.model.Producer;
 
 public interface ProducerService extends CrudService<Producer, Long> {
@@ -13,5 +14,7 @@ public interface ProducerService extends CrudService<Producer, Long> {
 	
 	Set<Producer> findByOrderByProducerNameAsc();
 
-	// TODO: refactor to be a generic producer
+    Set<Producer> findProducerByProduct(ProducerType product);
+
+    // TODO: refactor to be a generic producer
 }

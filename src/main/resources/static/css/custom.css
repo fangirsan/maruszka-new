@@ -152,14 +152,12 @@ a.simple-button {
 }
 
 .form-error {
-	margin-top: 5px;
-	margin-bottom: 8px;
 	font-size: initial;
 	text-align: center;
 	color: #ff6767;
-	/*margin: 1% 1%;*/
 	width: 50%;
 	border: 2px solid #757272;
-	margin-left: 51%;
+	/*margin-left: 51%;*/
+	margin: 5px 8px 0 auto;
 }
 
