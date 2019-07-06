@@ -139,6 +139,9 @@ public class MaltController {
                     if (malt.getCountry().getId() == 0) {
                         bindingResult.rejectValue("country", "ConstraintViolationException");
                     }
+                    if (maltService.findAllMaltNames().contains(malt.getMaltName())) {
+                        bindingResult.rejectValue("maltName", "ConstraintViolationException");
+                    }
                     return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
                 }
                 return null;

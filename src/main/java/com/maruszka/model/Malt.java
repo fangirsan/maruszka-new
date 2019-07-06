@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Setter
 @Getter
@@ -15,8 +16,8 @@ import lombok.*;
 @Table(name="malt")
 public class Malt  extends BaseEntity{
 
-	@NotBlank
-	@Column(name="malt_name")
+	@NotBlank(message="Name must not be blank")
+	@Column(name="malt_name", unique = true)
 	private String maltName;
 
 	@NotNull

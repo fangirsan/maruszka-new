@@ -1,4 +1,5 @@
-*::before, *::after {
+*::before,
+*::after {
 	box-sizing: border-box;
 }
 
@@ -20,21 +21,13 @@ body {
 	margin: 7px auto;
 }
 
-.header {
-	
-}
+.header {}
 
-.menu {
-	
-}
+.menu {}
 
-.inner-menu {
-	
-}
+.inner-menu {}
 
-.main {
-	
-}
+.main {}
 
 .page-title {
 	background-color: #757272;
@@ -116,21 +109,25 @@ th {
 	font-size: 0;
 }
 
-.form-field-name, .form-field-input {
+.form-field-name,
+.form-field-input{
 	display: inline-block;
 	margin-top: 8px;
 	width: 49%;
 	font-size: initial;
+	vertical-align:top;
 }
 
 .form-field-name {
 	text-align: right;
-	padding-right: 15%;
+	padding-right: 5%;
+	vertical-align:top;
 }
 
 .form-field-input {
 	text-align: left;
 	padding-left: 5%;
+	vertical-align:top;
 }
 
 .form-field-submit {
@@ -145,16 +142,24 @@ th {
 	font-size: initial;
 }
 
-.simpple-button, .simple-button:hover {
+a.simple-button {
 	margin-top: 8px;
 	margin-bottom: 8px;
-	border: 2px outset;
-	padding: 1px 4px;
 	color: white;
 	background-color: #757272;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 16px;
+	font-size: initial;
 	text-decoration: none;
-	display: inline;
 }
+
+.form-error {
+	margin-top: 5px;
+	margin-bottom: 8px;
+	font-size: initial;
+	text-align: center;
+	color: #ff6767;
+	/*margin: 1% 1%;*/
+	width: 50%;
+	border: 2px solid #757272;
+	margin-left: 51%;
+}
+

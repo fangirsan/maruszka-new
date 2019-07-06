@@ -12,5 +12,7 @@ public interface MaltService extends CrudService<Malt, Long> {
 	List<Malt> findAllByMaltNameLike(String maltName);
 
 	Set<Malt> findByOrderByMaltNameAsc();
+
+	Set<String> findAllMaltNames();
 	
 }

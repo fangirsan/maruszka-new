@@ -34,10 +34,23 @@ public class MaltSDJpaService implements MaltService {
 
 	@Override
 	public Set<Malt> findAll() {
+
 		Set<Malt> malts = new HashSet<Malt>();
 		maltRepository.findAll().forEach(malts::add);
 		
 		return malts;
+	}
+
+	@Override
+	public Set<String> findAllMaltNames() {
+
+		Set<String> maltNames = new HashSet<>();
+
+		for (Malt tempMalt : maltRepository.findAll()) {
+			maltNames.add(tempMalt.getMaltName());
+		}
+
+		return maltNames;
 	}
 
 	@Override
