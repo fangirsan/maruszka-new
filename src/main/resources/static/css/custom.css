@@ -31,7 +31,7 @@ body {
 
 .page-title {
 	background-color: #757272;
-	margin: 20px 35% 40px 35%;
+	margin: 20px 35% 20px 35%;
 	text-align: center;
 	display: block;
 	border-radius: 15px;
@@ -112,10 +112,11 @@ th {
 .form-field-name,
 .form-field-input {
 	display: inline-block;
-	margin-top: 8px;
+	margin-top: 15px;
 	width: 49%;
 	font-size: initial;
-	vertical-align:top;
+	/*vertical-align:top;*/
+	vertical-align: sub;
 }
 
 .form-field-name {
@@ -131,20 +132,29 @@ th {
 	text-align: right;
 }
 
-.submit-button {
-	margin-top: 8px;
-	margin-bottom: 8px;
+.submit-button,
+a.simple-button {
+	margin: 10px 10px 10px auto;
+	padding: 10px;
 	color: white;
-	background-color: #757272;
 	font-size: initial;
+	background-color: #333333;
+	border: 2px solid #000000;
+	border-radius: 10px;
+	text-decoration: none;
 }
 
-a.simple-button {
-	margin-top: 8px;
-	margin-bottom: 8px;
+a.simple-button:hover,
+.submit-button:hover {
 	color: white;
 	background-color: #757272;
-	font-size: initial;
+	text-decoration: none;
+}
+
+a.simple-button:focus,
+.submit-button:focus {
+	color: white;
+	background-color: #757272;
 	text-decoration: none;
 }
 

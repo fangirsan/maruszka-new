@@ -77,7 +77,10 @@ class DataLoader implements CommandLineRunner{
 
         Country country3 = Country.builder().id(3L).countryCode("USA").countryName("United States of America").build();
         countryService.save(country3);
-        log.info("Countries loadaed...");
+
+        Country countr4 = Country.builder().id(4L).countryCode("DE").countryName("Germany").build();
+        countryService.save(countr4);
+        log.info("Countries loaded...");
 
         // Producer
         Producer producer = Producer.builder()
@@ -93,7 +96,7 @@ class DataLoader implements CommandLineRunner{
                 .product(ProducerType.Hop)
                 .build();
         producerService.save(producer2);
-        log.info("Producers loadaed...");
+        log.info("Producers loaded...");
 
         // Malt
         Malt malt = Malt.builder()
@@ -104,14 +107,6 @@ class DataLoader implements CommandLineRunner{
                 .country(countryService.findByCountryName("Poland"))
                 .producer(producerService.findByProducerName("Malt Europ"))
                 .build();
-//		Malt malt = new Malt();
-//		malt.setMaltName("Pale Ale");
-//		malt.setMaltFilling(100);
-//		malt.setMaltEbc(3);
-//		malt.setMaltUsage("All");
-//		malt.setCountry(countryService.findByCountryName("Poland"));
-//		malt.setProducer(producerService.findByProducerName("Malt Europ"));
-//		maltService.save(malt);
 
         Malt malt2 = Malt.builder()
                 .maltName("Strzegom")
@@ -132,19 +127,39 @@ class DataLoader implements CommandLineRunner{
                 .producer(producerService.findByProducerName("Malt Europ"))
                 .build();
         maltService.save(malt3);
-        log.info("Malts loadaed...");
+        log.info("Malts loaded...");
 
         // Hop
         Hop hop = Hop.builder()
                 .hopName("Citra")
-                .bitteringHop(true)
+                .bitterHop(true)
                 .aromaHop(true)
                 .alphaAcidMin(new BigDecimal("12.3"))
                 .alphaAcidMax(new BigDecimal("15.3"))
                 .country(countryService.findByCountryName("United States of America"))
                 .build();
         hopService.save(hop);
-        log.info("Hops loadaed...");
+
+        Hop hop2 = Hop.builder()
+                .hopName("Magnum")
+                .bitterHop(true)
+                .aromaHop(false)
+                .alphaAcidMin(new BigDecimal("10"))
+                .alphaAcidMax(new BigDecimal("15"))
+                .country(countryService.findByCountryName("Germany"))
+                .build();
+        hopService.save(hop2);
+
+        Hop cascade = Hop.builder()
+                .hopName("Cascade")
+                .bitterHop(false)
+                .aromaHop(true)
+                .alphaAcidMin(new BigDecimal("5"))
+                .alphaAcidMax(new BigDecimal("9"))
+                .country(countryService.findByCountryName("United States of America"))
+                .build();
+        hopService.save(cascade);
+        log.info("Hops loaded...");
 
         // Yeast
         Yeast yeast = Yeast.builder()
@@ -157,7 +172,7 @@ class DataLoader implements CommandLineRunner{
                 .producer(producerService.findByProducerName("Fermentis"))
                 .build();
         yeastService.save(yeast);
-        log.info("Yeasts loadaed...");
+        log.info("Yeasts loaded...");
 
         // BeerType
         BeerType beerType = BeerType.builder()

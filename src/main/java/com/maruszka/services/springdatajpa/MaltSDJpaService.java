@@ -56,8 +56,6 @@ public class MaltSDJpaService implements MaltService {
 	@Override
 	public Malt findById(Long id) {
 
-//		return maltRepository.findById(id).orElse(null);
-
 		Optional<Malt> maltOptional = maltRepository.findById(id);
 
 		if (!maltOptional.isPresent()) {

@@ -98,10 +98,10 @@ public class MaltController {
     }
 
     @GetMapping("/list")
-    public String getMalts(Model theModel) {
+    public String getMalts(Model model) {
 
-        Set<Malt> theMalts = maltService.findByOrderByMaltNameAsc();
-        theModel.addAttribute("malts", theMalts);
+        Set<Malt> malts = maltService.findByOrderByMaltNameAsc();
+        model.addAttribute("malts", malts);
         return "malt/malt-list";
     }
 

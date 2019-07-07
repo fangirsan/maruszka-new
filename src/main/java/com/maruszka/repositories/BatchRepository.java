@@ -15,6 +15,7 @@ public interface BatchRepository extends CrudRepository<Batch, Long> {
 	
 	Set<Batch> findByOrderByBatchNumberAsc();
 	
-	Set<Batch> findByMalts_id(Long maltId);
-	
+    Set<Batch> findByHops_id(Long hopIdToDelete);
+
+	Set<Batch> findByMalts_id(Long maltIdToDelete);
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{index.page.title}">Page Title</title>
+
+<link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}" />
+
+<script src="../static/js/jquery-2.1.4.min.js"
+	th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+<link th:href="@{/css/custom.css}" rel="stylesheet" media="screen" />
+
+<style th:remove="all">
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<div class="header" th:replace="fragments/main-sections :: header"></div>
+		<div class="menu" th:replace="fragments/main-sections :: menu"></div>
+
+		<div class="wrapper">
+			<div class="main">
+				<div class="page-title">
+					<p th:text="${hop.hopName}">Malt name</p>
+				</div>
+				<div class="show">
+
+					<div class="form-row">
+						<div class="form-field-name">
+							<label>Country:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${hop.country.countryName}">Country</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-field-name">
+							<label>Alpha acid min:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${hop.getAlphaAcidMin()} + '%'">Alpha acid min</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-field-name">
+							<label>Alpha acid max:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${hop.getAlphaAcidMax()} + '%'">Alpha acid max</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-field-name">
+							<label>Bitter hop:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${hop.isBitterHop()}">Bitter hop</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-field-name">
+							<label>Aroma hop:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${hop.isAromaHop()}">Aroma hop</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="footer" th:replace="fragments/main-sections :: footer"></div>
+	</div>
+
+</body>
+</html>

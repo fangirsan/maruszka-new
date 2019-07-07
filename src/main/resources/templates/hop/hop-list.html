@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{index.page.title}">Page Title</title>
+
+<link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}" />
+
+<script src="../static/js/jquery-2.1.4.min.js"
+	th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+<link th:href="@{/css/custom.css}" rel="stylesheet" media="screen" />
+
+<style th:remove="all">
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<div class="header" th:replace="fragments/main-sections :: header"></div>
+
+		<div class="menu" th:replace="fragments/main-sections :: menu"></div>
+
+
+		<div class="wrapper">
+			<div class="main">
+
+				<div class="page-title">
+					<p th:text="#{hop.title}" />
+				</div>
+
+				<table class="table">
+					<thead class="thead">
+						<tr>
+							<th>Hop name</th>
+							<th>Hop Country</th>
+							<th>Alpha Acid</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						<tr th:remove="all">
+							<td>Citra</td>
+							<td>United States of America</td>
+							<td>14</td>
+						</tr>
+						<tr th:remove="all">
+							<td>Marynka</td>
+							<td>Poland</td>
+							<td>9</td>
+						</tr>
+						<tr th:each="hop: ${hops}">
+							<td th:text="${hop.hopName}" />
+							<td th:text="${hop.country.countryName}" />
+							<td th:text="${(hop.getAlphaAcidMin() + hop.getAlphaAcidMax()) / 2} + '%'" />
+							<td>
+								<a href="#" th:href="@{'/hop/' + ${hop.id} + '/edit'}">Update</a> |
+								<a href="#" th:href="@{'/hop/' + ${hop.id}}">View</a> |
+								<a href="#" th:href="@{'/hop/delete/' + ${hop.id}}">Delete</a>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+				<div class="form-field-submit">
+					<a class="simple-button" href="#" th:href="@{'/hop/new'}">Add hop</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer" th:replace="fragments/main-sections :: footer"></div>
+
+	</div>
+
+</body>
+</html>
