@@ -61,7 +61,12 @@
 							<label>Bitter hop:</label>
 						</div>
 						<div class="form-field-input">
-							<p th:text="${hop.isBitterHop()}">Bitter hop</p>
+							<span th:if="${hop.isBitterHop()}">
+								<img width="30px" height="30px" th:src="@{/images/true_icon.png}">
+							</span>
+							<span th:if="${!hop.isBitterHop()}">
+								<img width="30px" height="30px" th:src="@{/images/false_icon.png}">
+							</span>
 						</div>
 					</div>
 
@@ -70,7 +75,12 @@
 							<label>Aroma hop:</label>
 						</div>
 						<div class="form-field-input">
-							<p th:text="${hop.isAromaHop()}">Aroma hop</p>
+							<span th:if="${hop.isAromaHop()}">
+								<img width="30px" height="30px" th:src="@{/images/true_icon.png}">
+							</span>
+							<span th:if="${!hop.isAromaHop()}">
+								<img width="30px" height="30px" th:src="@{/images/false_icon.png}">
+							</span>
 						</div>
 					</div>
 
