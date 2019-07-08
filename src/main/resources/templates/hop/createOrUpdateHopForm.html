@@ -37,12 +37,17 @@
 							</div>
 							<div class="form-field-input">
 								<input type="text" class="form-control"	th:field="*{hopName}" th:errorclass="has-error"/>
-							</div>
 								<div class="form-error" th:if="${#fields.hasErrors('hopName')}">
-										<ul>
-											<li th:each="err : ${#fields.errors('hopName')}" th:text="${err}"/>
-										</ul>
+									<ul>
+										<li th:each="err : ${#fields.errors('hopName')}" th:text="${err}"/>
+									</ul>
 								</div>
+							</div>
+<!--								<div class="form-error" th:if="${#fields.hasErrors('hopName')}">-->
+<!--										<ul>-->
+<!--											<li th:each="err : ${#fields.errors('hopName')}" th:text="${err}"/>-->
+<!--										</ul>-->
+<!--								</div>-->
 						</div>
 
 						<div class="form-row">

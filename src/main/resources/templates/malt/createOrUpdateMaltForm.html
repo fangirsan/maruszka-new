@@ -38,16 +38,12 @@
 							<div class="form-field-input">
 								<input type="text" class="form-control"
 									th:field="*{maltName}" th:errorclass="has-error"/>
-							</div>
-<!--							<span th:if="${#fields.hasErrors('maltName')}">-->
 								<div class="form-error" th:if="${#fields.hasErrors('maltName')}">
-	<!--								<span th:if="${#fields.hasErrors('maltName')}">-->
-										<ul>
-											<li th:each="err : ${#fields.errors('maltName')}" th:text="${err}"/>
-										</ul>
-	<!--								</span>-->
+									<ul>
+										<li th:each="err : ${#fields.errors('maltName')}" th:text="${err}"/>
+									</ul>
 								</div>
-<!--							</span>-->
+							</div>
 						</div>
 
 						<div class="form-row">
