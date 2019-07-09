@@ -110,24 +110,36 @@ th {
 }
 
 .form-field-name,
-.form-field-input {
+.form-field-input,
+.display-field-name {
 	display: inline-block;
 	margin-top: 15px;
 	width: 49%;
 	font-size: initial;
-	vertical-align: sub;
+	/*vertical-align: top;*/
 }
 
 .form-field-name {
 	text-align: right;
 	padding-right: 3%;
-	vertical-align: top;
+	padding-top: 5px;
 }
 
 .form-field-input {
 	text-align: left;
 	padding-left: 3%;
 	vertical-align: top;
+}
+
+.display-field-name {
+	text-align: right;
+	padding-right: 3%;
+	vertical-align: top;
+}
+
+.form-field-input img {
+	width: 25px;
+	height: 25px;
 }
 
 .form-field-submit {

@@ -30,7 +30,7 @@
 				<div class="show">
 
 					<div class="form-row">
-						<div class="form-field-name">
+						<div class="display-field-name">
 							<label>Country:</label>
 						</div>
 						<div class="form-field-input">
@@ -39,7 +39,7 @@
 					</div>
 
 					<div class="form-row">
-						<div class="form-field-name">
+						<div class="display-field-name">
 							<label>Alpha acid min:</label>
 						</div>
 						<div class="form-field-input">
@@ -48,7 +48,7 @@
 					</div>
 
 					<div class="form-row">
-						<div class="form-field-name">
+						<div class="display-field-name">
 							<label>Alpha acid max:</label>
 						</div>
 						<div class="form-field-input">
@@ -57,7 +57,7 @@
 					</div>
 
 					<div class="form-row">
-						<div class="form-field-name">
+						<div class="display-field-name">
 							<label>Bitter hop:</label>
 						</div>
 						<div class="form-field-input">
@@ -71,15 +71,15 @@
 					</div>
 
 					<div class="form-row">
-						<div class="form-field-name">
+						<div class="display-field-name">
 							<label>Aroma hop:</label>
 						</div>
 						<div class="form-field-input">
 							<span th:if="${hop.isAromaHop()}">
-								<img width="30px" height="30px" th:src="@{/images/true_icon.png}">
+								<img th:src="@{/images/true_icon.png}">
 							</span>
 							<span th:if="${!hop.isAromaHop()}">
-								<img width="30px" height="30px" th:src="@{/images/false_icon.png}">
+								<img th:src="@{/images/false_icon.png}">
 							</span>
 						</div>
 					</div>
