@@ -4,6 +4,7 @@ import com.maruszka.model.Country;
 import com.maruszka.model.Hop;
 import com.maruszka.services.CountryService;
 import com.maruszka.services.HopService;
+import com.maruszka.utils.DuplicateCheck;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,10 +27,12 @@ public class HopController {
 
     private HopService hopService;
     private CountryService countryService;
+    private DuplicateCheck duplicateCheck;
 
-    public HopController(HopService hopService, CountryService countryService) {
+    public HopController(HopService hopService, CountryService countryService, DuplicateCheck duplicateCheck) {
         this.hopService = hopService;
         this.countryService = countryService;
+        this.duplicateCheck = duplicateCheck;
     }
 
     // Method invoked in first place, adding "countries" to all models
@@ -91,13 +94,15 @@ public class HopController {
             });
             return VIEWS_HOP_CREATE_OR_UPDATE_FORM;
         } else {
-            if (hopService.findAllHopNames().contains(hop.getHopName().toLowerCase())) {
+            if (duplicateCheck.isDuplicate("HOP_NAME", "HOP", hop.getHopName()) && hop.isNew()) {
                 bindingResult.rejectValue("hopName", "duplicate", "Duplicate name");
                 log.info("Hop with given name: [" + hop.getHopName() + "] already exists");
+
                 return VIEWS_HOP_CREATE_OR_UPDATE_FORM;
+            } else {
+                Hop savedHop = hopService.save(hop);
+                return "redirect:/hop/" + savedHop.getId();
             }
-            Hop savedHop = hopService.save(hop);
-            return "redirect:/hop/" + savedHop.getId();
         }
     }
 

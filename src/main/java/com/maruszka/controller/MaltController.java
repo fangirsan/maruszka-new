@@ -7,17 +7,14 @@ import com.maruszka.model.Producer;
 import com.maruszka.services.CountryService;
 import com.maruszka.services.MaltService;
 import com.maruszka.services.ProducerService;
+import com.maruszka.utils.DuplicateCheck;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.ejb.EJBTransactionRolledbackException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
@@ -32,26 +29,20 @@ public class MaltController {
     private final MaltService maltService;
     private final CountryService countryService;
     private final ProducerService producerService;
+    private final DuplicateCheck duplicateCheck;
 
-    public MaltController(MaltService maltService, CountryService countryService, ProducerService producerService) {
+    public MaltController(MaltService maltService, CountryService countryService, ProducerService producerService, DuplicateCheck duplicateCheck) {
         this.maltService = maltService;
         this.countryService = countryService;
         this.producerService = producerService;
+        this.duplicateCheck = duplicateCheck;
     }
-
-//	@InitBinder
-//	public void setAllowedFields(WebDataBinder dataBinder) {
-//		dataBinder.setDisallowedFields("id");
-//	}
 
     // Method invoked in first place, adding "countries" to all models
     @ModelAttribute("countries")
     public Set<Country> populateCountries() {
         return countryService.findByOrderByCountryNameAsc();
     }
-
-//    @ModelAttribute("producers")
-//    public Set<Producer> populateProducers() { return producerService.findByOrderByProducerNameAsc(); }
 
     @ModelAttribute("producers")
     public Set<Producer> populateProducers() { return producerService.findProducerByProduct(ProducerType.Malt); }
@@ -130,14 +121,17 @@ public class MaltController {
             });
             return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
         } else {
-            if (maltService.findAllMaltNames().contains(malt.getMaltName().toLowerCase())) {
+            if (duplicateCheck.isDuplicate("MALT_NAME", "MALT", malt.getMaltName()) && malt.isNew()) {
                 bindingResult.rejectValue("maltName", "duplicate", "Duplicate name");
                 log.info("Malt with given name: [" + malt.getMaltName() + "] already exists");
+
                 return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
+            } else {
+                Malt savedMalt = maltService.save(malt);
+                return "redirect:/malt/" + savedMalt.getId();
             }
-            Malt savedMalt = maltService.save(malt);
-            return "redirect:/malt/" + savedMalt.getId();
         }
+
     }
 
     @RequestMapping("/delete/{maltId}")
