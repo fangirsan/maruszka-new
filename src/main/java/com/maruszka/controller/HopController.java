@@ -91,19 +91,13 @@ public class HopController {
             });
             return VIEWS_HOP_CREATE_OR_UPDATE_FORM;
         } else {
-            try {
-                Hop savedHop = hopService.save(hop);
-                return "redirect:/hop/" + savedHop.getId();
-            }  catch (Exception e) {
-                if (e instanceof ConstraintViolationException || e instanceof DataIntegrityViolationException) {
-                    if (hopService.findAllHopNames().contains(hop.getHopName())) {
-                        bindingResult.rejectValue("hopName", "duplicate", "Duplicate name");
-                        log.info("Hop with given name: [" + hop.getHopName() + "] already exists");
-                    }
-                    return VIEWS_HOP_CREATE_OR_UPDATE_FORM;
-                }
-                return null;
+            if (hopService.findAllHopNames().contains(hop.getHopName().toLowerCase())) {
+                bindingResult.rejectValue("hopName", "duplicate", "Duplicate name");
+                log.info("Hop with given name: [" + hop.getHopName() + "] already exists");
+                return VIEWS_HOP_CREATE_OR_UPDATE_FORM;
             }
+            Hop savedHop = hopService.save(hop);
+            return "redirect:/hop/" + savedHop.getId();
         }
     }
 

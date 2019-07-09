@@ -130,25 +130,13 @@ public class MaltController {
             });
             return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
         } else {
-            try {
-                Malt savedMalt = maltService.save(malt);
-                return "redirect:/malt/" + savedMalt.getId();
-            }  catch (Exception e) {
-                if (e instanceof ConstraintViolationException || e instanceof DataIntegrityViolationException) {
-                    if (malt.getProducer().getId() == 0) {
-                        bindingResult.rejectValue("producer", "ConstraintViolationException");
-                    }
-                    if (malt.getCountry().getId() == 0) {
-                        bindingResult.rejectValue("country", "ConstraintViolationException");
-                    }
-                    if (maltService.findAllMaltNames().contains(malt.getMaltName())) {
-                        bindingResult.rejectValue("maltName", "duplicate", "Duplicate name");
-                        log.info("Malt with given name: [" + malt.getMaltName() + "] already exists");
-                    }
-                    return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
-                }
-                return null;
+            if (maltService.findAllMaltNames().contains(malt.getMaltName().toLowerCase())) {
+                bindingResult.rejectValue("maltName", "duplicate", "Duplicate name");
+                log.info("Malt with given name: [" + malt.getMaltName() + "] already exists");
+                return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
             }
+            Malt savedMalt = maltService.save(malt);
+            return "redirect:/malt/" + savedMalt.getId();
         }
     }
 

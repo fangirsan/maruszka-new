@@ -47,7 +47,7 @@ public class MaltSDJpaService implements MaltService {
 		Set<String> maltNames = new HashSet<>();
 
 		for (Malt tempMalt : maltRepository.findAll()) {
-			maltNames.add(tempMalt.getMaltName());
+			maltNames.add(tempMalt.getMaltName().toLowerCase());
 		}
 
 		return maltNames;

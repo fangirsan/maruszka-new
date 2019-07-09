@@ -55,7 +55,12 @@
 						<tr th:each="hop: ${hops}">
 							<td th:text="${hop.hopName}" />
 							<td th:text="${hop.country.countryName}" />
-							<td th:text="${(hop.getAlphaAcidMin() + hop.getAlphaAcidMax()) / 2} + '%'" />
+							<span th:if="${hop.getAlphaAcidMin()} != null and ${hop.getAlphaAcidMax()} != null">
+								<td th:text="${(hop.getAlphaAcidMin() + hop.getAlphaAcidMax()) / 2} + '%'" />
+							</span>
+							<span th:if="${hop.getAlphaAcidMin()} == null and ${hop.getAlphaAcidMax()} == null">
+								<td th:text="'0'" />
+							</span>
 							<td>
 								<a href="#" th:href="@{'/hop/' + ${hop.id} + '/edit'}">Update</a> |
 								<a href="#" th:href="@{'/hop/' + ${hop.id}}">View</a> |

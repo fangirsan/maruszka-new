@@ -43,7 +43,7 @@ public class HopSDJpaService implements HopService {
 		Set<String> maltNames = new HashSet<>();
 
 		for (Hop tempHop : hopRepository.findAll()) {
-			maltNames.add(tempHop.getHopName());
+			maltNames.add(tempHop.getHopName().toLowerCase());
 		}
 
 		return maltNames;
