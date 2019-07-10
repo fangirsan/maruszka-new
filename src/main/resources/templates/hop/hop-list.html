@@ -41,7 +41,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
 						<tr th:remove="all">
 							<td>Citra</td>
 							<td>United States of America</td>
@@ -62,9 +61,11 @@
 								<td th:text="'0'" />
 							</span>
 							<td>
-								<a href="#" th:href="@{'/hop/' + ${hop.id} + '/edit'}">Update</a> |
-								<a href="#" th:href="@{'/hop/' + ${hop.id}}">View</a> |
-								<a href="#" th:href="@{'/hop/delete/' + ${hop.id}}">Delete</a>
+								<div  class="list-nav-buttons">
+									<a href="#" th:href="@{'/hop/' + ${hop.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a>
+									<a href="#" th:href="@{'/hop/' + ${hop.id}}"><img th:src="@{/images/view.png}" title="view"></a>
+									<a href="#" th:href="@{'/hop/delete/' + ${hop.id}}"><img th:src="@{/images/delete.png}" title="delete"></a>
+								</div>
 							</td>
 						</tr>
 

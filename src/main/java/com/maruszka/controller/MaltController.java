@@ -131,7 +131,6 @@ public class MaltController {
                 return "redirect:/malt/" + savedMalt.getId();
             }
         }
-
     }
 
     @RequestMapping("/delete/{maltId}")
