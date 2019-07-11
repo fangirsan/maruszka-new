@@ -36,7 +36,7 @@
 				<tr>
 					<th>Malt name</th>
 					<th>Malt Producer</th>
-					<th>Malt Country</th>
+					<th>EBC</th>
 					<th>Actions</th>
 				</tr>
 				</thead>
@@ -45,22 +45,22 @@
 				<tr th:remove="all">
 					<td>Strzegom jasny</td>
 					<td>Strzegom</td>
-					<td>Polska</td>
+					<td>5</td>
 				</tr>
 				<tr th:remove="all">
 					<td>Pale Ale</td>
 					<td>Malteurop</td>
-					<td>Polska</td>
+					<td>5</td>
 				</tr>
 				<tr th:each="malt: ${malts}">
 					<td th:text="${malt.maltName}" />
 					<td th:text="${malt.producer.producerName}" />
-					<td th:text="${malt.country.countryName}" />
+					<td th:text="${malt.maltEbc}" />
 					<td>
 						<div  class="list-nav-buttons">
-							<a href="#" th:href="@{'/hop/' + ${malt.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a>
-							<a href="#" th:href="@{'/hop/' + ${malt.id}}"><img th:src="@{/images/view.png}" title="view"></a>
-							<a href="#" th:href="@{'/hop/delete/' + ${malt.id}}"><img th:src="@{/images/delete.png}" title="delete"></a>
+							<a href="#" th:href="@{'/malt/' + ${malt.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a>
+							<a href="#" th:href="@{'/malt/' + ${malt.id}}"><img th:src="@{/images/view.png}" title="view"></a>
+							<a href="#" th:href="@{'/malt/delete/' + ${malt.id}}"><img th:src="@{/images/delete.png}" title="delete"></a>
 						</div>
 					</td>
 

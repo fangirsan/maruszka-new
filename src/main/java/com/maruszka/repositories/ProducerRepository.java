@@ -3,7 +3,7 @@ package com.maruszka.repositories;
 import java.util.List;
 import java.util.Set;
 
-import com.maruszka.model.Enums.ProducerType;
+import com.maruszka.model.enums.ProducerType;
 import org.springframework.data.repository.CrudRepository;
 
 import com.maruszka.model.Producer;

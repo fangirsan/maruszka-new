@@ -3,7 +3,7 @@ package com.maruszka.services;
 import java.util.List;
 import java.util.Set;
 
-import com.maruszka.model.Enums.ProducerType;
+import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.Producer;
 
 public interface ProducerService extends CrudService<Producer, Long> {

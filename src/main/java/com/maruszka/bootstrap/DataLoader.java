@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import com.maruszka.model.enums.YeastFermentationType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +17,9 @@ import com.maruszka.model.Hop;
 import com.maruszka.model.Malt;
 import com.maruszka.model.Producer;
 import com.maruszka.model.Yeast;
-import com.maruszka.model.Enums.ProducerType;
-import com.maruszka.model.Enums.YeastFlocculation;
-import com.maruszka.model.Enums.YeastType;
+import com.maruszka.model.enums.ProducerType;
+import com.maruszka.model.enums.YeastFlocculation;
+import com.maruszka.model.enums.YeastType;
 import com.maruszka.services.BatchService;
 import com.maruszka.services.BeerTypeService;
 import com.maruszka.services.CountryService;
@@ -170,6 +171,7 @@ class DataLoader implements CommandLineRunner{
                 .fermentationTempMax(new BigDecimal(24))
                 .yeastType(YeastType.Dry)
                 .producer(producerService.findByProducerName("Fermentis"))
+                .yeastFermentationType(YeastFermentationType.TOP)
                 .build();
         yeastService.save(yeast);
 
@@ -181,6 +183,7 @@ class DataLoader implements CommandLineRunner{
                 .fermentationTempMax(new BigDecimal(20))
                 .yeastType(YeastType.Dry)
                 .producer(producerService.findByProducerName("Fermentis"))
+                .yeastFermentationType(YeastFermentationType.TOP)
                 .build();
         yeastService.save(yeast2);
         log.info("Yeasts loaded...");

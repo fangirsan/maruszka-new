@@ -1,4 +1,4 @@
-package com.maruszka.model.Enums;
+package com.maruszka.model.enums;
 
 public enum YeastType {
 	Dry("Dry yeast"),

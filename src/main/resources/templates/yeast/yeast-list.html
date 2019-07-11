@@ -35,26 +35,30 @@
 					<thead class="thead">
 						<tr>
 							<th>Yeast name</th>
-							<th>Producer</th>
+							<th>Type</th>
 							<th>Yeast Type</th>
+							<th>Alcohol Tolerance</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:remove="all">
 							<td>SafAle US-05</td>
-							<td>Fermentis</td>
+							<td>Top</td>
+							<td>10</td>
 							<td>14</td>
 						</tr>
 						<tr th:remove="all">
 							<td>SafAle T-58</td>
-							<td>Fermentis</td>
+							<td>Top</td>
+							<td>10</td>
 							<td>10</td>
 						</tr>
 						<tr th:each="yeast: ${yeasts}">
 							<td th:text="${yeast.yeastName}" />
-							<td th:text="${yeast.producer.producerName}" />
+							<td th:text="${yeast.yeastFermentationType.getDescription()}" />
 							<td th:text="${yeast.yeastType}" />
+							<td th:text="${yeast.alcoholTolerance}" />
 							<td>
 								<div  class="list-nav-buttons">
 									<a href="#" th:href="@{'/yeast/' + ${yeast.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a>

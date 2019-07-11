@@ -65,9 +65,23 @@
 							</div>
 							<div class="form-field-input">
 								<select class="form-control" th:field="*{yeastType}">
-									<option th:each="yeastType : ${T(com.maruszka.model.Enums.YeastType).values()}"
+									<option th:each="yeastType : ${T(com.maruszka.model.enums.YeastType).values()}"
 											th:value="${yeastType}"
 											th:text="${yeastType.getDescription()}">
+									</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Fermentation Type:</label>
+							</div>
+							<div class="form-field-input">
+								<select class="form-control" th:field="*{yeastFermentationType}">
+									<option th:each="yeastFermentationType : ${T(com.maruszka.model.enums.YeastFermentationType).values()}"
+											th:value="${yeastFermentationType}"
+											th:text="${yeastFermentationType.getDescription()}">
 									</option>
 								</select>
 							</div>
@@ -106,7 +120,7 @@
 							</div>
 							<div class="form-field-input">
 								<select class="form-control"  th:field="*{flocculation}">
-									<option th:each="flocculation : ${T(com.maruszka.model.Enums.YeastFlocculation).values()}"
+									<option th:each="flocculation : ${T(com.maruszka.model.enums.YeastFlocculation).values()}"
 											th:value="${flocculation}"
 											th:text="${flocculation}">
 									</option>

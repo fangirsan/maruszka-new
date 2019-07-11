@@ -1,7 +1,7 @@
 package com.maruszka.controller;
 
 import com.maruszka.model.Country;
-import com.maruszka.model.Enums.ProducerType;
+import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.Malt;
 import com.maruszka.model.Producer;
 import com.maruszka.services.CountryService;

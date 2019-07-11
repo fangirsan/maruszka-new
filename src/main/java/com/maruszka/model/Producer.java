@@ -6,7 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import com.maruszka.model.Enums.ProducerType;
+import com.maruszka.model.enums.ProducerType;
 
 import lombok.Builder;
 import lombok.Getter;

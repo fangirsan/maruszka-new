@@ -90,13 +90,20 @@ li a:focus {
 table {
 	margin: 0px auto;
 	text-align: center;
+	vertical-align: middle;
 	border-collapse: collapse;
 	/*this makes equals spacing in columns*/
 	table-layout: fixed;
+	border-bottom-style: ridge;
 }
 
 th {
 	text-align: center;
+}
+
+td, th {
+	/*this make vertical alignment for table cell*/
+	vertical-align: middle !important;
 }
 
 .form {
@@ -182,8 +189,8 @@ a.simple-button:focus,
 
 .list-nav-buttons img {
 	 margin: 0 8px 0 8px;
-	 width: 25px;
-	 height: 25px;
+	 width: 30px;
+	 height: 30px;
  }
 
 .bottom-nav-buttons {

@@ -4,8 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.maruszka.model.Enums.ProducerType;
-import org.apache.tomcat.jni.Proc;
+import com.maruszka.model.enums.ProducerType;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 

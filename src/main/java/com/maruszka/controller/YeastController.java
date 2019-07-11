@@ -1,6 +1,6 @@
 package com.maruszka.controller;
 
-import com.maruszka.model.Enums.ProducerType;
+import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.Producer;
 import com.maruszka.model.Yeast;
 import com.maruszka.services.ProducerService;
