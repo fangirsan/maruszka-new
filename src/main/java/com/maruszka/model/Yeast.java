@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.maruszka.model.Enums.YeastFlocculation;
 import com.maruszka.model.Enums.YeastType;
@@ -17,6 +18,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -25,7 +28,8 @@ import lombok.ToString;
 @Table(name="yeast")
 public class Yeast extends BaseEntity {
 
-	@Column(name="yeast_name")
+	@NotBlank
+	@Column(name="yeast_name", unique = true)
 	private String yeastName;
 	
 	@Enumerated(EnumType.STRING)
@@ -33,13 +37,13 @@ public class Yeast extends BaseEntity {
 	private YeastType yeastType; 
 	
 	@Column(name="fermentation_temp_min")
-	private Integer fermentationTempMin;
+	private BigDecimal fermentationTempMin;
 	
 	@Column(name="fermentation_temp_max")
-	private Integer fermentationTempMax;
+	private BigDecimal fermentationTempMax;
 	
 	@Column(name="alcohol_tolerance")
-	private Integer alcoholToleracne;
+	private BigDecimal alcoholTolerance;
 	
 	@Enumerated
 	@Column(name="flocculation")
@@ -50,14 +54,14 @@ public class Yeast extends BaseEntity {
 	private Producer producer;
 
 	@Builder
-	public Yeast(Long id, String yeastName, YeastType yeastType, Integer fermentationTempMin, Integer fermentationTempMax,
-			Integer alcoholToleracne, YeastFlocculation flocculation, Producer producer) {
+	public Yeast(Long id, String yeastName, YeastType yeastType, BigDecimal fermentationTempMin, BigDecimal fermentationTempMax,
+				 BigDecimal alcoholTolerance, YeastFlocculation flocculation, Producer producer) {
 		super(id);
 		this.yeastName = yeastName;
 		this.yeastType = yeastType;
 		this.fermentationTempMin = fermentationTempMin;
 		this.fermentationTempMax = fermentationTempMax;
-		this.alcoholToleracne = alcoholToleracne;
+		this.alcoholTolerance = alcoholTolerance;
 		this.flocculation = flocculation;
 		this.producer = producer;
 	}

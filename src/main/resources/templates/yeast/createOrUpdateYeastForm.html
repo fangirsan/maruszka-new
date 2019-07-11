@@ -25,22 +25,21 @@
 		<div class="wrapper">
 			<div class="main">
 				<div class="page-title">
-					<p th:text="#{malt.form.title}" />
+					<p th:text="#{yeast.form.title}" />
 				</div>
 				<div class="form">
-					<form th:object="${malt}" th:action="@{'/malt/saveMalt'}" method="post">
+					<form th:object="${yeast}" th:action="@{'/yeast/saveYeast'}" method="post">
 						<input type="hidden" name ="id" th:field="*{id}">
 
 						<div class="form-row">
 							<div class="form-field-name">
-								<label>Malt name:</label>
+								<label>Yeast name:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="text" class="form-control"
-									th:field="*{maltName}" th:errorclass="has-error"/>
-								<div class="form-error" th:if="${#fields.hasErrors('maltName')}">
+								<input type="text" class="form-control"	th:field="*{yeastName}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('yeastName')}">
 									<ul>
-										<li th:each="err : ${#fields.errors('maltName')}" th:text="${err}"/>
+										<li th:each="err : ${#fields.errors('yeastName')}" th:text="${err}"/>
 									</ul>
 								</div>
 							</div>
@@ -52,24 +51,9 @@
 							</div>
 							<div class="form-field-input">
 								<select class="form-control" th:field="*{producer.id}">
-									<option th:each="producer : ${producers}"
-										th:value="${producer?.id}"
-										th:text="${producer?.producerName}">
-									</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="form-field-name">
-								<label>Country:</label>
-							</div>
-							<div class="form-field-input">
-								<select class="form-control" th:field="*{country.id}">
-<!--							    <option value="0">Select country</option>-->
-								    <option th:each="country : ${countries}"
-			                            th:value="${country?.id}"
-			                            th:text="${country?.countryName}">
+								    <option th:each="producer : ${producers}"
+			                            th:value="${producer?.id}"
+			                            th:text="${producer?.producerName}">
 						    		</option>
 							    </select>
 							</div>
@@ -77,37 +61,61 @@
 
 						<div class="form-row">
 							<div class="form-field-name">
-								<label>Malt filling:</label>
+								<label>Yeast Type:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="number" class="form-control"
-									th:field="*{maltFilling}" />
+								<select class="form-control" th:field="*{yeastType}">
+									<option th:each="yeastType : ${T(com.maruszka.model.Enums.YeastType).values()}"
+											th:value="${yeastType}"
+											th:text="${yeastType}">
+									</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="form-field-name">
-								<label>Malt usage:</label>
+								<label>Alcohol Tolerance:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="text" class="form-control"
-									th:field="*{maltUsage}" />
+								<input type="number" class="form-control" th:field="*{alcoholTolerance}"/>
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="form-field-name">
-								<label>Malt EBC:</label>
+								<label>Fermentation Temp. Min:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="number" class="form-control"
-									th:field="*{maltEbc}" />
+								<input type="number" class="form-control" th:field="*{fermentationTempMin}"/>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Fermentation Temp. Max:</label>
+							</div>
+							<div class="form-field-input">
+								<input type="number" class="form-control" th:field="*{fermentationTempMax}"/>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Flocculation:</label>
+							</div>
+							<div class="form-field-input">
+								<select class="form-control"  th:field="*{flocculation}">
+									<option th:each="flocculation : ${T(com.maruszka.model.Enums.YeastFlocculation).values()}"
+											th:value="${flocculation}"
+											th:text="${flocculation}">
+									</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="form-field-submit">
-<!--								<button class="btn btn-default" type="submit">Submit</button>-->
 								<button class="submit-button" type="submit">Submit</button>
 							</div>
 						</div>

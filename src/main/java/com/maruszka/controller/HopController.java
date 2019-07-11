@@ -6,8 +6,6 @@ import com.maruszka.services.CountryService;
 import com.maruszka.services.HopService;
 import com.maruszka.utils.DuplicateCheck;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,7 +43,6 @@ public class HopController {
     public ModelAndView showHop(@PathVariable("hopId") Long hopId) {
 
         ModelAndView mav = new ModelAndView("hop/hop-show");
-
         Hop hopToShow = hopService.findById(hopId);
 
         if (hopToShow.getAlphaAcidMin() == null) {
@@ -64,8 +61,8 @@ public class HopController {
     public String getHops(Model model) {
 
         Set<Hop> hops = hopService.findByOrderByHopNameAsc();
-
         model.addAttribute("hops", hops);
+
         return "hop/hop-list";
     }
 

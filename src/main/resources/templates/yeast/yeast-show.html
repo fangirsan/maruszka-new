@@ -25,7 +25,7 @@
 	<div class="wrapper">
 		<div class="main">
 			<div class="page-title">
-				<p th:text="${hop.hopName}">Malt name</p>
+				<p th:text="${yeast.yeastName}">Yeast name</p>
 			</div>
 			<div class="show">
 
@@ -34,61 +34,60 @@
 						<label>Country:</label>
 					</div>
 					<div class="form-field-input">
-						<p th:text="${hop.country.countryName}">Country</p>
+						<p th:text="${yeast.producer.producerName}">Producer</p>
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="display-field-name">
-						<label>Alpha acid min:</label>
+						<label>Yeast Type:</label>
 					</div>
 					<div class="form-field-input">
-						<p th:text="${hop.getAlphaAcidMin()} + '%'">Alpha acid min</p>
+						<p th:text="${yeast.yeastType}">Yeast Type</p>
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="display-field-name">
-						<label>Alpha acid max:</label>
+						<label>Alcohol Tolerance</label>
 					</div>
 					<div class="form-field-input">
-						<p th:text="${hop.getAlphaAcidMax()} + '%'">Alpha acid max</p>
+						<p th:text="${yeast.getAlcoholTolerance()} + '%'">Alcohol Tolerance</p>
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="display-field-name">
-						<label>Bitter hop:</label>
+						<label>Fermentation Temperature Min:</label>
 					</div>
 					<div class="form-field-input">
-						<span th:if="${hop.isBitterHop()}">
-							<img width="30px" height="30px" th:src="@{/images/true_icon.png}">
-						</span>
-						<span th:if="${!hop.isBitterHop()}">
-							<img width="30px" height="30px" th:src="@{/images/false_icon.png}">
-						</span>
+						<p th:text="${yeast.getFermentationTempMin()} + ' °C'">Fermentation Temperature Min</p>
 					</div>
 				</div>
 
 				<div class="form-row">
 					<div class="display-field-name">
-						<label>Aroma hop:</label>
+						<label>Fermentation Temperature Max:</label>
 					</div>
 					<div class="form-field-input">
-						<span th:if="${hop.isAromaHop()}">
-							<img th:src="@{/images/true_icon.png}">
-						</span>
-						<span th:if="${!hop.isAromaHop()}">
-							<img th:src="@{/images/false_icon.png}">
-						</span>
+						<p th:text="${yeast.getFermentationTempMax()} + ' °C'">Fermentation Temperature Max</p>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="display-field-name">
+						<label>Flocculation:</label>
+					</div>
+					<div class="form-field-input">
+						<p th:text="${yeast.flocculation}">Flocculation</p>
 					</div>
 				</div>
 
 				<div class="bottom-nav-buttons">
 					<ul>
-						<li><a href="#" th:href="@{'/hop/list'}"><img th:src="@{/images/list.png}" title="list"></a></li>
-						<li><a href="#" th:href="@{'/hop/' + ${hop.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a></li>
-						<li><a href="#" th:href="@{'/hop/delete/' + ${hop.id}}"><img th:src="@{/images/delete.png}" title="delete"></a></li>
+						<li><a href="#" th:href="@{'/yeast/list'}"><img th:src="@{/images/list.png}" title="list"></a></li>
+						<li><a href="#" th:href="@{'/yeast/' + ${yeast.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a></li>
+						<li><a href="#" th:href="@{'/yeast/delete/' + ${yeast.id}}"><img th:src="@{/images/delete.png}" title="delete"></a></li>
 					</ul>
 				</div>
 			</div>

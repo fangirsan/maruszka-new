@@ -93,7 +93,7 @@ class DataLoader implements CommandLineRunner{
         Producer producer2 = Producer.builder()
                 .id(2L)
                 .producerName("Fermentis")
-                .product(ProducerType.Hop)
+                .product(ProducerType.Yeast)
                 .build();
         producerService.save(producer2);
         log.info("Producers loaded...");
@@ -163,15 +163,26 @@ class DataLoader implements CommandLineRunner{
 
         // Yeast
         Yeast yeast = Yeast.builder()
-                .yeastName("US-05")
-                .alcoholToleracne(9)
-                .flocculation(YeastFlocculation.MEDIUM)
-                .fermentationTempMin(15)
-                .fermentationTempMax(24)
-                .yeastType(YeastType.DRY)
+                .yeastName("SafAle US-05")
+                .alcoholTolerance(new BigDecimal(9))
+                .flocculation(YeastFlocculation.Medium)
+                .fermentationTempMin(new BigDecimal(15))
+                .fermentationTempMax(new BigDecimal(24))
+                .yeastType(YeastType.Dry)
                 .producer(producerService.findByProducerName("Fermentis"))
                 .build();
         yeastService.save(yeast);
+
+        Yeast yeast2 = Yeast.builder()
+                .yeastName("SafAle T-58")
+                .alcoholTolerance(new BigDecimal(10))
+                .flocculation(YeastFlocculation.Medium)
+                .fermentationTempMin(new BigDecimal(15))
+                .fermentationTempMax(new BigDecimal(20))
+                .yeastType(YeastType.Dry)
+                .producer(producerService.findByProducerName("Fermentis"))
+                .build();
+        yeastService.save(yeast2);
         log.info("Yeasts loaded...");
 
         // BeerType

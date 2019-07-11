@@ -58,4 +58,9 @@ public class YeastSDJpaService implements YeastService {
 		return yeastRepository.findAllByYeastNameLike(YeastName);
 	}
 
+	@Override
+	public Set<Yeast> findByOrderByYeastNameAsc() {
+		return yeastRepository.findByOrderByYeastNameAsc();
+	}
+
 }
