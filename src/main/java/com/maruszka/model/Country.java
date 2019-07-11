@@ -3,6 +3,7 @@ package com.maruszka.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,8 @@ import lombok.Setter;
 @Table(name="country")
 public class Country extends BaseEntity {
 
-	@Column(name="country_name")
+	@NotBlank
+	@Column(name="country_name", unique = true)
 	private String countryName;
 	
 	@Column(name="country_code")
