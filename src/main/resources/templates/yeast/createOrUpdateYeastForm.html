@@ -67,7 +67,7 @@
 								<select class="form-control" th:field="*{yeastType}">
 									<option th:each="yeastType : ${T(com.maruszka.model.Enums.YeastType).values()}"
 											th:value="${yeastType}"
-											th:text="${yeastType}">
+											th:text="${yeastType.getDescription()}">
 									</option>
 								</select>
 							</div>
