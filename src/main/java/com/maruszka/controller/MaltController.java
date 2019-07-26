@@ -83,6 +83,12 @@ public class MaltController {
         public ModelAndView showMalt(@PathVariable("maltId") Long maltId) {
 
         ModelAndView mav = new ModelAndView("malt/malt-show");
+        Malt maltToShow = maltService.findById(maltId);
+
+        if (maltToShow.getCountry() == null) {
+            maltToShow.setCountry(countryService.findByCountryName("N/A"));
+        }
+
         mav.addObject(maltService.findById(maltId));
 
         return mav;

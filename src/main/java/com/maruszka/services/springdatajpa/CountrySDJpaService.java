@@ -1,8 +1,15 @@
 package com.maruszka.services.springdatajpa;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import com.maruszka.model.Batch;
+import com.maruszka.model.Hop;
+import com.maruszka.model.Malt;
+import com.maruszka.repositories.HopRepository;
+import com.maruszka.repositories.MaltRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -10,21 +17,26 @@ import com.maruszka.model.Country;
 import com.maruszka.repositories.CountryRepository;
 import com.maruszka.services.CountryService;
 
+@Slf4j
 @Service
 @Profile("springdatajpa")
 public class CountrySDJpaService implements CountryService {
 
 	private final CountryRepository countryRepository;
+	private final MaltRepository maltRepository;
+	private final HopRepository hopRepository;
 	
-	public CountrySDJpaService(CountryRepository countryRepository) {
+	public CountrySDJpaService(CountryRepository countryRepository, MaltRepository maltRepository, HopRepository hopRepository) {
 		this.countryRepository = countryRepository;
+		this.maltRepository = maltRepository;
+		this.hopRepository = hopRepository;
 	}
 
 	@Override
 	public Set<Country> findAll() {
 		Set<Country> countries = new HashSet<>();
 		countryRepository.findAll().forEach(countries::add);
-		
+
 		return countries;
 	}
 
@@ -44,8 +56,41 @@ public class CountrySDJpaService implements CountryService {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		countryRepository.deleteById(id);
+	public void deleteById(Long countryIdToDelete) {
+
+		Set<Malt> malts = maltRepository.findByCountry_id(countryIdToDelete);
+//		if (malts != null) {
+		if (malts.size() != 0 ) {
+			for (Malt tempMalt : malts) {
+				log.debug("Deleting country from malt number: " + tempMalt.getMaltName());
+				tempMalt.setCountry(null);
+			}
+//			maltRepository.deleteById(countryIdToDelete);
+			countryRepository.deleteById(countryIdToDelete);
+		}
+
+		Set<Hop> hops = hopRepository.findByCountry_id(countryIdToDelete);
+//		if (hops != null) {
+		if (hops.size() != 0) {
+			for (Hop tempHop : hops) {
+				log.debug("Deleting country from hop number: " + tempHop.getHopName());
+				tempHop.setCountry(null);
+			}
+//			hopRepository.deleteById(countryIdToDelete);
+			countryRepository.deleteById(countryIdToDelete);
+		}
+
+//		Optional<Malt> maltOptional = maltRepository.findById(id);
+//
+//		if (!maltOptional.isPresent()) {
+//			throw new NotFoundException("Malt not found. For Id value: " + id.toString());
+//		}
+
+		Optional<Country> countryOptional = countryRepository.findById(countryIdToDelete);
+		if (countryOptional.isPresent()) {
+			countryRepository.deleteById(countryIdToDelete);
+		}
+
 	}
 
 	@Override
@@ -60,7 +105,12 @@ public class CountrySDJpaService implements CountryService {
 
 	@Override
 	public Set<Country> findByOrderByCountryNameAsc() {
-		return countryRepository.findByOrderByCountryNameAsc();
+		Set<Country> countries = countryRepository.findByOrderByCountryNameAsc();
+
+		// do not show N/A in the Country list
+		countries.removeIf(country -> country.getCountryName().equals("N/A"));
+
+		return countries;
 	}
 
 }

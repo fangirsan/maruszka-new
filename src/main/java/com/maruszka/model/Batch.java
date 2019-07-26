@@ -36,7 +36,7 @@ public class Batch extends BaseEntity {
 	@JoinColumn(name="beerType")
 	private BeerType beerType;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="yeast_id")
 	private Yeast yeast;
 	

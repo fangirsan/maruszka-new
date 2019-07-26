@@ -14,4 +14,6 @@ public interface MaltRepository extends CrudRepository<Malt, Long> {
 	List<Malt> findAllByMaltNameLike(String maltName);
 
 	Set<Malt> findByOrderByMaltNameAsc();
+
+    Set<Malt> findByCountry_id(Long countryIdToDelete);
 }

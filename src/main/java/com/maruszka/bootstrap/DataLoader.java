@@ -79,8 +79,12 @@ class DataLoader implements CommandLineRunner{
         Country country3 = Country.builder().id(3L).countryCode("USA").countryName("United States of America").build();
         countryService.save(country3);
 
-        Country countr4 = Country.builder().id(4L).countryCode("DE").countryName("Germany").build();
-        countryService.save(countr4);
+        Country country4 = Country.builder().id(4L).countryCode("DE").countryName("Germany").build();
+        countryService.save(country4);
+
+        Country unspecified = Country.builder().id(4L).countryCode("N/A").countryName("N/A").build();
+        countryService.save(unspecified);
+
         log.info("Countries loaded...");
 
         // Producer
@@ -137,7 +141,7 @@ class DataLoader implements CommandLineRunner{
                 .aromaHop(true)
                 .alphaAcidMin(new BigDecimal("12.3"))
                 .alphaAcidMax(new BigDecimal("15.3"))
-                .country(countryService.findByCountryName("United States of America"))
+                .country(countryService.findById(3L))
                 .build();
         hopService.save(hop);
 
@@ -147,7 +151,7 @@ class DataLoader implements CommandLineRunner{
                 .aromaHop(false)
                 .alphaAcidMin(new BigDecimal("10"))
                 .alphaAcidMax(new BigDecimal("15"))
-                .country(countryService.findByCountryName("Germany"))
+                .country(countryService.findById(1L))
                 .build();
         hopService.save(hop2);
 
@@ -157,7 +161,7 @@ class DataLoader implements CommandLineRunner{
                 .aromaHop(true)
                 .alphaAcidMin(new BigDecimal("5"))
                 .alphaAcidMax(new BigDecimal("9"))
-                .country(countryService.findByCountryName("United States of America"))
+                .country(countryService.findById(3L))
                 .build();
         hopService.save(cascade);
         log.info("Hops loaded...");
@@ -212,7 +216,7 @@ class DataLoader implements CommandLineRunner{
                 .batchNumber(1)
                 .beerType(beerTypeService.findByBeerType("Stout"))
                 .hops(hops)
-                .yeast(yeastService.findByYeastName("US-05"))
+                .yeast(yeastService.findById(2L))
                 .malts(malts)
                 .build();
         batch.getMalts().add(malt);
@@ -222,7 +226,7 @@ class DataLoader implements CommandLineRunner{
                 .batchNumber(2)
                 .beerType(beerTypeService.findById(2L))
                 .hops(hops)
-                .yeast(yeastService.findByYeastName("US-05"))
+                .yeast(yeastService.findById(1L))
                 .malts(malts)
                 .build();
         batchService.save(batch);

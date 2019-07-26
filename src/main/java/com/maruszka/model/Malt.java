@@ -37,7 +37,7 @@ public class Malt  extends BaseEntity{
 	@Column(name="malt_usage")
 	private String maltUsage;
 
-	@NotNull
+//	@NotNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="country_id")
 	private Country country;
