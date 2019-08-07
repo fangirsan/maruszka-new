@@ -14,4 +14,5 @@ public interface YeastRepository extends CrudRepository<Yeast, Long> {
 	List<Yeast> findAllByYeastNameLike(String YeastName);
 
     Set<Yeast> findByOrderByYeastNameAsc();
+
 }

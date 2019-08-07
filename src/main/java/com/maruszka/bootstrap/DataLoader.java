@@ -190,6 +190,11 @@ class DataLoader implements CommandLineRunner{
                 .yeastFermentationType(YeastFermentationType.TOP)
                 .build();
         yeastService.save(yeast2);
+
+        Yeast nullYeast = Yeast.builder()
+                .yeastName("N/A")
+                .build();
+        yeastService.save(nullYeast);
         log.info("Yeasts loaded...");
 
         // BeerType

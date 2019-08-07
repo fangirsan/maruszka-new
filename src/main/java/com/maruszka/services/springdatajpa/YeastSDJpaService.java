@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.maruszka.model.Batch;
+import com.maruszka.repositories.BatchRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +14,17 @@ import com.maruszka.model.Yeast;
 import com.maruszka.repositories.YeastRepository;
 import com.maruszka.services.YeastService;
 
+@Slf4j
 @Service
 @Profile("springdatajpa")
 public class YeastSDJpaService implements YeastService {
 
 	private final YeastRepository yeastRepository;
+	private final BatchRepository batchRepository;
 	
-	public YeastSDJpaService(YeastRepository yeastRepository) {
+	public YeastSDJpaService(YeastRepository yeastRepository, BatchRepository batchRepository) {
 		this.yeastRepository = yeastRepository;
+		this.batchRepository = batchRepository;
 	}
 
 	@Override
@@ -44,8 +50,18 @@ public class YeastSDJpaService implements YeastService {
 	}
 
 	@Override
-	public void deleteById(Long id) {
-		yeastRepository.deleteById(id);
+	public void deleteById(Long yeastIdToDelete) {
+
+		Set<Batch> batches = batchRepository.findByYeast_id(yeastIdToDelete);
+		if (batches.size() != 0 ) {
+			for (Batch tempBatch : batches) {
+				log.debug("Deleting yeast from batch number: " + tempBatch.getBatchNumber());
+				tempBatch.setYeast(yeastRepository.findByYeastName("N/A"));
+			}
+			yeastRepository.deleteById(yeastIdToDelete);
+		} else {
+			yeastRepository.deleteById(yeastIdToDelete);
+		}
 	}
 
 	@Override
@@ -60,7 +76,13 @@ public class YeastSDJpaService implements YeastService {
 
 	@Override
 	public Set<Yeast> findByOrderByYeastNameAsc() {
-		return yeastRepository.findByOrderByYeastNameAsc();
+
+		Set<Yeast> yeasts = yeastRepository.findByOrderByYeastNameAsc();
+
+		// do not show N/A in the Yeast list
+		yeasts.removeIf(yeast -> yeast.getYeastName().equals("N/A"));
+
+		return yeasts;
 	}
 
 }
