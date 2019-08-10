@@ -51,6 +51,9 @@ public class HopController {
         if (hopToShow.getAlphaAcidMax() == null) {
             hopToShow.setAlphaAcidMax(BigDecimal.valueOf(0L));
         }
+        if (hopToShow.getCountry() == null) {
+            hopToShow.setCountry(countryService.findByCountryName("N/A"));
+        }
 
         mav.addObject(hopToShow);
 
@@ -61,6 +64,13 @@ public class HopController {
     public String getHops(Model model) {
 
         Set<Hop> hops = hopService.findByOrderByHopNameAsc();
+
+        for (Hop tempHop: hops) {
+            if (tempHop.getCountry() == null) {
+                tempHop.setCountry(countryService.findByCountryName("N/A"));
+            }
+        }
+
         model.addAttribute("hops", hops);
 
         return "hop/hop-list";

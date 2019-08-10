@@ -32,7 +32,7 @@ public class Hop extends BaseEntity{
 	@Column(name="aroma_hop")
 	private boolean aromaHop;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="country_id")
 	private Country country;
 	
