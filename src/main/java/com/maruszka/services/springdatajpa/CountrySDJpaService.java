@@ -22,85 +22,86 @@ import com.maruszka.services.CountryService;
 @Profile("springdatajpa")
 public class CountrySDJpaService implements CountryService {
 
-	private final CountryRepository countryRepository;
-	private final MaltRepository maltRepository;
-	private final HopRepository hopRepository;
-	
-	public CountrySDJpaService(CountryRepository countryRepository, MaltRepository maltRepository, HopRepository hopRepository) {
-		this.countryRepository = countryRepository;
-		this.maltRepository = maltRepository;
-		this.hopRepository = hopRepository;
-	}
+    private final CountryRepository countryRepository;
+    private final MaltRepository maltRepository;
+    private final HopRepository hopRepository;
 
-	@Override
-	public Set<Country> findAll() {
-		Set<Country> countries = new HashSet<>();
-		countryRepository.findAll().forEach(countries::add);
+    public CountrySDJpaService(CountryRepository countryRepository, MaltRepository maltRepository, HopRepository hopRepository) {
+        this.countryRepository = countryRepository;
+        this.maltRepository = maltRepository;
+        this.hopRepository = hopRepository;
+    }
 
-		return countries;
-	}
+    @Override
+    public Set<Country> findAll() {
+        Set<Country> countries = new HashSet<>();
+        countryRepository.findAll().forEach(countries::add);
 
-	@Override
-	public Country findById(Long id) {
-		return countryRepository.findById(id).orElse(null);
-	}
+        return countries;
+    }
 
-	@Override
-	public Country save(Country object) {
-		return countryRepository.save(object);
-	}
+    @Override
+    public Country findById(Long id) {
+        return countryRepository.findById(id).orElse(null);
+    }
 
-	@Override
-	public void delete(Country object) {
-		countryRepository.delete(object);
-	}
+    @Override
+    public Country save(Country country) {
+        log.debug("Country: " + country.getCountryName() + " has been saved");
+        return countryRepository.save(country);
+    }
 
-	@Override
-	public void deleteById(Long countryIdToDelete) {
+    @Override
+    public void delete(Country object) {
+        countryRepository.delete(object);
+    }
 
-		Set<Malt> malts = maltRepository.findByCountry_id(countryIdToDelete);
-		if (malts.size() != 0 ) {
-			for (Malt tempMalt : malts) {
-				log.debug("Detaching country from malt: " + tempMalt.getMaltName());
-				tempMalt.setCountry(findByCountryName("N/A"));
-			}
-		}
+    @Override
+    public void deleteById(Long countryIdToDelete) {
 
-		Set<Hop> hops = hopRepository.findByCountry_id(countryIdToDelete);
-		if (hops.size() != 0) {
-			for (Hop tempHop : hops) {
-				log.debug("Detaching country from hop: " + tempHop.getHopName());
-				tempHop.setCountry(findByCountryName("N/A"));
-			}
-		}
+        Set<Malt> malts = maltRepository.findByCountry_id(countryIdToDelete);
+        if (malts.size() != 0 ) {
+            for (Malt tempMalt : malts) {
+                log.debug("Detaching country from malt: " + tempMalt.getMaltName());
+                tempMalt.setCountry(findByCountryName("N/A"));
+            }
+        }
 
-		Optional<Country> countryOptional = countryRepository.findById(countryIdToDelete);
-		if (countryOptional.isPresent()) {
-			String countryName = findById(countryIdToDelete).getCountryName();
-			countryRepository.deleteById(countryIdToDelete);
-			log.info("Country: " + countryName + " has been deleted." );
-		}
-	}
+        Set<Hop> hops = hopRepository.findByCountry_id(countryIdToDelete);
+        if (hops.size() != 0) {
+            for (Hop tempHop : hops) {
+                log.debug("Detaching country from hop: " + tempHop.getHopName());
+                tempHop.setCountry(findByCountryName("N/A"));
+            }
+        }
 
-	@Override
-	public Country findByCountryName(String countryName) {
-		return countryRepository.findByCountryName(countryName);
-	}
+        Optional<Country> countryOptional = countryRepository.findById(countryIdToDelete);
+        if (countryOptional.isPresent()) {
+            String countryName = findById(countryIdToDelete).getCountryName();
+            countryRepository.deleteById(countryIdToDelete);
+            log.info("Country: " + countryName + " has been deleted." );
+        }
+    }
 
-	@Override
-	public Set<Country> findAllByCountryNameLike(String countryName) {
-		return countryRepository.findAllByCountryNameLike(countryName);
-	}
+    @Override
+    public Country findByCountryName(String countryName) {
+        return countryRepository.findByCountryName(countryName);
+    }
 
-	@Override
-	public Set<Country> findByOrderByCountryNameAsc() {
+    @Override
+    public Set<Country> findAllByCountryNameLike(String countryName) {
+        return countryRepository.findAllByCountryNameLike(countryName);
+    }
 
-		Set<Country> countries = countryRepository.findByOrderByCountryNameAsc();
+    @Override
+    public Set<Country> findByOrderByCountryNameAsc() {
 
-		// do not show N/A in the Country list
-		countries.removeIf(country -> country.getCountryName().equals("N/A"));
+        Set<Country> countries = countryRepository.findByOrderByCountryNameAsc();
 
-		return countries;
-	}
+        // do not show N/A in the Country list
+        countries.removeIf(country -> country.getCountryName().equals("N/A"));
+
+        return countries;
+    }
 
 }

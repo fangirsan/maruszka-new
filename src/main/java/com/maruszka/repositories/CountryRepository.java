@@ -8,11 +8,11 @@ import com.maruszka.model.Country;
 
 public interface CountryRepository extends CrudRepository<Country, Long> {
 
-	Country findByCountryName(String countryName);
-	
-	Set<Country> findAllByCountryNameLike(String countryName);
+    Country findByCountryName(String countryName);
 
-	Set<Country> findByOrderByCountryNameAsc();
+    Set<Country> findAllByCountryNameLike(String countryName);
 
-	//TODO: add searching by countryCode
+    Set<Country> findByOrderByCountryNameAsc();
+
+    //TODO: add searching by countryCode
 }

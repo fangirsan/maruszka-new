@@ -10,11 +10,11 @@ import com.maruszka.model.Producer;
 
 public interface ProducerRepository extends CrudRepository<Producer, Long> {
 
-	Producer findByProducerName(String producerName);
-	
-	List<Producer> findAllByProducerNameLike(String producerName);
+    Producer findByProducerName(String producerName);
 
-	Set<Producer> findByOrderByProducerNameAsc();
+    List<Producer> findAllByProducerNameLike(String producerName);
 
-	Set<Producer> findProducerByProduct(ProducerType product);
+    Set<Producer> findByOrderByProducerNameAsc();
+
+    Set<Producer> findProducerByProduct(ProducerType product);
 }

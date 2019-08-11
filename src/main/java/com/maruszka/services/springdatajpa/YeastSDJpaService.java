@@ -19,70 +19,70 @@ import com.maruszka.services.YeastService;
 @Profile("springdatajpa")
 public class YeastSDJpaService implements YeastService {
 
-	private final YeastRepository yeastRepository;
-	private final BatchRepository batchRepository;
-	
-	public YeastSDJpaService(YeastRepository yeastRepository, BatchRepository batchRepository) {
-		this.yeastRepository = yeastRepository;
-		this.batchRepository = batchRepository;
-	}
+    private final YeastRepository yeastRepository;
+    private final BatchRepository batchRepository;
 
-	@Override
-	public Set<Yeast> findAll() {
-		Set<Yeast> yeasts = new HashSet<>();
-		yeastRepository.findAll().forEach(yeasts::add);
-		return yeasts;
-	}
+    public YeastSDJpaService(YeastRepository yeastRepository, BatchRepository batchRepository) {
+        this.yeastRepository = yeastRepository;
+        this.batchRepository = batchRepository;
+    }
 
-	@Override
-	public Yeast findById(Long id) {
-		return yeastRepository.findById(id).orElse(null);
-	}
+    @Override
+    public Set<Yeast> findAll() {
+        Set<Yeast> yeasts = new HashSet<>();
+        yeastRepository.findAll().forEach(yeasts::add);
+        return yeasts;
+    }
 
-	@Override
-	public Yeast save(Yeast object) {
-		return yeastRepository.save(object);
-	}
+    @Override
+    public Yeast findById(Long id) {
+        return yeastRepository.findById(id).orElse(null);
+    }
 
-	@Override
-	public void delete(Yeast object) {
-		yeastRepository.delete(object);
-	}
+    @Override
+    public Yeast save(Yeast object) {
+        return yeastRepository.save(object);
+    }
 
-	@Override
-	public void deleteById(Long yeastIdToDelete) {
+    @Override
+    public void delete(Yeast object) {
+        yeastRepository.delete(object);
+    }
 
-		Set<Batch> batches = batchRepository.findByYeast_id(yeastIdToDelete);
-		if (batches.size() != 0 ) {
-			for (Batch tempBatch : batches) {
-				log.debug("Deleting yeast from batch number: " + tempBatch.getBatchNumber());
-				tempBatch.setYeast(yeastRepository.findByYeastName("N/A"));
-			}
-			yeastRepository.deleteById(yeastIdToDelete);
-		} else {
-			yeastRepository.deleteById(yeastIdToDelete);
-		}
-	}
+    @Override
+    public void deleteById(Long yeastIdToDelete) {
 
-	@Override
-	public Yeast findByYeastName(String yeastName) {
-		return yeastRepository.findByYeastName(yeastName);
-	}
+        Set<Batch> batches = batchRepository.findByYeast_id(yeastIdToDelete);
+        if (batches.size() != 0 ) {
+            for (Batch tempBatch : batches) {
+                log.debug("Deleting yeast from batch number: " + tempBatch.getBatchNumber());
+                tempBatch.setYeast(yeastRepository.findByYeastName("N/A"));
+            }
+            yeastRepository.deleteById(yeastIdToDelete);
+        } else {
+            yeastRepository.deleteById(yeastIdToDelete);
+        }
+    }
 
-	@Override
-	public List<Yeast> findAllByYeastNameLike(String YeastName) {
-		return yeastRepository.findAllByYeastNameLike(YeastName);
-	}
+    @Override
+    public Yeast findByYeastName(String yeastName) {
+        return yeastRepository.findByYeastName(yeastName);
+    }
 
-	@Override
-	public Set<Yeast> findByOrderByYeastNameAsc() {
+    @Override
+    public List<Yeast> findAllByYeastNameLike(String YeastName) {
+        return yeastRepository.findAllByYeastNameLike(YeastName);
+    }
 
-		Set<Yeast> yeasts = yeastRepository.findByOrderByYeastNameAsc();
+    @Override
+    public Set<Yeast> findByOrderByYeastNameAsc() {
 
-		// do not show N/A in the Yeast list
-		yeasts.removeIf(yeast -> yeast.getYeastName().equals("N/A"));
+        Set<Yeast> yeasts = yeastRepository.findByOrderByYeastNameAsc();
 
-		return yeasts;
-	}
+        // do not show N/A in the Yeast list
+        yeasts.removeIf(yeast -> yeast.getYeastName().equals("N/A"));
+
+        return yeasts;
+    }
 
 }

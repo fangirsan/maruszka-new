@@ -21,22 +21,22 @@ import lombok.Setter;
 @Table(name="producer")
 public class Producer extends BaseEntity{
 
-	@Column(name="producer_name")
-	private String producerName;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name="product")
-	private ProducerType product;
+    @Column(name="producer_name")
+    private String producerName;
 
-	@Builder
-	public Producer(Long id, String producerName, ProducerType product) {
-		super(id);
-		this.producerName = producerName;
-		this.product = product;
-	}
-	
-	public String toString() {
-		return producerName;
-	}
-	
+    @Enumerated(EnumType.STRING)
+    @Column(name="product")
+    private ProducerType product;
+
+    @Builder
+    public Producer(Long id, String producerName, ProducerType product) {
+        super(id);
+        this.producerName = producerName;
+        this.product = product;
+    }
+
+    public String toString() {
+        return producerName;
+    }
+
 }

@@ -18,22 +18,22 @@ import javax.validation.constraints.NotBlank;
 @Table(name="country")
 public class Country extends BaseEntity {
 
-	@NotBlank
-	@Column(name="country_name", unique = true)
-	private String countryName;
-	
-	@Column(name="country_code")
-	private String countryCode;
+    @NotBlank
+    @Column(name="country_name", unique = true)
+    private String countryName;
 
-	@Builder
-	public Country(Long id, String countryName, String countryCode) {
-		super(id);
-		this.countryName = countryName;
-		this.countryCode = countryCode;
-	}
-	
-	public String toString( ) {
-		return countryName;
-	}
-	
+    @Column(name="country_code")
+    private String countryCode;
+
+    @Builder
+    public Country(Long id, String countryName, String countryCode) {
+        super(id);
+        this.countryName = countryName;
+        this.countryCode = countryCode;
+    }
+
+    public String toString( ) {
+        return countryName;
+    }
+
 }

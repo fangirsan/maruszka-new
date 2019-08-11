@@ -29,38 +29,38 @@ import lombok.ToString;
 @Table(name="batch")
 public class Batch extends BaseEntity {
 
-	@Column(name="batch_number")
-	private Integer batchNumber;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="beerType")
-	private BeerType beerType;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="yeast_id")
-	private Yeast yeast;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name = "batch_hop",
-    		   joinColumns = @JoinColumn(name = "batch_id"),
-    		   inverseJoinColumns = @JoinColumn(name = "hop_id"))
-    private Set<Hop> hops = new HashSet<>();
-	
-	@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-						  CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinTable(name="batch_malt",
-				joinColumns = @JoinColumn(name="batch_id"),
-				inverseJoinColumns = @JoinColumn(name="malt_id"))
-	private Set<Malt> malts = new HashSet<>();
+    @Column(name="batch_number")
+    private Integer batchNumber;
 
-	@Builder
-	public Batch(Long id, Integer batchNumber, BeerType beerType, Yeast yeast, Set<Hop> hops, Set<Malt> malts) {
-		super(id);
-		this.batchNumber = batchNumber;
-		this.beerType = beerType;
-		this.yeast = yeast;
-		this.hops = hops;
-		this.malts = malts;
-	}
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="beerType")
+    private BeerType beerType;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="yeast_id")
+    private Yeast yeast;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "batch_hop",
+            joinColumns = @JoinColumn(name = "batch_id"),
+            inverseJoinColumns = @JoinColumn(name = "hop_id"))
+    private Set<Hop> hops = new HashSet<>();
+
+    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name="batch_malt",
+            joinColumns = @JoinColumn(name="batch_id"),
+            inverseJoinColumns = @JoinColumn(name="malt_id"))
+    private Set<Malt> malts = new HashSet<>();
+
+    @Builder
+    public Batch(Long id, Integer batchNumber, BeerType beerType, Yeast yeast, Set<Hop> hops, Set<Malt> malts) {
+        super(id);
+        this.batchNumber = batchNumber;
+        this.beerType = beerType;
+        this.yeast = yeast;
+        this.hops = hops;
+        this.malts = malts;
+    }
 
 }

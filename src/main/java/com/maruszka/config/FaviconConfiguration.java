@@ -12,20 +12,20 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 @Configuration
 public class FaviconConfiguration {
-  
-	SimpleUrlHandlerMapping faviconHandlerMapping() {
-	    SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
-	    mapping.setOrder(Integer.MIN_VALUE);
-	    mapping.setUrlMap(Collections.singletonMap("mylocation/favicon.ico",
-	            faviconRequestHandler()));
-	    return mapping;
-	}
 
-	@Bean
-	protected ResourceHttpRequestHandler faviconRequestHandler() {
-	    ResourceHttpRequestHandler requestHandler = new ResourceHttpRequestHandler();
-	    requestHandler.setLocations(Arrays
-	            .<Resource> asList(new ClassPathResource("/")));
-	    return requestHandler;
-	}
+    SimpleUrlHandlerMapping faviconHandlerMapping() {
+        SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
+        mapping.setOrder(Integer.MIN_VALUE);
+        mapping.setUrlMap(Collections.singletonMap("mylocation/favicon.ico",
+                faviconRequestHandler()));
+        return mapping;
+    }
+
+    @Bean
+    protected ResourceHttpRequestHandler faviconRequestHandler() {
+        ResourceHttpRequestHandler requestHandler = new ResourceHttpRequestHandler();
+        requestHandler.setLocations(Arrays
+                .<Resource> asList(new ClassPathResource("/")));
+        return requestHandler;
+    }
 }

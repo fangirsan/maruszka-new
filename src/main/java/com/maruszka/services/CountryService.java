@@ -6,10 +6,10 @@ import com.maruszka.model.Country;
 
 public interface CountryService extends CrudService<Country, Long> {
 
-	Country findByCountryName(String countryName);
-	
-	Set<Country> findAllByCountryNameLike(String countryName);
+    Country findByCountryName(String countryName);
 
-	Set<Country> findByOrderByCountryNameAsc();
-	
+    Set<Country> findAllByCountryNameLike(String countryName);
+
+    Set<Country> findByOrderByCountryNameAsc();
+
 }

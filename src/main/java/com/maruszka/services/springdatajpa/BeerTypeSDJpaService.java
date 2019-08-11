@@ -14,48 +14,48 @@ import com.maruszka.services.BeerTypeService;
 @Profile("springdatajpa")
 public class BeerTypeSDJpaService implements BeerTypeService {
 
-	private final BeerTypeRepository beerTypeRepository;
-	
-	public BeerTypeSDJpaService(BeerTypeRepository beerTypeRepository) {
-		this.beerTypeRepository = beerTypeRepository;
-	}
+    private final BeerTypeRepository beerTypeRepository;
 
-	@Override
-	public Set<BeerType> findAll() {
-		Set<BeerType> beerType = new HashSet<>();
-		beerTypeRepository.findAll().forEach(beerType::add);
-		
-		return beerType;
-	}
+    public BeerTypeSDJpaService(BeerTypeRepository beerTypeRepository) {
+        this.beerTypeRepository = beerTypeRepository;
+    }
 
-	@Override
-	public BeerType findById(Long id) {
-		return beerTypeRepository.findById(id).orElse(null);
-	}
+    @Override
+    public Set<BeerType> findAll() {
+        Set<BeerType> beerType = new HashSet<>();
+        beerTypeRepository.findAll().forEach(beerType::add);
 
-	@Override
-	public BeerType save(BeerType object) {
-		return beerTypeRepository.save(object);
-	}
+        return beerType;
+    }
 
-	@Override
-	public void delete(BeerType object) {
-		beerTypeRepository.delete(object);
-	}
+    @Override
+    public BeerType findById(Long id) {
+        return beerTypeRepository.findById(id).orElse(null);
+    }
 
-	@Override
-	public void deleteById(Long id) {
-		beerTypeRepository.deleteById(id);
-	}
+    @Override
+    public BeerType save(BeerType object) {
+        return beerTypeRepository.save(object);
+    }
 
-	@Override
-	public BeerType findByBeerType(String beerType) {
-		return beerTypeRepository.findByBeerType(beerType);
-	}
+    @Override
+    public void delete(BeerType object) {
+        beerTypeRepository.delete(object);
+    }
 
-	@Override
-	public Set<BeerType> findAllByBeerTypeLike(String beerType) {
-		return findAllByBeerTypeLike(beerType);
-	}
+    @Override
+    public void deleteById(Long id) {
+        beerTypeRepository.deleteById(id);
+    }
+
+    @Override
+    public BeerType findByBeerType(String beerType) {
+        return beerTypeRepository.findByBeerType(beerType);
+    }
+
+    @Override
+    public Set<BeerType> findAllByBeerTypeLike(String beerType) {
+        return findAllByBeerTypeLike(beerType);
+    }
 
 }

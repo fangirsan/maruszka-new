@@ -23,98 +23,98 @@ import lombok.extern.slf4j.Slf4j;
 @Profile("springdatajpa")
 public class MaltSDJpaService implements MaltService {
 
-	private final MaltRepository maltRepository;
-	private final BatchRepository batchRepository;
-	
-	@Autowired
-	public MaltSDJpaService(MaltRepository maltRepository, BatchRepository batchRepository) {
-		this.maltRepository = maltRepository;
-		this.batchRepository = batchRepository;
-	}
+    private final MaltRepository maltRepository;
+    private final BatchRepository batchRepository;
 
-	@Override
-	public Set<Malt> findAll() {
+    @Autowired
+    public MaltSDJpaService(MaltRepository maltRepository, BatchRepository batchRepository) {
+        this.maltRepository = maltRepository;
+        this.batchRepository = batchRepository;
+    }
 
-		Set<Malt> malts = new HashSet<Malt>();
-		maltRepository.findAll().forEach(malts::add);
-		
-		return malts;
-	}
+    @Override
+    public Set<Malt> findAll() {
 
-	@Override
-	public Set<String> findAllMaltNames() {
+        Set<Malt> malts = new HashSet<Malt>();
+        maltRepository.findAll().forEach(malts::add);
 
-		Set<String> maltNames = new HashSet<>();
+        return malts;
+    }
 
-		for (Malt tempMalt : maltRepository.findAll()) {
-			maltNames.add(tempMalt.getMaltName().toLowerCase());
-		}
+    @Override
+    public Set<String> findAllMaltNames() {
 
-		return maltNames;
-	}
+        Set<String> maltNames = new HashSet<>();
 
-	@Override
-	public Malt findById(Long id) {
+        for (Malt tempMalt : maltRepository.findAll()) {
+            maltNames.add(tempMalt.getMaltName().toLowerCase());
+        }
 
-		Optional<Malt> maltOptional = maltRepository.findById(id);
+        return maltNames;
+    }
 
-		if (!maltOptional.isPresent()) {
-			throw new NotFoundException("Malt not found. For Id value: " + id.toString());
-		}
+    @Override
+    public Malt findById(Long id) {
 
-		return maltOptional.get();
-	}
+        Optional<Malt> maltOptional = maltRepository.findById(id);
 
-	@Override
-	public Malt save(Malt malt) {
-		return maltRepository.save(malt);
-	}
+        if (!maltOptional.isPresent()) {
+            throw new NotFoundException("Malt not found. For Id value: " + id.toString());
+        }
 
-	@Override
-	public void delete(Malt object) {
-		maltRepository.delete(object);
-	}
+        return maltOptional.get();
+    }
 
-	@Override
-	public void deleteById(Long maltIdToDelete) {
+    @Override
+    public Malt save(Malt malt) {
+        return maltRepository.save(malt);
+    }
 
-		String maltName = findById(maltIdToDelete).getMaltName();
-		Set<Batch> batches = batchRepository.findByMalts_id(maltIdToDelete);
+    @Override
+    public void delete(Malt object) {
+        maltRepository.delete(object);
+    }
 
-		if (batches != null) {
-			for (Batch tempBatch : batches) {
-				Optional<Malt> maltOptional = tempBatch
-						.getMalts()
-						.stream()
-						.filter(malt -> malt.getId().equals(maltIdToDelete))
-						.findFirst();
-				
-				if (maltOptional.isPresent()) {
-					log.debug("Deleting malt: " + maltName + " from batch number: " + tempBatch.getBatchNumber());
-					Malt maltToDelete = maltOptional.get();
-					maltToDelete.setBatches(null);
-					tempBatch.getMalts().remove(maltOptional.get());
-					batchRepository.save(tempBatch);
-				}
-			}
-			maltRepository.deleteById(maltIdToDelete);
-			log.debug("Malt: " + maltName + " has been deleted.");
-		}
-	}
+    @Override
+    public void deleteById(Long maltIdToDelete) {
 
-	@Override
-	public Malt findByMaltName(String maltName) {
-		return maltRepository.findByMaltName(maltName);
-	}
-	
-	@Override
-	public Set<Malt> findByOrderByMaltNameAsc() {
-		return maltRepository.findByOrderByMaltNameAsc();
-	}
+        String maltName = findById(maltIdToDelete).getMaltName();
+        Set<Batch> batches = batchRepository.findByMalts_id(maltIdToDelete);
 
-	@Override
-	public List<Malt> findAllByMaltNameLike(String maltName) {
-		return maltRepository.findAllByMaltNameLike(maltName);
-	}
+        if (batches != null) {
+            for (Batch tempBatch : batches) {
+                Optional<Malt> maltOptional = tempBatch
+                        .getMalts()
+                        .stream()
+                        .filter(malt -> malt.getId().equals(maltIdToDelete))
+                        .findFirst();
+
+                if (maltOptional.isPresent()) {
+                    log.debug("Deleting malt: " + maltName + " from batch number: " + tempBatch.getBatchNumber());
+                    Malt maltToDelete = maltOptional.get();
+                    maltToDelete.setBatches(null);
+                    tempBatch.getMalts().remove(maltOptional.get());
+                    batchRepository.save(tempBatch);
+                }
+            }
+            maltRepository.deleteById(maltIdToDelete);
+            log.debug("Malt: " + maltName + " has been deleted.");
+        }
+    }
+
+    @Override
+    public Malt findByMaltName(String maltName) {
+        return maltRepository.findByMaltName(maltName);
+    }
+
+    @Override
+    public Set<Malt> findByOrderByMaltNameAsc() {
+        return maltRepository.findByOrderByMaltNameAsc();
+    }
+
+    @Override
+    public List<Malt> findAllByMaltNameLike(String maltName) {
+        return maltRepository.findAllByMaltNameLike(maltName);
+    }
 
 }

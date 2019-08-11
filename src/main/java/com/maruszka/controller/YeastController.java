@@ -1,8 +1,8 @@
 package com.maruszka.controller;
 
-import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.Producer;
 import com.maruszka.model.Yeast;
+import com.maruszka.model.enums.ProducerType;
 import com.maruszka.services.ProducerService;
 import com.maruszka.services.YeastService;
 import com.maruszka.utils.DuplicateCheck;
@@ -35,7 +35,9 @@ public class YeastController {
     }
 
     @ModelAttribute("producers")
-    public Set<Producer> populateProducers() { return producerService.findProducerByProduct(ProducerType.Yeast); }
+    public Set<Producer> populateProducers() {
+        return producerService.findProducerByProduct(ProducerType.Yeast);
+    }
 
     @GetMapping("/{yeastId}")
     public ModelAndView showYeast(@PathVariable("yeastId") Long yeastId) {

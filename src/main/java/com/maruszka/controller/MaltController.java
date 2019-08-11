@@ -1,9 +1,9 @@
 package com.maruszka.controller;
 
 import com.maruszka.model.Country;
-import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.Malt;
 import com.maruszka.model.Producer;
+import com.maruszka.model.enums.ProducerType;
 import com.maruszka.services.CountryService;
 import com.maruszka.services.MaltService;
 import com.maruszka.services.ProducerService;
@@ -45,7 +45,9 @@ public class MaltController {
     }
 
     @ModelAttribute("producers")
-    public Set<Producer> populateProducers() { return producerService.findProducerByProduct(ProducerType.Malt); }
+    public Set<Producer> populateProducers() {
+        return producerService.findProducerByProduct(ProducerType.Malt);
+    }
 
     @RequestMapping("/find")
     public String findMalts(Model model) {
@@ -80,7 +82,7 @@ public class MaltController {
     }
 
     @GetMapping("/{maltId}")
-        public ModelAndView showMalt(@PathVariable("maltId") Long maltId) {
+    public ModelAndView showMalt(@PathVariable("maltId") Long maltId) {
 
         ModelAndView mav = new ModelAndView("malt/malt-show");
         Malt maltToShow = maltService.findById(maltId);

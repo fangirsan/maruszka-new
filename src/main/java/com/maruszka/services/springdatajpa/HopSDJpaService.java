@@ -21,94 +21,94 @@ import com.maruszka.services.HopService;
 @Profile("springdatajpa")
 public class HopSDJpaService implements HopService {
 
-	private final HopRepository hopRepository;
-	private final BatchRepository batchRepository;
-	
-	public HopSDJpaService(HopRepository hopRepository, BatchRepository batchRepository) {
-		this.hopRepository = hopRepository;
-		this.batchRepository = batchRepository;
-	}
+    private final HopRepository hopRepository;
+    private final BatchRepository batchRepository;
 
-	@Override
-	public Set<Hop> findAll() {
-		Set<Hop> hops = new HashSet<>();
-		hopRepository.findAll().forEach(hops::add);
-		
-		return hops;
-	}
+    public HopSDJpaService(HopRepository hopRepository, BatchRepository batchRepository) {
+        this.hopRepository = hopRepository;
+        this.batchRepository = batchRepository;
+    }
 
-	@Override
-	public Set<String> findAllHopNames() {
+    @Override
+    public Set<Hop> findAll() {
+        Set<Hop> hops = new HashSet<>();
+        hopRepository.findAll().forEach(hops::add);
 
-		Set<String> maltNames = new HashSet<>();
+        return hops;
+    }
 
-		for (Hop tempHop : hopRepository.findAll()) {
-			maltNames.add(tempHop.getHopName().toLowerCase());
-		}
+    @Override
+    public Set<String> findAllHopNames() {
 
-		return maltNames;
-	}
+        Set<String> maltNames = new HashSet<>();
 
-	@Override
-	public Hop findById(Long id) {
-		Optional<Hop> hopOptional = hopRepository.findById(id);
+        for (Hop tempHop : hopRepository.findAll()) {
+            maltNames.add(tempHop.getHopName().toLowerCase());
+        }
 
-		if (!hopOptional.isPresent()) {
-			throw new NotFoundException(("Hop not found. For Id value: " + id.toString()));
-		}
+        return maltNames;
+    }
 
-		return hopOptional.get();
-	}
+    @Override
+    public Hop findById(Long id) {
+        Optional<Hop> hopOptional = hopRepository.findById(id);
 
-	@Override
-	public Hop save(Hop object) {
-		return hopRepository.save(object);
-	}
+        if (!hopOptional.isPresent()) {
+            throw new NotFoundException(("Hop not found. For Id value: " + id.toString()));
+        }
 
-	@Override
-	public void delete(Hop object) {
-		hopRepository.delete(object);
-	}
+        return hopOptional.get();
+    }
 
-	@Override
-	public void deleteById(Long hopIdToDelete) {
+    @Override
+    public Hop save(Hop object) {
+        return hopRepository.save(object);
+    }
 
-		String hopName = findById(hopIdToDelete).getHopName();
-		Set<Batch> batches = batchRepository.findByHops_id(hopIdToDelete);
+    @Override
+    public void delete(Hop object) {
+        hopRepository.delete(object);
+    }
 
-		if (batches != null) {
-			for (Batch tempBatch : batches) {
-				Optional<Hop> hopOptional = tempBatch
-						.getHops()
-						.stream()
-						.filter(hop -> hop.getId().equals(hopIdToDelete))
-						.findFirst();
+    @Override
+    public void deleteById(Long hopIdToDelete) {
 
-				if (hopOptional.isPresent()) {
-					log.debug("Detaching hop: " + hopName + " from batch number: " + tempBatch.getBatchNumber());
-					Hop hopToDelete = hopOptional.get();
-					hopToDelete.setBatches(null);
-					tempBatch.getHops().remove(hopOptional.get());
-					batchRepository.save(tempBatch);
-				}
-			}
-			hopRepository.deleteById(hopIdToDelete);
-			log.debug("Hop: " + hopName + " has been deleted.");
-		}
-	}
+        String hopName = findById(hopIdToDelete).getHopName();
+        Set<Batch> batches = batchRepository.findByHops_id(hopIdToDelete);
 
-	@Override
-	public Hop findByHopName(String hopName) {
-		return hopRepository.findByHopName(hopName);
-	}
+        if (batches != null) {
+            for (Batch tempBatch : batches) {
+                Optional<Hop> hopOptional = tempBatch
+                        .getHops()
+                        .stream()
+                        .filter(hop -> hop.getId().equals(hopIdToDelete))
+                        .findFirst();
 
-	@Override
-	public List<Hop> findAllByHopNameLike(String hopName) {
-		return hopRepository.findAllByHopNameLike(hopName);
-	}
+                if (hopOptional.isPresent()) {
+                    log.debug("Detaching hop: " + hopName + " from batch number: " + tempBatch.getBatchNumber());
+                    Hop hopToDelete = hopOptional.get();
+                    hopToDelete.setBatches(null);
+                    tempBatch.getHops().remove(hopOptional.get());
+                    batchRepository.save(tempBatch);
+                }
+            }
+            hopRepository.deleteById(hopIdToDelete);
+            log.debug("Hop: " + hopName + " has been deleted.");
+        }
+    }
 
-	@Override
-	public Set<Hop> findByOrderByHopNameAsc() {
-		return hopRepository.findByOrderByHopNameAsc();
-	}
+    @Override
+    public Hop findByHopName(String hopName) {
+        return hopRepository.findByHopName(hopName);
+    }
+
+    @Override
+    public List<Hop> findAllByHopNameLike(String hopName) {
+        return hopRepository.findAllByHopNameLike(hopName);
+    }
+
+    @Override
+    public Set<Hop> findByOrderByHopNameAsc() {
+        return hopRepository.findByOrderByHopNameAsc();
+    }
 }

@@ -21,7 +21,7 @@ import lombok.ToString;
 @Table(name="beer_type")
 public class BeerType extends BaseEntity {
 
-	@Column(name="beer_type")
-	private String beerType;
-	
+    @Column(name="beer_type")
+    private String beerType;
+
 }

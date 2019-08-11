@@ -8,7 +8,7 @@ import com.maruszka.model.BeerType;
 
 public interface BeerTypeRepository extends CrudRepository<BeerType, Long> {
 
-	BeerType findByBeerType(String beerType);
-	
-	Set<BeerType> findAllByBeerTypeLike(String beerType);
+    BeerType findByBeerType(String beerType);
+
+    Set<BeerType> findAllByBeerTypeLike(String beerType);
 }

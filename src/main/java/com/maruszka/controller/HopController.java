@@ -62,7 +62,7 @@ public class HopController {
 
         Set<Hop> hops = hopService.findByOrderByHopNameAsc();
 
-        for (Hop tempHop: hops) {
+        for (Hop tempHop : hops) {
             if (tempHop.getCountry() == null) {
                 tempHop.setCountry(countryService.findByCountryName("N/A"));
             }

@@ -17,61 +17,61 @@ import com.maruszka.services.BatchService;
 @Profile("springdatajpa")
 public class BatchSDJpaService implements BatchService {
 
-	private final BatchRepository batchRepository;
-	private final BeerTypeRepository beerTypeRepository;
-	
-	public BatchSDJpaService(BatchRepository batchRepository, BeerTypeRepository beerTypeRepository) {
-		this.batchRepository = batchRepository;
-		this.beerTypeRepository = beerTypeRepository;
-	}
+    private final BatchRepository batchRepository;
+    private final BeerTypeRepository beerTypeRepository;
 
-	@Override
-	public Set<Batch> findAll() {
-		Set<Batch> batches = new HashSet<>();
-		batchRepository.findAll().forEach(batches::add);
-		
-		return batches;
-	}
+    public BatchSDJpaService(BatchRepository batchRepository, BeerTypeRepository beerTypeRepository) {
+        this.batchRepository = batchRepository;
+        this.beerTypeRepository = beerTypeRepository;
+    }
 
-	@Override
-	public Batch findById(Long id) {
-		return batchRepository.findById(id).orElse(null);
-	}
+    @Override
+    public Set<Batch> findAll() {
+        Set<Batch> batches = new HashSet<>();
+        batchRepository.findAll().forEach(batches::add);
 
-	@Override
-	public Batch save(Batch object) {
-		return batchRepository.save(object);
-	}
+        return batches;
+    }
 
-	@Override
-	public void delete(Batch object) {
-		batchRepository.delete(object);
-	}
+    @Override
+    public Batch findById(Long id) {
+        return batchRepository.findById(id).orElse(null);
+    }
 
-	@Override
-	public void deleteById(Long id) {
-		batchRepository.deleteById(id);
-	}
+    @Override
+    public Batch save(Batch object) {
+        return batchRepository.save(object);
+    }
 
-	@Override
-	public Batch findBatchByBeerType(BeerType beerType) {
-		Batch theBatch = batchRepository.findBatchByBeerType(beerType);
-		if(theBatch!=null){
-			Hibernate.initialize(theBatch.getHops());
-		}
-		
-		return theBatch;
+    @Override
+    public void delete(Batch object) {
+        batchRepository.delete(object);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        batchRepository.deleteById(id);
+    }
+
+    @Override
+    public Batch findBatchByBeerType(BeerType beerType) {
+        Batch theBatch = batchRepository.findBatchByBeerType(beerType);
+        if(theBatch!=null){
+            Hibernate.initialize(theBatch.getHops());
+        }
+
+        return theBatch;
 //		return batchRepository.findBatchByBeerType(beerType);
-	}
+    }
 
-	@Override
-	public Set<Batch> findAllByBeerTypeLike(BeerType beerType) {
-		return batchRepository.findAllByBeerTypeLike(beerType);
-	}
+    @Override
+    public Set<Batch> findAllByBeerTypeLike(BeerType beerType) {
+        return batchRepository.findAllByBeerTypeLike(beerType);
+    }
 
-	@Override
-	public Set<Batch> findByOrderByBatchNumberAsc() {
-		return batchRepository.findByOrderByBatchNumberAsc();
-	}
+    @Override
+    public Set<Batch> findByOrderByBatchNumberAsc() {
+        return batchRepository.findByOrderByBatchNumberAsc();
+    }
 
 }

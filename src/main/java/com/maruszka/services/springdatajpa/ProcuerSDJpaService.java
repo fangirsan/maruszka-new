@@ -16,58 +16,58 @@ import com.maruszka.services.ProducerService;
 @Profile("springdatajpa")
 public class ProcuerSDJpaService implements ProducerService {
 
-	private final ProducerRepository producerRepository;
-	
-	public ProcuerSDJpaService(ProducerRepository maltProducerRepository) {
-		this.producerRepository = maltProducerRepository;
-	}
+    private final ProducerRepository producerRepository;
 
-	@Override
-	public Set<Producer> findAll() {
-		Set<Producer> producers = new HashSet<>();
-		producerRepository.findAll().forEach(producers::add);
-		
-		return producers;
-	}
+    public ProcuerSDJpaService(ProducerRepository maltProducerRepository) {
+        this.producerRepository = maltProducerRepository;
+    }
 
-	@Override
-	public Producer findById(Long id) {
-		return producerRepository.findById(id).orElse(null);
-	}
+    @Override
+    public Set<Producer> findAll() {
+        Set<Producer> producers = new HashSet<>();
+        producerRepository.findAll().forEach(producers::add);
 
-	@Override
-	public Producer save(Producer object) {
-		return producerRepository.save(object);
-	}
+        return producers;
+    }
 
-	@Override
-	public void delete(Producer object) {
-		producerRepository.delete(object);
-	}
+    @Override
+    public Producer findById(Long id) {
+        return producerRepository.findById(id).orElse(null);
+    }
 
-	@Override
-	public void deleteById(Long id) {
-		producerRepository.deleteById(id);
-	}
+    @Override
+    public Producer save(Producer object) {
+        return producerRepository.save(object);
+    }
 
-	@Override
-	public Producer findByProducerName(String maltProducerName) {
-		return producerRepository.findByProducerName(maltProducerName);
-	}
+    @Override
+    public void delete(Producer object) {
+        producerRepository.delete(object);
+    }
 
-	@Override
-	public List<Producer> findAllByProducerNameLike(String maltProducerName) {
-		return producerRepository.findAllByProducerNameLike(maltProducerName);
-	}
-	
-	@Override
-	public Set<Producer> findByOrderByProducerNameAsc() {
-		return producerRepository.findByOrderByProducerNameAsc();
-	}
+    @Override
+    public void deleteById(Long id) {
+        producerRepository.deleteById(id);
+    }
 
-	@Override
-	public Set<Producer> findProducerByProduct(ProducerType product) {
-		return producerRepository.findProducerByProduct(product);
-	}
+    @Override
+    public Producer findByProducerName(String maltProducerName) {
+        return producerRepository.findByProducerName(maltProducerName);
+    }
+
+    @Override
+    public List<Producer> findAllByProducerNameLike(String maltProducerName) {
+        return producerRepository.findAllByProducerNameLike(maltProducerName);
+    }
+
+    @Override
+    public Set<Producer> findByOrderByProducerNameAsc() {
+        return producerRepository.findByOrderByProducerNameAsc();
+    }
+
+    @Override
+    public Set<Producer> findProducerByProduct(ProducerType product) {
+        return producerRepository.findProducerByProduct(product);
+    }
 
 }
