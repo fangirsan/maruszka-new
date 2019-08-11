@@ -77,13 +77,12 @@ public class MaltSDJpaService implements MaltService {
 
 	@Override
 	public void deleteById(Long maltIdToDelete) {
-		
+
+		String maltName = findById(maltIdToDelete).getMaltName();
 		Set<Batch> batches = batchRepository.findByMalts_id(maltIdToDelete);
-		
+
 		if (batches != null) {
 			for (Batch tempBatch : batches) {
-				log.debug("Deleting malt from batch number: " + tempBatch.getBatchNumber());
-				
 				Optional<Malt> maltOptional = tempBatch
 						.getMalts()
 						.stream()
@@ -91,6 +90,7 @@ public class MaltSDJpaService implements MaltService {
 						.findFirst();
 				
 				if (maltOptional.isPresent()) {
+					log.debug("Deleting malt: " + maltName + " from batch number: " + tempBatch.getBatchNumber());
 					Malt maltToDelete = maltOptional.get();
 					maltToDelete.setBatches(null);
 					tempBatch.getMalts().remove(maltOptional.get());
@@ -98,6 +98,7 @@ public class MaltSDJpaService implements MaltService {
 				}
 			}
 			maltRepository.deleteById(maltIdToDelete);
+			log.debug("Malt: " + maltName + " has been deleted.");
 		}
 	}
 

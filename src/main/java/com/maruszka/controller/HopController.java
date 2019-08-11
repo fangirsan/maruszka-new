@@ -51,9 +51,6 @@ public class HopController {
         if (hopToShow.getAlphaAcidMax() == null) {
             hopToShow.setAlphaAcidMax(BigDecimal.valueOf(0L));
         }
-        if (hopToShow.getCountry() == null) {
-            hopToShow.setCountry(countryService.findByCountryName("N/A"));
-        }
 
         mav.addObject(hopToShow);
 

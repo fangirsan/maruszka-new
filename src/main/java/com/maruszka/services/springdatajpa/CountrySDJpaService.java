@@ -62,18 +62,16 @@ public class CountrySDJpaService implements CountryService {
 		if (malts.size() != 0 ) {
 			for (Malt tempMalt : malts) {
 				log.debug("Detaching country from malt: " + tempMalt.getMaltName());
-				tempMalt.setCountry(null);
+				tempMalt.setCountry(findByCountryName("N/A"));
 			}
-//			countryRepository.deleteById(countryIdToDelete);
 		}
 
 		Set<Hop> hops = hopRepository.findByCountry_id(countryIdToDelete);
 		if (hops.size() != 0) {
 			for (Hop tempHop : hops) {
 				log.debug("Detaching country from hop: " + tempHop.getHopName());
-				tempHop.setCountry(null);
+				tempHop.setCountry(findByCountryName("N/A"));
 			}
-//			countryRepository.deleteById(countryIdToDelete);
 		}
 
 		Optional<Country> countryOptional = countryRepository.findById(countryIdToDelete);
