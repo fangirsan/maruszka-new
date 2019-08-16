@@ -15,4 +15,5 @@ public interface YeastRepository extends CrudRepository<Yeast, Long> {
 
     Set<Yeast> findByOrderByYeastNameAsc();
 
+    Set<Yeast> findByProducer_id(Long producerIdToDelete);
 }

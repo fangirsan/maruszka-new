@@ -101,6 +101,12 @@ class DataLoader implements CommandLineRunner{
                 .product(ProducerType.Yeast)
                 .build();
         producerService.save(producer2);
+
+        Producer nullProducer = Producer.builder()
+                .id(3L)
+                .producerName("N/A")
+                .build();
+        producerService.save(nullProducer);
         log.info("Producers loaded...");
 
         // Malt

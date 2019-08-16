@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{index.page.title}">Page Title</title>
+
+<link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}" />
+
+<script src="../static/js/jquery-2.1.4.min.js"
+	th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+<link th:href="@{/css/custom.css}" rel="stylesheet" media="screen" />
+
+<style th:remove="all">
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<div class="header" th:replace="fragments/main-sections :: header"></div>
+		<div class="menu" th:replace="fragments/main-sections :: menu"></div>
+
+		<div class="wrapper">
+			<div class="main">
+				<div class="page-title">
+					<p th:text="#{producer.form.title}" />
+				</div>
+				<div class="form">
+					<form th:object="${producer}" th:action="@{'/producer/saveProducer'}" method="post">
+						<input type="hidden" name ="id" th:field="*{id}">
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Producer name:</label>
+							</div>
+							<div class="form-field-input">
+								<input type="text" class="form-control"	th:field="*{producerName}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('producerName')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('producerName')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Product Type:</label>
+							</div>
+							<div class="form-field-input">
+								<select class="form-control" th:field="*{product}">
+									<option th:each="product : ${T(com.maruszka.model.enums.ProducerType).values()}"
+											th:value="${product}"
+											th:text="${product.getDescription()}">
+									</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-submit">
+								<button class="submit-button" type="submit">Submit</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="footer" th:replace="fragments/main-sections :: footer"></div>
+	</div>
+
+</body>
+</html>
