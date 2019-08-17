@@ -71,7 +71,7 @@ li a {
 	color: white;
 	text-align: center;
 	padding: 15px;
-	width: 100px;
+	min-width: 100px;
 	text-decoration: none;
 }
 

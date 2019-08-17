@@ -53,6 +53,13 @@ public class Batch extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name="malt_id"))
     private Set<Malt> malts = new HashSet<>();
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name="batch_additives",
+            joinColumns = @JoinColumn(name="batch_id"),
+            inverseJoinColumns = @JoinColumn(name="additives_id"))
+    private Set<Additives> additives = new HashSet<>();
+
     @Builder
     public Batch(Long id, Integer batchNumber, BeerType beerType, Yeast yeast, Set<Hop> hops, Set<Malt> malts) {
         super(id);

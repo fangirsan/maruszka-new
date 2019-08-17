@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 @Entity
 @ToString
 @Table(name="malt")
-public class Malt  extends BaseEntity{
+public class Malt extends BaseEntity {
 
     @NotBlank(message="{NotBlank.malt.maltName}")
     @Column(name="malt_name", unique = true)
@@ -28,16 +28,12 @@ public class Malt  extends BaseEntity{
     @Column(name="malt_filling")
     private int maltFilling;
 
-    //	@NotNull
-//	@Min(1)
-//	@Max(2000)
     @Column(name="malt_ebc")
     private int maltEbc;
 
     @Column(name="malt_usage")
     private String maltUsage;
 
-    //	@NotNull
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="country_id")
     private Country country;
@@ -56,13 +52,5 @@ public class Malt  extends BaseEntity{
         this.maltUsage = maltUsage;
         this.country = country;
     }
-
-
-//	@Override
-//	public String toString() {
-//		return "Malt [maltName=" + maltName + ", producer=" + producer + ", maltFilling=" + maltFilling + ", maltEbc="
-//				+ maltEbc + ", maltUsage=" + maltUsage + ", country=" + country + ", batches=" + batches + "]";
-//	}
-
 
 }

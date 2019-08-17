@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.maruszka.model.enums.ProducerType;
 
@@ -21,6 +22,7 @@ import lombok.Setter;
 @Table(name="producer")
 public class Producer extends BaseEntity{
 
+    @NotBlank(message="{NotBlank.producer.producerName}")
     @Column(name="producer_name")
     private String producerName;
 
