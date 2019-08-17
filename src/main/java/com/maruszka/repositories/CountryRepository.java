@@ -14,5 +14,4 @@ public interface CountryRepository extends CrudRepository<Country, Long> {
 
     Set<Country> findByOrderByCountryNameAsc();
 
-    //TODO: add searching by countryCode
 }

@@ -16,5 +16,4 @@ public interface ProducerService extends CrudService<Producer, Long> {
 
     Set<Producer> findProducerByProduct(ProducerType product);
 
-    // TODO: refactor to be a generic producer
 }
