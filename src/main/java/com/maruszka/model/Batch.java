@@ -58,7 +58,7 @@ public class Batch extends BaseEntity {
     @JoinTable(name="batch_additives",
             joinColumns = @JoinColumn(name="batch_id"),
             inverseJoinColumns = @JoinColumn(name="additives_id"))
-    private Set<Additives> additives = new HashSet<>();
+    private Set<Additive> additives = new HashSet<>();
 
     @Builder
     public Batch(Long id, Integer batchNumber, BeerType beerType, Yeast yeast, Set<Hop> hops, Set<Malt> malts) {

@@ -15,7 +15,7 @@ import java.util.Set;
 @Entity
 @ToString
 @Table(name="additives")
-public class Additives extends BaseEntity {
+public class Additive extends BaseEntity {
 
     @NotBlank(message="{NotBlank.additives.additivesName}")
     @Column(name="additives_name", unique = true)
@@ -25,7 +25,7 @@ public class Additives extends BaseEntity {
     private Set<Batch> batches;
 
     @Builder
-    public Additives(Long id, String additivesName) {
+    public Additive(Long id, String additivesName) {
         super(id);
         this.additivesName = additivesName;
     }
