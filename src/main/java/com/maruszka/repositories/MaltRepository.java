@@ -18,4 +18,5 @@ public interface MaltRepository extends CrudRepository<Malt, Long> {
     Set<Malt> findByCountry_id(Long countryIdToDelete);
 
     Set<Malt> findByProducer_id(Long producerIdToDelete);
+
 }

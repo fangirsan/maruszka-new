@@ -43,7 +43,7 @@ public class AdditiveSDJpaService implements AdditiveService {
         Set<String> additiveNames = new HashSet<>();
 
         for (Additive tempAdditive : additiveRepository.findAll()) {
-            additiveNames.add(tempAdditive.getAdditivesName().toLowerCase());
+            additiveNames.add(tempAdditive.getAdditiveName().toLowerCase());
         }
 
         return additiveNames;
@@ -70,8 +70,8 @@ public class AdditiveSDJpaService implements AdditiveService {
     @Override
     public void deleteById(Long additiveIdToDelete) {
 
-        String additiveName = findById(additiveIdToDelete).getAdditivesName();
-        Set<Batch> batches = batchRepository.findByAdditive_id(additiveIdToDelete);
+        String additiveName = findById(additiveIdToDelete).getAdditiveName();
+        Set<Batch> batches = batchRepository.findByAdditives_id(additiveIdToDelete);
 
         if (batches != null) {
             for (Batch tempBatch : batches) {

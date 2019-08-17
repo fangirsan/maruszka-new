@@ -6,27 +6,15 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import com.maruszka.model.*;
 import com.maruszka.model.enums.YeastFermentationType;
+import com.maruszka.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.maruszka.model.Batch;
-import com.maruszka.model.BeerType;
-import com.maruszka.model.Country;
-import com.maruszka.model.Hop;
-import com.maruszka.model.Malt;
-import com.maruszka.model.Producer;
-import com.maruszka.model.Yeast;
 import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.enums.YeastFlocculation;
 import com.maruszka.model.enums.YeastType;
-import com.maruszka.services.BatchService;
-import com.maruszka.services.BeerTypeService;
-import com.maruszka.services.CountryService;
-import com.maruszka.services.HopService;
-import com.maruszka.services.MaltService;
-import com.maruszka.services.ProducerService;
-import com.maruszka.services.YeastService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,9 +30,10 @@ class DataLoader implements CommandLineRunner{
     private final YeastService yeastService;
     private final BeerTypeService beerTypeService;
     private final BatchService batchService;
+    private final AdditiveService additiveService;
 
     public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
-                       HopService hopService, YeastService yeastService, BeerTypeService beerTypeService, BatchService batchService) {
+                      HopService hopService, YeastService yeastService, BeerTypeService beerTypeService, BatchService batchService, AdditiveService additiveService) {
         this.maltService = maltService;
         this.producerService = maltProducerService;
         this.countryService = countryService;
@@ -52,6 +41,7 @@ class DataLoader implements CommandLineRunner{
         this.yeastService = yeastService;
         this.beerTypeService = beerTypeService;
         this.batchService = batchService;
+        this.additiveService = additiveService;
     }
 
     @Override
@@ -215,6 +205,13 @@ class DataLoader implements CommandLineRunner{
         beerTypeService.save(beerType);
         log.info("BeerType loaded...");
 
+        // Additive
+        Additive curacao = Additive.builder()
+                .additiveName("Curacao")
+                .build();
+        additiveService.save(curacao);
+        log.info("Additives loaded...");
+
         // Batch
         Set<Hop> hops = new HashSet<Hop>();
         hops.add(hopService.findByHopName("Citra"));
@@ -223,12 +220,16 @@ class DataLoader implements CommandLineRunner{
         malts.add(maltService.findByMaltName("Pale Ale"));
         malts.add(maltService.findById(2L));
 
+        Set<Additive> additives = new HashSet<>();
+        additives.add(additiveService.findByAdditiveName("Curacao"));
+
         Batch batch = Batch.builder()
                 .batchNumber(1)
                 .beerType(beerTypeService.findByBeerType("Stout"))
                 .hops(hops)
                 .yeast(yeastService.findById(2L))
                 .malts(malts)
+                .additives(additives)
                 .build();
         batch.getMalts().add(malt);
         batchService.save(batch);
@@ -239,6 +240,7 @@ class DataLoader implements CommandLineRunner{
                 .hops(hops)
                 .yeast(yeastService.findById(1L))
                 .malts(malts)
+                .additives(additives)
                 .build();
         batchService.save(batch);
         log.info("Batch loaded...");

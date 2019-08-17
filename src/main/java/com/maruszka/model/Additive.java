@@ -14,19 +14,19 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @ToString
-@Table(name="additives")
+@Table(name="additive")
 public class Additive extends BaseEntity {
 
-    @NotBlank(message="{NotBlank.additives.additivesName}")
-    @Column(name="additives_name", unique = true)
-    private String additivesName;
+    @NotBlank(message="{NotBlank.additive.additiveName}")
+    @Column(name="additive_name", unique = true)
+    private String additiveName;
 
     @ManyToMany(mappedBy="additives")
     private Set<Batch> batches;
 
     @Builder
-    public Additive(Long id, String additivesName) {
+    public Additive(Long id, String additiveName) {
         super(id);
-        this.additivesName = additivesName;
+        this.additiveName = additiveName;
     }
 }
