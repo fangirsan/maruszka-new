@@ -210,6 +210,11 @@ class DataLoader implements CommandLineRunner{
                 .additiveName("Curacao")
                 .build();
         additiveService.save(curacao);
+
+        Additive lactose = Additive.builder()
+                .additiveName("Lactose")
+                .build();
+        additiveService.save(lactose);
         log.info("Additives loaded...");
 
         // Batch
@@ -220,7 +225,7 @@ class DataLoader implements CommandLineRunner{
         malts.add(maltService.findByMaltName("Pale Ale"));
         malts.add(maltService.findById(2L));
 
-        Set<Additive> additives = new HashSet<>();
+        Set<Additive> additives = new HashSet<Additive>();
         additives.add(additiveService.findByAdditiveName("Curacao"));
 
         Batch batch = Batch.builder()
