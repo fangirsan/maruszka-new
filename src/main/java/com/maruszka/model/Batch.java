@@ -34,7 +34,7 @@ public class Batch extends BaseEntity {
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="beerType")
-    private BeerType beerType;
+    private BeerStyle beerStyle;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="yeast_id")
@@ -61,10 +61,10 @@ public class Batch extends BaseEntity {
     private Set<Additive> additives = new HashSet<>();
 
     @Builder
-    public Batch(Long id, Integer batchNumber, BeerType beerType, Yeast yeast, Set<Hop> hops, Set<Malt> malts, Set<Additive> additives) {
+    public Batch(Long id, Integer batchNumber, BeerStyle beerStyle, Yeast yeast, Set<Hop> hops, Set<Malt> malts, Set<Additive> additives) {
         super(id);
         this.batchNumber = batchNumber;
-        this.beerType = beerType;
+        this.beerStyle = beerStyle;
         this.yeast = yeast;
         this.hops = hops;
         this.malts = malts;

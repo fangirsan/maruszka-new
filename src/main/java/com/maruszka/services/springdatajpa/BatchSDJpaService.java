@@ -3,14 +3,14 @@ package com.maruszka.services.springdatajpa;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.maruszka.model.BeerStyle;
 import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.maruszka.model.Batch;
-import com.maruszka.model.BeerType;
 import com.maruszka.repositories.BatchRepository;
-import com.maruszka.repositories.BeerTypeRepository;
+import com.maruszka.repositories.BeerStyleRepository;
 import com.maruszka.services.BatchService;
 
 @Service
@@ -18,11 +18,11 @@ import com.maruszka.services.BatchService;
 public class BatchSDJpaService implements BatchService {
 
     private final BatchRepository batchRepository;
-    private final BeerTypeRepository beerTypeRepository;
+    private final BeerStyleRepository beerStyleRepository;
 
-    public BatchSDJpaService(BatchRepository batchRepository, BeerTypeRepository beerTypeRepository) {
+    public BatchSDJpaService(BatchRepository batchRepository, BeerStyleRepository beerStyleRepository) {
         this.batchRepository = batchRepository;
-        this.beerTypeRepository = beerTypeRepository;
+        this.beerStyleRepository = beerStyleRepository;
     }
 
     @Override
@@ -54,8 +54,8 @@ public class BatchSDJpaService implements BatchService {
     }
 
     @Override
-    public Batch findBatchByBeerType(BeerType beerType) {
-        Batch theBatch = batchRepository.findBatchByBeerType(beerType);
+    public Batch findBatchByBeerType(BeerStyle beerStyle) {
+        Batch theBatch = batchRepository.findBatchByBeerStyle(beerStyle);
         if(theBatch!=null){
             Hibernate.initialize(theBatch.getHops());
         }
@@ -65,8 +65,8 @@ public class BatchSDJpaService implements BatchService {
     }
 
     @Override
-    public Set<Batch> findAllByBeerTypeLike(BeerType beerType) {
-        return batchRepository.findAllByBeerTypeLike(beerType);
+    public Set<Batch> findAllByBeerTypeLike(BeerStyle beerStyle) {
+        return batchRepository.findAllByBeerStyleLike(beerStyle);
     }
 
     @Override

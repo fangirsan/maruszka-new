@@ -28,18 +28,18 @@ class DataLoader implements CommandLineRunner{
     private final CountryService countryService;
     private final HopService hopService;
     private final YeastService yeastService;
-    private final BeerTypeService beerTypeService;
+    private final BeerStyleService beerStyleService;
     private final BatchService batchService;
     private final AdditiveService additiveService;
 
     public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
-                      HopService hopService, YeastService yeastService, BeerTypeService beerTypeService, BatchService batchService, AdditiveService additiveService) {
+                      HopService hopService, YeastService yeastService, BeerStyleService beerStyleService, BatchService batchService, AdditiveService additiveService) {
         this.maltService = maltService;
         this.producerService = maltProducerService;
         this.countryService = countryService;
         this.hopService = hopService;
         this.yeastService = yeastService;
-        this.beerTypeService = beerTypeService;
+        this.beerStyleService = beerStyleService;
         this.batchService = batchService;
         this.additiveService = additiveService;
     }
@@ -194,15 +194,27 @@ class DataLoader implements CommandLineRunner{
         log.info("Yeasts loaded...");
 
         // BeerType
-        BeerType beerType = BeerType.builder()
-                .beerType("Stout")
+        BeerStyle ris = BeerStyle.builder()
+                .beerStyle("Russian Imperial Stout")
+                .originalBLG1(new BigDecimal(18.2))
+                .originalBLG2(new BigDecimal(27))
+                .finalBLG1(new BigDecimal(4.6))
+                .finalBLG2(new BigDecimal(7.6))
+                .ebc(60)
+                .abv(new BigDecimal(10))
                 .build();
-        beerTypeService.save(beerType);
+        beerStyleService.save(ris);
 
-        beerType = BeerType.builder()
-                .beerType("Russian Imperial Stout")
+        BeerStyle dryStout = BeerStyle.builder()
+                .beerStyle("Dry Stout")
+//                .originalBLG1(new BigDecimal(9))
+//                .originalBLG2(new BigDecimal(12.4))
+//                .finalBLG1(new BigDecimal(1.8))
+//                .finalBLG2(new BigDecimal(2.8))
+//                .ebc(35)
+//                .abv(new BigDecimal(4.5))
                 .build();
-        beerTypeService.save(beerType);
+        beerStyleService.save(dryStout);
         log.info("BeerType loaded...");
 
         // Additive
@@ -230,7 +242,7 @@ class DataLoader implements CommandLineRunner{
 
         Batch batch = Batch.builder()
                 .batchNumber(1)
-                .beerType(beerTypeService.findByBeerType("Stout"))
+                .beerStyle(beerStyleService.findByBeerType("Stout"))
                 .hops(hops)
                 .yeast(yeastService.findById(2L))
                 .malts(malts)
@@ -241,7 +253,7 @@ class DataLoader implements CommandLineRunner{
 
         batch = Batch.builder()
                 .batchNumber(2)
-                .beerType(beerTypeService.findById(2L))
+                .beerStyle(beerStyleService.findById(2L))
                 .hops(hops)
                 .yeast(yeastService.findById(1L))
                 .malts(malts)
@@ -252,7 +264,7 @@ class DataLoader implements CommandLineRunner{
 
         log.info("Loading data complete");
 
-        Batch beer = batchService.findBatchByBeerType(beerTypeService.findByBeerType("Stout"));
+        Batch beer = batchService.findBatchByBeerType(beerStyleService.findByBeerType("Stout"));
         log.info(beer.toString());
 
     }

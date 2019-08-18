@@ -3,13 +3,13 @@ package com.maruszka.services;
 import java.util.Set;
 
 import com.maruszka.model.Batch;
-import com.maruszka.model.BeerType;
+import com.maruszka.model.BeerStyle;
 
 public interface BatchService extends CrudService<Batch, Long> {
 
-    Batch findBatchByBeerType(BeerType beerType);
+    Batch findBatchByBeerType(BeerStyle beerStyle);
 
-    Set<Batch> findAllByBeerTypeLike(BeerType beerType);
+    Set<Batch> findAllByBeerTypeLike(BeerStyle beerStyle);
 
     Set<Batch> findByOrderByBatchNumberAsc();
 
