@@ -90,7 +90,7 @@ public class MaltSDJpaService implements MaltService {
                         .findFirst();
 
                 if (maltOptional.isPresent()) {
-                    log.debug("Deleting malt: " + maltName + " from batch number: " + tempBatch.getBatchNumber());
+                    log.debug("Detaching malt: " + maltName + " from batch number: " + tempBatch.getBatchNumber());
                     Malt maltToDelete = maltOptional.get();
                     maltToDelete.setBatches(null);
                     tempBatch.getMalts().remove(maltOptional.get());

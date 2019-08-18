@@ -215,6 +215,11 @@ class DataLoader implements CommandLineRunner{
 //                .abv(new BigDecimal(4.5))
                 .build();
         beerStyleService.save(dryStout);
+
+        BeerStyle nullBeerStyle = BeerStyle.builder()
+                .beerStyle("N/A")
+                .build();
+        beerStyleService.save(nullBeerStyle);
         log.info("BeerType loaded...");
 
         // Additive

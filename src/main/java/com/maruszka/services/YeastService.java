@@ -12,4 +12,5 @@ public interface YeastService extends CrudService<Yeast, Long> {
     List<Yeast> findAllByYeastNameLike(String YeastName);
 
     Set<Yeast> findByOrderByYeastNameAsc();
+
 }

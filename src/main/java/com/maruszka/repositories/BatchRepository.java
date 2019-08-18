@@ -23,4 +23,6 @@ public interface BatchRepository extends CrudRepository<Batch, Long> {
 
     Set<Batch> findByAdditives_id(Long additiveIdToDelete);
 
+    Set<Batch> findByBeerStyle_id(Long beerStyleToDelete);
+
 }
