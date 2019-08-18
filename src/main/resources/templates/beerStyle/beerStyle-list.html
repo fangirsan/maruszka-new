@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{index.page.title}">Page Title</title>
+
+<link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}" />
+
+<script src="../static/js/jquery-2.1.4.min.js"
+	th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+<link th:href="@{/css/custom.css}" rel="stylesheet" media="screen" />
+
+<style th:remove="all">
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<div class="header" th:replace="fragments/main-sections :: header"></div>
+
+		<div class="menu" th:replace="fragments/main-sections :: menu"></div>
+
+
+		<div class="wrapper">
+			<div class="main">
+
+				<div class="page-title">
+					<p th:text="#{beerStyle.title}" />
+				</div>
+
+				<table class="table">
+					<thead class="thead">
+						<tr>
+							<th>Beer style</th>
+							<th>EBC</th>
+							<th>Alcohol By Volume</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:remove="all">
+							<td>RIS</td>
+							<td>60</td>
+							<td>10</td>
+						</tr>
+						<tr th:remove="all">
+							<td>Dry Stout</td>
+							<td>30</td>
+							<td>5</td>
+						</tr>
+						<tr th:each="beerStyle: ${beerStyles}">
+							<td th:text="${beerStyle.beerStyle}" />
+							<td th:text="${beerStyle.ebc}" />
+							<td th:text="${beerStyle.abv}" />
+							<td>
+								<div  class="list-nav-buttons">
+									<a href="#" th:href="@{'/beerStyle/' + ${beerStyle.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a>
+									<a href="#" th:href="@{'/beerStyle/' + ${beerStyle.id}}"><img th:src="@{/images/view.png}" title="view"></a>
+									<a href="#" th:href="@{'/beerStyle/delete/' + ${beerStyle.id}}"><img th:src="@{/images/delete.png}" title="delete"></a>
+								</div>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+				<div class="form-field-submit">
+					<a class="simple-button" href="#" th:href="@{'/beerStyle/new'}">Add beer style</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer" th:replace="fragments/main-sections :: footer"></div>
+
+	</div>
+
+</body>
+</html>
