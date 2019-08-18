@@ -14,6 +14,6 @@ public interface BeerStyleRepository extends CrudRepository<BeerStyle, Long> {
 
     Set<BeerStyle> findByOrderByBeerStyleAsc();
 
-    Set<BeerStyle> findByBatch_id(Long beerStyleToDelete);
+//    Set<BeerStyle> findByBatch_id(Long beerStyleToDelete);
 
 }

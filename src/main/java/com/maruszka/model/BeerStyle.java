@@ -21,7 +21,7 @@ import java.math.MathContext;
 @Table(name="beer_style")
 public class BeerStyle extends BaseEntity {
 
-    @Column(name="beer_type")
+    @Column(name="beer_style")
     private String beerStyle;
 
     @Column(name="original_blg_1", precision = 3, scale = 1)

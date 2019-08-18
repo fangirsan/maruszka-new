@@ -245,18 +245,18 @@ class DataLoader implements CommandLineRunner{
         Set<Additive> additives = new HashSet<Additive>();
         additives.add(additiveService.findByAdditiveName("Curacao"));
 
-        Batch batch = Batch.builder()
+        Batch batch1 = Batch.builder()
                 .batchNumber(1)
-                .beerStyle(beerStyleService.findByBeerType("Stout"))
+                .beerStyle(beerStyleService.findById(1L))
                 .hops(hops)
                 .yeast(yeastService.findById(2L))
                 .malts(malts)
                 .additives(additives)
                 .build();
-        batch.getMalts().add(malt);
-        batchService.save(batch);
+        batch1.getMalts().add(malt);
+        batchService.save(batch1);
 
-        batch = Batch.builder()
+        Batch batch2 = Batch.builder()
                 .batchNumber(2)
                 .beerStyle(beerStyleService.findById(2L))
                 .hops(hops)
@@ -264,13 +264,16 @@ class DataLoader implements CommandLineRunner{
                 .malts(malts)
                 .additives(additives)
                 .build();
-        batchService.save(batch);
+        batchService.save(batch2);
         log.info("Batch loaded...");
 
         log.info("Loading data complete");
 
-        Batch beer = batchService.findBatchByBeerType(beerStyleService.findByBeerType("Stout"));
-        log.info(beer.toString());
+        Set<Batch> batches = batchService.findAll();
+        for (Batch tempBatch : batches) {
+            log.info(tempBatch.toString());
+        }
+
 
     }
 
