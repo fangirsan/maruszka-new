@@ -87,10 +87,10 @@ public class BeerStyleController {
     }
 
     @RequestMapping("/delete/{beerStyleId}")
-    public String deleteYeast(@PathVariable("beerStyleId") Long beerStyleId) {
+    public String deleteBeerStyle(@PathVariable("beerStyleId") Long beerStyleId) {
 
         beerStyleService.deleteById(beerStyleId);
 
-        return "redirect:/beerStyleId/list";
+        return "redirect:/beerStyle/list";
     }
 }

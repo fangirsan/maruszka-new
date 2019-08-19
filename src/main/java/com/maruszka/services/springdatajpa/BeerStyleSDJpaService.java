@@ -62,10 +62,12 @@ public class BeerStyleSDJpaService implements BeerStyleService {
                 log.debug("Detaching beer style: " + beerStyle + " from batch number: " + tempBatch.getBatchNumber());
                 tempBatch.setBeerStyle(beerStyleRepository.findByBeerStyle("N/A"));
             }
-            beerStyleRepository.deleteById(beerStyleToDelete);
-        } else {
-            beerStyleRepository.deleteById(beerStyleToDelete);
+//            beerStyleRepository.deleteById(beerStyleToDelete);
+//        } else {
+//            beerStyleRepository.deleteById(beerStyleToDelete);
         }
+        beerStyleRepository.deleteById(beerStyleToDelete);
+        log.debug("Beer style: " + beerStyle + " has been deleted.");
     }
 
     @Override
