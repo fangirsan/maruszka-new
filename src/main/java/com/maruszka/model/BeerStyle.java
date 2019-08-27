@@ -48,17 +48,29 @@ public class BeerStyle extends BaseEntity {
     @Column(name="final_gravity_2", precision = 4, scale = 3)
     private BigDecimal finalGravity2;
 
-    @Column(name="ebc")
-    private Integer ebc;
+    @Column(name="ebc1")
+    private Integer ebc1;
 
-    @Column(name="srm")
-    private Integer srm;
+    @Column(name="ebc2")
+    private Integer ebc2;
 
-    @Column(name="abv", precision = 3, scale = 1)
-    private BigDecimal abv;
+    @Column(name="srm1")
+    private Integer srm1;
 
-    @Column(name = "ibu")
-    private Integer ibu;
+    @Column(name="srm2")
+    private Integer srm2;
+
+    @Column(name="abv1", precision = 3, scale = 1)
+    private BigDecimal abv1;
+
+    @Column(name="abv2", precision = 3, scale = 1)
+    private BigDecimal abv2;
+
+    @Column(name = "ibu1")
+    private Integer ibu1;
+
+    @Column(name = "ibu2")
+    private Integer ibu2;
 
     private Integer calculateEbcToSrm(Integer ebc) {
         // SRM = EBC x 0.508
@@ -74,8 +86,8 @@ public class BeerStyle extends BaseEntity {
 
     @Builder
     public BeerStyle(Long id, String beerStyle, BigDecimal originalBLG1, BigDecimal finalBLG1,
-                     BigDecimal originalBLG2, BigDecimal finalBLG2, Integer ebc,
-                     BigDecimal abv, Integer ibu) {
+                     BigDecimal originalBLG2, BigDecimal finalBLG2, Integer ebc1, Integer ebc2,
+                     BigDecimal abv1, BigDecimal abv2, Integer ibu1 , Integer ibu2) {
         super(id);
         this.beerStyle = beerStyle;
         if (originalBLG1 != null) {
@@ -94,14 +106,22 @@ public class BeerStyle extends BaseEntity {
             this.finalBLG2 = finalBLG2.setScale(1, BigDecimal.ROUND_HALF_UP);
             this.finalGravity2 = calculateBallingToGravity(finalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
         }
-        if (ebc != null) {
-            this.srm = calculateEbcToSrm(ebc);
+        if (ebc1 != null) {
+            this.srm1 = calculateEbcToSrm(ebc1);
         }
-        if (abv != null) {
-            this.abv = abv.setScale(1, BigDecimal.ROUND_HALF_UP);
+        if (ebc2 != null) {
+            this.srm2 = calculateEbcToSrm(ebc2);
         }
-        this.ebc = ebc;
-        this.ibu = ibu;
+        if (abv1 != null) {
+            this.abv1 = abv1.setScale(1, BigDecimal.ROUND_HALF_UP);
+        }
+        if (abv2 != null) {
+            this.abv2 = abv2.setScale(1, BigDecimal.ROUND_HALF_UP);
+        }
+        this.ebc1 = ebc1;
+        this.ebc2 = ebc2;
+        this.ibu1 = ibu1;
+        this.ibu2 = ibu2;
     }
 
 }

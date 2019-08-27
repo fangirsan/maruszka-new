@@ -31,11 +31,12 @@ body {
 
 .page-title {
 	background-color: #757272;
-	margin: 20px 35% 20px 35%;
+	margin: 20px 25% 20px 25%;
 	text-align: center;
 	display: block;
 	border-radius: 15px;
 	font-size: 200%;
+	/*min-width: 400px !important;*/
 }
 
 .footer {
@@ -201,6 +202,3 @@ a.simple-button:focus,
 	width: 25px;
 	height: 25px;
 }
-
-
-

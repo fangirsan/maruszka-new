@@ -200,8 +200,12 @@ class DataLoader implements CommandLineRunner{
                 .originalBLG2(new BigDecimal(27))
                 .finalBLG1(new BigDecimal(4.6))
                 .finalBLG2(new BigDecimal(7.6))
-                .ebc(60)
-                .abv(new BigDecimal(10))
+                .ebc1(60)
+                .ebc2(80)
+                .abv1(new BigDecimal(8))
+                .abv2(new BigDecimal(12))
+                .ibu1(50)
+                .ibu2(90)
                 .build();
         beerStyleService.save(ris);
 

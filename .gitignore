@@ -28,3 +28,8 @@ target/
 #inteliJ
 maruszka.iml
 /.idea/
+
+.mvn/.mvn.iml
+out/
+src/test/test.iml
+

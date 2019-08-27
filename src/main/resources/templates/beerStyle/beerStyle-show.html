@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{index.page.title}">Page Title</title>
+
+<link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css"
+	rel="stylesheet" media="screen"
+	th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}" />
+
+<script src="../static/js/jquery-2.1.4.min.js"
+	th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+<link th:href="@{/css/custom.css}" rel="stylesheet" media="screen" />
+
+<style th:remove="all">
+</style>
+
+</head>
+<body>
+	<div class="container">
+		<div class="header" th:replace="fragments/main-sections :: header"></div>
+		<div class="menu" th:replace="fragments/main-sections :: menu"></div>
+
+		<div class="wrapper">
+			<div class="main">
+				<div class="page-title">
+					<p th:text="${beerStyle.beerStyle}">Beer style</p>
+				</div>
+
+				<div class="show">
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Original Plato:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${beerStyle.originalBLG1} + ' - ' + ${beerStyle.originalBLG2}">Original Plato</p>
+						</div>
+
+						<div class="display-field-name">
+							<label>Final Plato:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${beerStyle.finalBLG1} + ' - ' + ${beerStyle.finalBLG2}">Final Plato</p>
+						</div>
+
+						<div class="display-field-name">
+							<label>Original Gravity:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${beerStyle.originalGravity1} + ' - ' + ${beerStyle.originalGravity2}">Original Gravity</p>
+						</div>
+
+						<div class="display-field-name">
+							<label>Final Gravity:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${beerStyle.finalGravity1} + ' - ' + ${beerStyle.finalGravity2}">Final Gravity</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>European Brewery Convention (EBC):</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${beerStyle.ebc1} + ' - ' + ${beerStyle.ebc2}">EBC</p>
+						</div>
+
+						<div class="display-field-name">
+							<label>Standard Reference Method (SRM):</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${beerStyle.srm1} + ' - ' + ${beerStyle.srm2}">SRM</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Alcohol by volume (ABV):</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${beerStyle.abv1} + ' - ' + ${beerStyle.abv2} + '%'">ABV</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>International Bittering Units (IBU):</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${beerStyle.ibu1} + ' - ' + ${beerStyle.ibu2}">IBU</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="footer" th:replace="fragments/main-sections :: footer"></div>
+	</div>
+
+</body>
+</html>

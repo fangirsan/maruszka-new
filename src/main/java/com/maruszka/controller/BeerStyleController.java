@@ -29,8 +29,8 @@ public class BeerStyleController {
         this.duplicateCheck = duplicateCheck;
     }
 
-    @GetMapping("/beerStyleId")
-    public ModelAndView showBeerStyle(@PathVariable("beerStyleId")Long beerStyleId) {
+    @GetMapping("/{beerStyleId}")
+    public ModelAndView showBeerStyle(@PathVariable("beerStyleId") Long beerStyleId) {
 
         ModelAndView mav = new ModelAndView("beerStyle/beerStyle-show");
         BeerStyle beerStyleToShow = beerStyleService.findById(beerStyleId);

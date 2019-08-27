@@ -53,8 +53,8 @@
 						</tr>
 						<tr th:each="beerStyle: ${beerStyles}">
 							<td th:text="${beerStyle.beerStyle}" />
-							<td th:text="${beerStyle.ebc}" />
-							<td th:text="${beerStyle.abv}" />
+							<td th:text="${beerStyle.ebc1} + ' - ' + ${beerStyle.ebc2}" />
+							<td th:text="${beerStyle.abv1} + ' - ' + ${beerStyle.abv2} + ' %'" />
 							<td>
 								<div  class="list-nav-buttons">
 									<a href="#" th:href="@{'/beerStyle/' + ${beerStyle.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a>
