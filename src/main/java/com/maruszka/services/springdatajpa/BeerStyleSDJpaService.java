@@ -54,39 +54,39 @@ public class BeerStyleSDJpaService implements BeerStyleService {
     @Override
     public void deleteById(Long beerStyleToDelete) {
 
-        String beerStyle = findById(beerStyleToDelete).getBeerStyle();
+        String beerStyleName = findById(beerStyleToDelete).getBeerStyleName();
         Set<Batch> batches = batchRepository.findByBeerStyle_id(beerStyleToDelete);
 
         if (batches.size() != 0) {
             for (Batch tempBatch : batches) {
-                log.debug("Detaching beer style: " + beerStyle + " from batch number: " + tempBatch.getBatchNumber());
-                tempBatch.setBeerStyle(beerStyleRepository.findByBeerStyle("N/A"));
+                log.debug("Detaching beer style: " + beerStyleName + " from batch number: " + tempBatch.getBatchNumber());
+                tempBatch.setBeerStyle(beerStyleRepository.findByBeerStyleName("N/A"));
             }
 //            beerStyleRepository.deleteById(beerStyleToDelete);
 //        } else {
 //            beerStyleRepository.deleteById(beerStyleToDelete);
         }
         beerStyleRepository.deleteById(beerStyleToDelete);
-        log.debug("Beer style: " + beerStyle + " has been deleted.");
+        log.debug("Beer style: " + beerStyleName + " has been deleted.");
     }
 
     @Override
-    public BeerStyle findByBeerType(String beerType) {
-        return beerStyleRepository.findByBeerStyle(beerType);
+    public BeerStyle findByBeerStyleName(String StyleName) {
+        return beerStyleRepository.findByBeerStyleName(StyleName);
     }
 
     @Override
-    public List<BeerStyle> findAllByBeerTypeLike(String beerType) {
-        return findAllByBeerTypeLike(beerType);
+    public List<BeerStyle> findAllByBeerStyleLike(String StyleName) {
+        return findAllByBeerStyleLike(StyleName);
     }
 
     @Override
     public Set<BeerStyle> findByOrderByBeerStyleAsc() {
 
-        Set<BeerStyle> beerStyles = beerStyleRepository.findByOrderByBeerStyleAsc();
+        Set<BeerStyle> beerStyles = beerStyleRepository.findByOrderByBeerStyleNameAsc();
 
         // do not show N/A in the Beer Style list
-        beerStyles.removeIf(beerStyle -> beerStyle.getBeerStyle().equals("N/A"));
+        beerStyles.removeIf(beerStyle -> beerStyle.getBeerStyleName().equals("N/A"));
 
         return beerStyles;
     }

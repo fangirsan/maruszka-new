@@ -69,6 +69,14 @@
 						</div>
 					</div>
 
+					<div class="bottom-nav-buttons">
+						<ul>
+							<li><a href="#" th:href="@{'/malt/list'}"><img th:src="@{/images/list.png}" title="list"></a></li>
+							<li><a href="#" th:href="@{'/malt/' + ${malt.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a></li>
+							<li><a href="#" th:href="@{'/malt/delete/' + ${malt.id}}"><img th:src="@{/images/delete.png}" title="delete"></a></li>
+						</ul>
+					</div>
+
 				</div>
 			</div>
 		</div>

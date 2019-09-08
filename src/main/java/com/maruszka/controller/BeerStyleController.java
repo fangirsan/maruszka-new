@@ -1,7 +1,6 @@
 package com.maruszka.controller;
 
 import com.maruszka.model.BeerStyle;
-import com.maruszka.repositories.BeerStyleRepository;
 import com.maruszka.services.BeerStyleService;
 import com.maruszka.utils.DuplicateCheck;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Slf4j
@@ -74,12 +74,26 @@ public class BeerStyleController {
             });
             return VIEWS_BEER_STYLE_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("BEER_STYLE", "BEER_STYLE", beerStyle.getBeerStyle()) && beerStyle.isNew()) {
-                bindingResult.rejectValue("beerStyle", "duplicate", "Duplicate name");
-                log.info("Beer Style with given name: [" + beerStyle.getBeerStyle() + "] already exists");
+            if (duplicateCheck.isDuplicate("BEER_STYLE_NAME", "BEER_STYLE", beerStyle.getBeerStyleName()) && beerStyle.isNew()) {
+                bindingResult.rejectValue("beerStyleName", "duplicate", "Duplicate name");
+                log.info("Beer Style with given name: [" + beerStyle.getBeerStyleName() + "] already exists");
 
                 return VIEWS_BEER_STYLE_CREATE_OR_UPDATE_FORM;
             } else {
+
+//                if (beerStyle.getOriginalBLG1() != null) {
+//                    beerStyle.setOriginalGravity1(beerStyle.calculateBallingToGravity(beerStyle.getOriginalBLG1()).setScale(3, BigDecimal.ROUND_HALF_UP));
+//                }
+//                if (beerStyle.getFinalBLG1() != null) {
+//                    this.finalGravity1 = calculateBallingToGravity(finalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);
+//                }
+//                if (beerStyle.getOriginalBLG2() != null) {
+//                    this.originalGravity2 = calculateBallingToGravity(originalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
+//                }
+//                if (beerStyle.getFinalBLG1() != null) {
+//                    this.finalGravity2 = calculateBallingToGravity(finalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
+//                }
+
                 BeerStyle savedBeerStyle = beerStyleService.save(beerStyle);
                 return "redirect:/beerStyle/" + savedBeerStyle.getId();
             }

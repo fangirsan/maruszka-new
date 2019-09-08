@@ -52,7 +52,7 @@
 							<td>5</td>
 						</tr>
 						<tr th:each="beerStyle: ${beerStyles}">
-							<td th:text="${beerStyle.beerStyle}" />
+							<td th:text="${beerStyle.beerStyleName}" />
 							<td th:text="${beerStyle.ebc1} + ' - ' + ${beerStyle.ebc2}" />
 							<td th:text="${beerStyle.abv1} + ' - ' + ${beerStyle.abv2} + ' %'" />
 							<td>

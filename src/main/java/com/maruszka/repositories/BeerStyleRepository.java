@@ -8,11 +8,11 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface BeerStyleRepository extends CrudRepository<BeerStyle, Long> {
 
-    BeerStyle findByBeerStyle(String beerStyle);
+    BeerStyle findByBeerStyleName(String beerStyleName);
 
-    List<BeerStyle> findAllByBeerStyleLike(String beerStyle);
+    List<BeerStyle> findAllByBeerStyleNameLike(String beerStyleName);
 
-    Set<BeerStyle> findByOrderByBeerStyleAsc();
+    Set<BeerStyle> findByOrderByBeerStyleNameAsc();
 
 //    Set<BeerStyle> findByBatch_id(Long beerStyleToDelete);
 

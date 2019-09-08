@@ -114,35 +114,39 @@ td, th {
 }
 
 .form-row {
-	font-size: initial;
+	font-size: 0;
 }
 
 .form-field-name,
 .form-field-input,
+.form-field-input-2-in-row,
 .display-field-name {
 	display: inline-block;
 	margin-top: 15px;
-	width: 49%;
+	width: 50%;
 	font-size: initial;
-	/*vertical-align: top;*/
+	vertical-align:middle;
 }
 
 .form-field-name {
 	text-align: right;
-	padding-right: 3%;
-	padding-top: 5px;
+	padding-right:10px;
 }
 
-.form-field-input {
+.form-field-input,
+.form-field-input-2-in-row {
 	text-align: left;
-	padding-left: 3%;
-	vertical-align: top;
+	padding-left:10px;
+}
+
+.form-field-input-2-in-row input {
+	display: inline-block;
+	width: 30%;
 }
 
 .display-field-name {
 	text-align: right;
 	padding-right: 3%;
-	vertical-align: top;
 }
 
 .form-field-input img {
@@ -189,10 +193,10 @@ a.simple-button:focus,
 }
 
 .list-nav-buttons img {
-	 margin: 0 8px 0 8px;
-	 width: 30px;
-	 height: 30px;
- }
+	margin: 0 8px 0 8px;
+	width: 30px;
+	height: 30px;
+}
 
 .bottom-nav-buttons {
 	margin: 15px 8px 15px 8px;
@@ -201,4 +205,11 @@ a.simple-button:focus,
 .bottom-nav-buttons img {
 	width: 25px;
 	height: 25px;
+}
+
+/*Remove increase / decrease arrow from number input fields*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }

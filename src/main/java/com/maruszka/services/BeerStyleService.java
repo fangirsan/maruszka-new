@@ -7,9 +7,9 @@ import com.maruszka.model.BeerStyle;
 
 public interface BeerStyleService extends CrudService<BeerStyle, Long> {
 
-    BeerStyle findByBeerType(String beerType);
+    BeerStyle findByBeerStyleName(String beerType);
 
-    List<BeerStyle> findAllByBeerTypeLike(String beerType);
+    List<BeerStyle> findAllByBeerStyleLike(String beerType);
 
     Set<BeerStyle> findByOrderByBeerStyleAsc();
 

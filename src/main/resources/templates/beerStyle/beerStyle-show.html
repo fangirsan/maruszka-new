@@ -25,35 +25,35 @@
 		<div class="wrapper">
 			<div class="main">
 				<div class="page-title">
-					<p th:text="${beerStyle.beerStyle}">Beer style</p>
+					<p th:text="${beerStyle.beerStyleName}">Beer style</p>
 				</div>
 
 				<div class="show">
 
 					<div class="form-row">
 						<div class="display-field-name">
-							<label>Original Plato:</label>
+							<label>Original plato:</label>
 						</div>
 						<div class="form-field-input">
 							<p th:text="${beerStyle.originalBLG1} + ' - ' + ${beerStyle.originalBLG2}">Original Plato</p>
 						</div>
 
 						<div class="display-field-name">
-							<label>Final Plato:</label>
+							<label>Final plato:</label>
 						</div>
 						<div class="form-field-input">
 							<p th:text="${beerStyle.finalBLG1} + ' - ' + ${beerStyle.finalBLG2}">Final Plato</p>
 						</div>
 
 						<div class="display-field-name">
-							<label>Original Gravity:</label>
+							<label>Original gravity:</label>
 						</div>
 						<div class="form-field-input">
 							<p th:text="${beerStyle.originalGravity1} + ' - ' + ${beerStyle.originalGravity2}">Original Gravity</p>
 						</div>
 
 						<div class="display-field-name">
-							<label>Final Gravity:</label>
+							<label>Final gravity:</label>
 						</div>
 						<div class="form-field-input">
 							<p th:text="${beerStyle.finalGravity1} + ' - ' + ${beerStyle.finalGravity2}">Final Gravity</p>
@@ -92,6 +92,14 @@
 						<div class="form-field-input">
 							<p th:text="${beerStyle.ibu1} + ' - ' + ${beerStyle.ibu2}">IBU</p>
 						</div>
+					</div>
+
+					<div class="bottom-nav-buttons">
+						<ul>
+							<li><a href="#" th:href="@{'/beerStyle/list'}"><img th:src="@{/images/list.png}" title="list"></a></li>
+							<li><a href="#" th:href="@{'/beerStyle/' + ${beerStyle.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a></li>
+							<li><a href="#" th:href="@{'/beerStyle/delete/' + ${beerStyle.id}}"><img th:src="@{/images/delete.png}" title="delete"></a></li>
+						</ul>
 					</div>
 
 				</div>

@@ -3,7 +3,10 @@ package com.maruszka.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 
+import com.maruszka.constraints.BigDecimalNotNullConstraint;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,18 +24,31 @@ import java.math.MathContext;
 @Table(name="beer_style")
 public class BeerStyle extends BaseEntity {
 
-    @Column(name="beer_style")
-    private String beerStyle;
+    @NotBlank
+    @Column(name="beer_style_name", unique = true)
+    private String beerStyleName;
 
+    @DecimalMin(value = "0", inclusive = false)
+    @Digits(integer=3, fraction=1)
+    @BigDecimalNotNullConstraint
     @Column(name="original_blg_1", precision = 3, scale = 1)
     private BigDecimal originalBLG1;
 
+    @DecimalMin(value = "0", inclusive = false)
+    @Digits(integer=3, fraction=1)
+    @BigDecimalNotNullConstraint
     @Column(name="final_blg_1", precision = 3, scale = 1)
     private BigDecimal finalBLG1;
 
+    @DecimalMin(value = "0", inclusive = false)
+    @Digits(integer=3, fraction=1)
+    @BigDecimalNotNullConstraint
     @Column(name="original_blg_2", precision = 3, scale = 1)
     private BigDecimal originalBLG2;
 
+    @DecimalMin(value = "0", inclusive = false)
+    @Digits(integer=3, fraction=1)
+    @BigDecimalNotNullConstraint
     @Column(name="final_blg_2", precision = 3, scale = 1)
     private BigDecimal finalBLG2;
 
@@ -72,7 +88,23 @@ public class BeerStyle extends BaseEntity {
     @Column(name = "ibu2")
     private Integer ibu2;
 
-    private Integer calculateEbcToSrm(Integer ebc) {
+//    public BigDecimal getOriginalGravity1() {
+//        return this.originalGravity1 = calculateBallingToGravity(originalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);
+//    }
+//
+//    public BigDecimal getFinalGravity1() {
+//        return this.finalGravity1 = calculateBallingToGravity(finalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);
+//    }
+//
+//    public BigDecimal getOriginalGravity2() {
+//        return this.originalGravity2 = calculateBallingToGravity(originalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
+//    }
+//
+//    public BigDecimal getFinalGravity2() {
+//        return this.finalGravity2 = calculateBallingToGravity(finalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
+//    }
+
+    public Integer calculateEbcToSrm(Integer ebc) {
         // SRM = EBC x 0.508
         double srm = Math.round(ebc * 0.508);
         return Integer.valueOf((int) srm);
@@ -85,11 +117,11 @@ public class BeerStyle extends BaseEntity {
     }
 
     @Builder
-    public BeerStyle(Long id, String beerStyle, BigDecimal originalBLG1, BigDecimal finalBLG1,
+    public BeerStyle(Long id, String beerStyleName, BigDecimal originalBLG1, BigDecimal finalBLG1,
                      BigDecimal originalBLG2, BigDecimal finalBLG2, Integer ebc1, Integer ebc2,
                      BigDecimal abv1, BigDecimal abv2, Integer ibu1 , Integer ibu2) {
         super(id);
-        this.beerStyle = beerStyle;
+        this.beerStyleName = beerStyleName;
         if (originalBLG1 != null) {
             this.originalBLG1 = originalBLG1.setScale(1, BigDecimal.ROUND_HALF_UP);
             this.originalGravity1 = calculateBallingToGravity(originalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);

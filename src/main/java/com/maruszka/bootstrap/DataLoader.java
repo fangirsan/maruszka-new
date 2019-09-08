@@ -195,7 +195,7 @@ class DataLoader implements CommandLineRunner{
 
         // BeerType
         BeerStyle ris = BeerStyle.builder()
-                .beerStyle("Russian Imperial Stout")
+                .beerStyleName("Russian Imperial Stout")
                 .originalBLG1(new BigDecimal(18.2))
                 .originalBLG2(new BigDecimal(27))
                 .finalBLG1(new BigDecimal(4.6))
@@ -210,18 +210,22 @@ class DataLoader implements CommandLineRunner{
         beerStyleService.save(ris);
 
         BeerStyle dryStout = BeerStyle.builder()
-                .beerStyle("Dry Stout")
-//                .originalBLG1(new BigDecimal(9))
-//                .originalBLG2(new BigDecimal(12.4))
-//                .finalBLG1(new BigDecimal(1.8))
-//                .finalBLG2(new BigDecimal(2.8))
+                .beerStyleName("Dry Stout")
+                .originalBLG1(new BigDecimal(9))
+                .originalBLG2(new BigDecimal(12.4))
+                .finalBLG1(new BigDecimal(1.8))
+                .finalBLG2(new BigDecimal(2.8))
 //                .ebc(35)
 //                .abv(new BigDecimal(4.5))
                 .build();
         beerStyleService.save(dryStout);
 
         BeerStyle nullBeerStyle = BeerStyle.builder()
-                .beerStyle("N/A")
+                .beerStyleName("N/A")
+                .originalBLG1(new BigDecimal(10))
+                .originalBLG2(new BigDecimal(10))
+                .finalBLG1(new BigDecimal(10))
+                .finalBLG2(new BigDecimal(10))
                 .build();
         beerStyleService.save(nullBeerStyle);
         log.info("BeerType loaded...");
