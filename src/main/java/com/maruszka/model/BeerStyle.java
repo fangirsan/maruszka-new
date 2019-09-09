@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.*;
 
 import com.maruszka.constraints.bigDecimal.BigDecimalNotNullConstraint;
-import com.maruszka.constraints.integer.IntegerNotZeroConstraint;
+import com.maruszka.constraints.integer.IntegerNotNullConstraint;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -65,12 +65,12 @@ public class BeerStyle extends BaseEntity {
     private BigDecimal finalGravity2;
 
     @Min(1)
-    @IntegerNotZeroConstraint
+    @IntegerNotNullConstraint
     @Column(name="ebc1")
     private Integer ebc1;
 
     @Min(1)
-    @IntegerNotZeroConstraint
+    @IntegerNotNullConstraint
     @Column(name="ebc2")
     private Integer ebc2;
 
@@ -93,12 +93,12 @@ public class BeerStyle extends BaseEntity {
     private BigDecimal abv2;
 
     @Min(1)
-    @IntegerNotZeroConstraint
+    @IntegerNotNullConstraint
     @Column(name = "ibu1")
     private Integer ibu1;
 
     @Min(1)
-    @IntegerNotZeroConstraint
+    @IntegerNotNullConstraint
     @Column(name = "ibu2")
     private Integer ibu2;
 

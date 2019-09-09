@@ -2,12 +2,11 @@ package com.maruszka.constraints.integer;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.math.BigDecimal;
 
-public class IntegerNotZeroValidator implements ConstraintValidator<IntegerNotZeroConstraint, Integer> {
+public class IntegerNotNullValidator implements ConstraintValidator<IntegerNotNullConstraint, Integer> {
 
     @Override
-    public void initialize(IntegerNotZeroConstraint integer) {
+    public void initialize(IntegerNotNullConstraint integer) {
     }
 
     @Override
