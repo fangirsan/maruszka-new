@@ -215,8 +215,12 @@ class DataLoader implements CommandLineRunner{
                 .originalBLG2(new BigDecimal(12.4))
                 .finalBLG1(new BigDecimal(1.8))
                 .finalBLG2(new BigDecimal(2.8))
-//                .ebc(35)
-//                .abv(new BigDecimal(4.5))
+                .ebc1(35)
+                .ebc2(45)
+                .abv1(new BigDecimal(4.5))
+                .abv2(new BigDecimal(4.5))
+                .ibu1(50)
+                .ibu2(70)
                 .build();
         beerStyleService.save(dryStout);
 
@@ -226,6 +230,12 @@ class DataLoader implements CommandLineRunner{
                 .originalBLG2(new BigDecimal(10))
                 .finalBLG1(new BigDecimal(10))
                 .finalBLG2(new BigDecimal(10))
+                .ebc1(1)
+                .ebc2(1)
+                .abv1(new BigDecimal(1))
+                .abv2(new BigDecimal(1))
+                .ibu1(1)
+                .ibu2(1)
                 .build();
         beerStyleService.save(nullBeerStyle);
         log.info("BeerType loaded...");

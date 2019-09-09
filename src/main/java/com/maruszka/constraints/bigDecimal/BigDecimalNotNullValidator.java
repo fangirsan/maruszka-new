@@ -1,4 +1,4 @@
-package com.maruszka.constraints;
+package com.maruszka.constraints.bigDecimal;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

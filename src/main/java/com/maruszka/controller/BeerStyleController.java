@@ -81,6 +81,7 @@ public class BeerStyleController {
                 return VIEWS_BEER_STYLE_CREATE_OR_UPDATE_FORM;
             } else {
 
+                // Use logic from model
 //                if (beerStyle.getOriginalBLG1() != null) {
 //                    beerStyle.setOriginalGravity1(beerStyle.calculateBallingToGravity(beerStyle.getOriginalBLG1()).setScale(3, BigDecimal.ROUND_HALF_UP));
 //                }

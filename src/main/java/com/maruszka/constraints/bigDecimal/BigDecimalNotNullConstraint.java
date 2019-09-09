@@ -1,4 +1,4 @@
-package com.maruszka.constraints;
+package com.maruszka.constraints.bigDecimal;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BigDecimalNotNullConstraint {
 
-    String message() default "Invalid phone number";
+    String message() default "Value must not be zero";
 
     Class<?>[] groups() default {};
 

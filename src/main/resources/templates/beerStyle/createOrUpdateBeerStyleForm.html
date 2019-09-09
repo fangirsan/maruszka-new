@@ -86,6 +86,66 @@
 						</div>
 
 						<div class="form-row">
+							<div class="form-field-name">
+								<label>European Brewery Convention:</label>
+							</div>
+							<div class="form-field-input-2-in-row">
+								<input type="number" class="form-control" th:field="*{ebc1}" th:errorclass="has-error"/> -
+								<input type="number" class="form-control" th:field="*{ebc2}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('ebc1')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('ebc1')}" th:text="${err}"/>
+									</ul>
+								</div>
+								<div class="form-error" th:if="${#fields.hasErrors('ebc2')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('ebc2')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Alcohol by volume:</label>
+							</div>
+							<div class="form-field-input-2-in-row">
+								<input type="number" step="any" class="form-control" th:field="*{abv1}" th:errorclass="has-error"/> -
+								<input type="number" step="any" class="form-control" th:field="*{abv2}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('abv1')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('abv1')}" th:text="${err}"/>
+									</ul>
+								</div>
+								<div class="form-error" th:if="${#fields.hasErrors('abv2')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('abv2')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Alcohol by volume:</label>
+							</div>
+							<div class="form-field-input-2-in-row">
+								<input type="number" step="any" class="form-control" th:field="*{ibu1}" th:errorclass="has-error"/> -
+								<input type="number" step="any" class="form-control" th:field="*{ibu2}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('ibu1')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('ibu1')}" th:text="${err}"/>
+									</ul>
+								</div>
+								<div class="form-error" th:if="${#fields.hasErrors('ibu2')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('ibu2')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
 							<div class="form-field-submit">
 								<button class="submit-button" type="submit">Submit</button>
 							</div>

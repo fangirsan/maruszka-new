@@ -4,9 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
-import javax.validation.constraints.NotNull;
 
-import com.maruszka.constraints.BigDecimalNotNullConstraint;
+import com.maruszka.constraints.bigDecimal.BigDecimalNotNullConstraint;
+import com.maruszka.constraints.integer.IntegerNotZeroConstraint;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -64,9 +64,13 @@ public class BeerStyle extends BaseEntity {
     @Column(name="final_gravity_2", precision = 4, scale = 3)
     private BigDecimal finalGravity2;
 
+    @Min(1)
+    @IntegerNotZeroConstraint
     @Column(name="ebc1")
     private Integer ebc1;
 
+    @Min(1)
+    @IntegerNotZeroConstraint
     @Column(name="ebc2")
     private Integer ebc2;
 
@@ -76,33 +80,51 @@ public class BeerStyle extends BaseEntity {
     @Column(name="srm2")
     private Integer srm2;
 
+    @DecimalMin(value = "0", inclusive = false)
+    @Digits(integer=3, fraction=1)
+    @BigDecimalNotNullConstraint
     @Column(name="abv1", precision = 3, scale = 1)
     private BigDecimal abv1;
 
+    @DecimalMin(value = "0", inclusive = false)
+    @Digits(integer=3, fraction=1)
+    @BigDecimalNotNullConstraint
     @Column(name="abv2", precision = 3, scale = 1)
     private BigDecimal abv2;
 
+    @Min(1)
+    @IntegerNotZeroConstraint
     @Column(name = "ibu1")
     private Integer ibu1;
 
+    @Min(1)
+    @IntegerNotZeroConstraint
     @Column(name = "ibu2")
     private Integer ibu2;
 
-//    public BigDecimal getOriginalGravity1() {
-//        return this.originalGravity1 = calculateBallingToGravity(originalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);
-//    }
-//
-//    public BigDecimal getFinalGravity1() {
-//        return this.finalGravity1 = calculateBallingToGravity(finalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);
-//    }
-//
-//    public BigDecimal getOriginalGravity2() {
-//        return this.originalGravity2 = calculateBallingToGravity(originalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
-//    }
-//
-//    public BigDecimal getFinalGravity2() {
-//        return this.finalGravity2 = calculateBallingToGravity(finalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
-//    }
+    public BigDecimal getOriginalGravity1() {
+        return this.originalGravity1 = calculateBallingToGravity(originalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public BigDecimal getFinalGravity1() {
+        return this.finalGravity1 = calculateBallingToGravity(finalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public BigDecimal getOriginalGravity2() {
+        return this.originalGravity2 = calculateBallingToGravity(originalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public BigDecimal getFinalGravity2() {
+        return this.finalGravity2 = calculateBallingToGravity(finalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public Integer getSrm1() {
+        return this.srm1 = calculateEbcToSrm(ebc1);
+    }
+
+    public Integer getSrm2() {
+        return this.srm2 = calculateEbcToSrm(ebc2);
+    }
 
     public Integer calculateEbcToSrm(Integer ebc) {
         // SRM = EBC x 0.508
