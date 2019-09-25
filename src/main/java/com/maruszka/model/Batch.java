@@ -1,7 +1,6 @@
 package com.maruszka.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +24,7 @@ import lombok.ToString;
 //@AllArgsConstructor
 //@Builder
 @Entity
-@ToString
+//@ToString
 @Table(name="batch")
 public class Batch extends BaseEntity {
 
@@ -40,7 +39,7 @@ public class Batch extends BaseEntity {
     @JoinColumn(name="yeast_id")
     private Yeast yeast;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name = "batch_hop",
             joinColumns = @JoinColumn(name = "batch_id"),
             inverseJoinColumns = @JoinColumn(name = "hop_id"))
@@ -69,6 +68,34 @@ public class Batch extends BaseEntity {
         this.hops = hops;
         this.malts = malts;
         this.additives = additives;
+    }
+
+    @Override
+    public String toString() {
+
+        Set<String> hopsName = new HashSet<>();
+        for (Hop tempHop: hops) {
+            hopsName.add(tempHop.getHopName());
+        }
+
+        Set<String> maltsName = new HashSet<>();
+        for (Malt tempMalt: malts) {
+            maltsName.add(tempMalt.getMaltName());
+        }
+
+        Set<String> additivesName = new HashSet<>();
+        for (Additive tempAdditive: additives) {
+            additivesName.add(tempAdditive.getAdditiveName());
+        }
+
+        return "Batch{" +
+                "batchNumber=" + batchNumber +
+                ", beerStyle=" + beerStyle.getBeerStyleName() +
+                ", yeast=" + yeast.getYeastName() +
+                ", hops=" + hopsName +
+                ", malts=" + maltsName +
+                ", additives=" + additivesName +
+                '}';
     }
 
 }

@@ -255,9 +255,10 @@ class DataLoader implements CommandLineRunner{
         // Batch
         Set<Hop> hops = new HashSet<Hop>();
         hops.add(hopService.findByHopName("Citra"));
+        hops.add(hopService.findByHopName("Cascade"));
 
         Set<Malt> malts = new HashSet<Malt>();
-        malts.add(maltService.findByMaltName("Pale Ale"));
+        malts.add(maltService.findByMaltName("Strzegom"));
         malts.add(maltService.findById(2L));
 
         Set<Additive> additives = new HashSet<Additive>();
