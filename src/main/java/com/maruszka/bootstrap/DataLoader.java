@@ -261,27 +261,30 @@ class DataLoader implements CommandLineRunner{
         malts.add(maltService.findByMaltName("Strzegom"));
         malts.add(maltService.findById(2L));
 
+        // Additives
         Set<Additive> additives = new HashSet<Additive>();
         additives.add(additiveService.findByAdditiveName("Curacao"));
+
 
         Batch batch1 = Batch.builder()
                 .batchNumber(1)
                 .beerStyle(beerStyleService.findById(1L))
-                .hops(hops)
-                .yeast(yeastService.findById(2L))
-                .malts(malts)
-                .additives(additives)
+//                .hops(hops)
+//                .yeast(yeastService.findById(2L))
+//                .malts(malts)
+//                .additives(additives)
                 .build();
-        batch1.getMalts().add(malt);
+//        batch1.getMalts().add(malt);
+        batch1.addMalt(maltService.findById(1L), 500);
         batchService.save(batch1);
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)
                 .beerStyle(beerStyleService.findById(2L))
-                .hops(hops)
-                .yeast(yeastService.findById(1L))
-                .malts(malts)
-                .additives(additives)
+//                .hops(hops)
+//                .yeast(yeastService.findById(1L))
+//                .malts(malts)
+//                .additives(additives)
                 .build();
         batchService.save(batch2);
         log.info("Batch loaded...");

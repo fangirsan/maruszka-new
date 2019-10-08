@@ -56,9 +56,9 @@ public class BatchSDJpaService implements BatchService {
     @Override
     public Batch findBatchByBeerType(BeerStyle beerStyle) {
         Batch theBatch = batchRepository.findBatchByBeerStyle(beerStyle);
-        if(theBatch!=null){
-            Hibernate.initialize(theBatch.getHops());
-        }
+//        if(theBatch!=null){
+//            Hibernate.initialize(theBatch.getHops());
+//        }
 
         return theBatch;
 //		return batchRepository.findBatchByBeerType(beerType);

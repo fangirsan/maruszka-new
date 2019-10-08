@@ -54,18 +54,18 @@ public class YeastSDJpaService implements YeastService {
     @Override
     public void deleteById(Long yeastIdToDelete) {
 
-        String yeastName = findById(yeastIdToDelete).toString();
-        Set<Batch> batches = batchRepository.findByYeast_id(yeastIdToDelete);
-
-        if (batches.size() != 0 ) {
-            for (Batch tempBatch : batches) {
-                log.debug("Detaching yeast: " + yeastName + " from batch number: " + tempBatch.getBatchNumber());
-                tempBatch.setYeast(yeastRepository.findByYeastName("N/A"));
-            }
-            yeastRepository.deleteById(yeastIdToDelete);
-        } else {
-            yeastRepository.deleteById(yeastIdToDelete);
-        }
+//        String yeastName = findById(yeastIdToDelete).toString();
+//        Set<Batch> batches = batchRepository.findByYeast_id(yeastIdToDelete);
+//
+//        if (batches.size() != 0 ) {
+//            for (Batch tempBatch : batches) {
+//                log.debug("Detaching yeast: " + yeastName + " from batch number: " + tempBatch.getBatchNumber());
+//                tempBatch.setYeast(yeastRepository.findByYeastName("N/A"));
+//            }
+//            yeastRepository.deleteById(yeastIdToDelete);
+//        } else {
+//            yeastRepository.deleteById(yeastIdToDelete);
+//        }
     }
 
     @Override

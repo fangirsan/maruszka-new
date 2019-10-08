@@ -73,28 +73,28 @@ public class HopSDJpaService implements HopService {
     @Override
     public void deleteById(Long hopIdToDelete) {
 
-        String hopName = findById(hopIdToDelete).getHopName();
-        Set<Batch> batches = batchRepository.findByHops_id(hopIdToDelete);
-
-        if (batches != null) {
-            for (Batch tempBatch : batches) {
-                Optional<Hop> hopOptional = tempBatch
-                        .getHops()
-                        .stream()
-                        .filter(hop -> hop.getId().equals(hopIdToDelete))
-                        .findFirst();
-
-                if (hopOptional.isPresent()) {
-                    log.debug("Detaching hop: " + hopName + " from batch number: " + tempBatch.getBatchNumber());
-                    Hop hopToDelete = hopOptional.get();
-                    hopToDelete.setBatches(null);
-                    tempBatch.getHops().remove(hopOptional.get());
-                    batchRepository.save(tempBatch);
-                }
-            }
-            hopRepository.deleteById(hopIdToDelete);
-            log.debug("Hop: " + hopName + " has been deleted.");
-        }
+//        String hopName = findById(hopIdToDelete).getHopName();
+//        Set<Batch> batches = batchRepository.findByHops_id(hopIdToDelete);
+//
+//        if (batches != null) {
+//            for (Batch tempBatch : batches) {
+//                Optional<Hop> hopOptional = tempBatch
+//                        .getHops()
+//                        .stream()
+//                        .filter(hop -> hop.getId().equals(hopIdToDelete))
+//                        .findFirst();
+//
+//                if (hopOptional.isPresent()) {
+//                    log.debug("Detaching hop: " + hopName + " from batch number: " + tempBatch.getBatchNumber());
+//                    Hop hopToDelete = hopOptional.get();
+//                    hopToDelete.setBatches(null);
+//                    tempBatch.getHops().remove(hopOptional.get());
+//                    batchRepository.save(tempBatch);
+//                }
+//            }
+//            hopRepository.deleteById(hopIdToDelete);
+//            log.debug("Hop: " + hopName + " has been deleted.");
+//        }
     }
 
     @Override

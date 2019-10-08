@@ -78,28 +78,28 @@ public class MaltSDJpaService implements MaltService {
     @Override
     public void deleteById(Long maltIdToDelete) {
 
-        String maltName = findById(maltIdToDelete).getMaltName();
-        Set<Batch> batches = batchRepository.findByMalts_id(maltIdToDelete);
-
-        if (batches != null) {
-            for (Batch tempBatch : batches) {
-                Optional<Malt> maltOptional = tempBatch
-                        .getMalts()
-                        .stream()
-                        .filter(malt -> malt.getId().equals(maltIdToDelete))
-                        .findFirst();
-
-                if (maltOptional.isPresent()) {
-                    log.debug("Detaching malt: " + maltName + " from batch number: " + tempBatch.getBatchNumber());
-                    Malt maltToDelete = maltOptional.get();
-                    maltToDelete.setBatches(null);
-                    tempBatch.getMalts().remove(maltOptional.get());
-                    batchRepository.save(tempBatch);
-                }
-            }
-            maltRepository.deleteById(maltIdToDelete);
-            log.debug("Malt: " + maltName + " has been deleted.");
-        }
+//        String maltName = findById(maltIdToDelete).getMaltName();
+//        Set<Batch> batches = batchRepository.findByMalts_id(maltIdToDelete);
+//
+//        if (batches != null) {
+//            for (Batch tempBatch : batches) {
+//                Optional<Malt> maltOptional = tempBatch
+//                        .getMalts()
+//                        .stream()
+//                        .filter(malt -> malt.getId().equals(maltIdToDelete))
+//                        .findFirst();
+//
+//                if (maltOptional.isPresent()) {
+//                    log.debug("Detaching malt: " + maltName + " from batch number: " + tempBatch.getBatchNumber());
+//                    Malt maltToDelete = maltOptional.get();
+//                    maltToDelete.setBatches(null);
+//                    tempBatch.getMalts().remove(maltOptional.get());
+//                    batchRepository.save(tempBatch);
+//                }
+//            }
+//            maltRepository.deleteById(maltIdToDelete);
+//            log.debug("Malt: " + maltName + " has been deleted.");
+//        }
     }
 
     @Override

@@ -21,8 +21,8 @@ public class Additive extends BaseEntity {
     @Column(name="additive_name", unique = true)
     private String additiveName;
 
-    @ManyToMany(mappedBy="additives")
-    private Set<Batch> batches;
+//    @ManyToMany(mappedBy="additives")
+//    private Set<Batch> batches;
 
     @Builder
     public Additive(Long id, String additiveName) {

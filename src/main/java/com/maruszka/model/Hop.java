@@ -36,8 +36,8 @@ public class Hop extends BaseEntity{
     @JoinColumn(name="country_id")
     private Country country;
 
-    @ManyToMany(mappedBy="hops")
-    private Set<Batch> batches;
+//    @ManyToMany(mappedBy="hops")
+//    private Set<Batch> batches;
 
     @Builder
     public Hop(Long id, String hopName, BigDecimal alphaAcidMin, BigDecimal alphaAcidMax, boolean bitterHop, boolean aromaHop,

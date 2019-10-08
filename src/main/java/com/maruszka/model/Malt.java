@@ -1,5 +1,6 @@
 package com.maruszka.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -38,8 +39,18 @@ public class Malt extends BaseEntity {
     @JoinColumn(name="country_id")
     private Country country;
 
-    @ManyToMany(mappedBy="malts")
-    private Set<Batch> batches;
+//    @ManyToMany(mappedBy="malts")
+//    private Set<Batch> batches;
+
+//    @ManyToOne(fetch=FetchType.LAZY)
+//    @JoinTable(name="ingredient")
+//    private Set<Batch> batches;
+    /*
+    @OneToMany(mappedBy="employee")
+ private List<ProjectAssociation> projects;
+     */
+    @OneToMany(mappedBy = "malt")
+    private Set<Ingredients> batches = new HashSet<>();
 
 
     @Builder

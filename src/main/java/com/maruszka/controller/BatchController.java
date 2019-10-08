@@ -32,7 +32,7 @@ class BatchController {
 //        }
 
         mav.addObject(batchService.findById(batchId));
-        mav.addObject("malts", batchToShow.getMalts());
+//        mav.addObject("malts", batchToShow.getMalts());
 
         return mav;
     }

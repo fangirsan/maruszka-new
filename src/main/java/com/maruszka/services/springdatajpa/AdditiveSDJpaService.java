@@ -70,28 +70,28 @@ public class AdditiveSDJpaService implements AdditiveService {
     @Override
     public void deleteById(Long additiveIdToDelete) {
 
-        String additiveName = findById(additiveIdToDelete).getAdditiveName();
-        Set<Batch> batches = batchRepository.findByAdditives_id(additiveIdToDelete);
-
-        if (batches != null) {
-            for (Batch tempBatch : batches) {
-                Optional<Additive> additiveOptional = tempBatch
-                        .getAdditives()
-                        .stream()
-                        .filter(additive -> additive.getId().equals(additiveIdToDelete))
-                        .findFirst();
-
-                if (additiveOptional.isPresent()) {
-                    log.debug("Deleting additive: " + additiveName + " from batch number: " + tempBatch.getBatchNumber());
-                    Additive additiveToDelete = additiveOptional.get();
-                    additiveToDelete.setBatches(null);
-                    tempBatch.getAdditives().remove(additiveOptional.get());
-                    batchRepository.save(tempBatch);
-                }
-            }
-            additiveRepository.deleteById(additiveIdToDelete);
-            log.debug("Additive: " + additiveName + " has been deleted.");
-        }
+//        String additiveName = findById(additiveIdToDelete).getAdditiveName();
+//        Set<Batch> batches = batchRepository.findByAdditives_id(additiveIdToDelete);
+//
+//        if (batches != null) {
+//            for (Batch tempBatch : batches) {
+//                Optional<Additive> additiveOptional = tempBatch
+//                        .getAdditives()
+//                        .stream()
+//                        .filter(additive -> additive.getId().equals(additiveIdToDelete))
+//                        .findFirst();
+//
+//                if (additiveOptional.isPresent()) {
+//                    log.debug("Deleting additive: " + additiveName + " from batch number: " + tempBatch.getBatchNumber());
+//                    Additive additiveToDelete = additiveOptional.get();
+//                    additiveToDelete.setBatches(null);
+//                    tempBatch.getAdditives().remove(additiveOptional.get());
+//                    batchRepository.save(tempBatch);
+//                }
+//            }
+//            additiveRepository.deleteById(additiveIdToDelete);
+//            log.debug("Additive: " + additiveName + " has been deleted.");
+//        }
     }
 
     @Override
