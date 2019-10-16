@@ -66,23 +66,9 @@ public class Batch extends BaseEntity {
 //    private Set<Ingredients> malts = new HashSet<>();
     private Set<Ingredients> malts;
 
-    /*
-    public void addEmployee(Employee employee, boolean teamLead) {
-      ProjectAssociation association = new ProjectAssociation();
-      association.setEmployee(employee);
-      association.setProject(this);
-      association.setEmployeeId(employee.getId());
-      association.setProjectId(this.getId());
-      association.setIsTeamLead(teamLead);
-      if(this.employees == null)
-        this.employees = new ArrayList<>();
 
-      this.employees.add(association);
-      // Also add the association object to the employee.
-      employee.getProjects().add(association);
-     */
-
-    public void addMalt(Malt malt, int amount) {
+    // https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany#Mapping_a_Join_Table_with_Additional_Columns
+    public void addIngredient(Malt malt, int amount) {
         Ingredients ingredients = new Ingredients();
         ingredients.setMalt(malt);
         ingredients.setBatch(this);
@@ -90,10 +76,7 @@ public class Batch extends BaseEntity {
 //        ingredients.setBatchId(this.getId());
         ingredients.setBatchId(1L);
         ingredients.setAmount(amount);
-        if(this.malts == null) {
-            this.malts = new HashSet<>();
-        }
-
+        if(this.malts == null) this.malts = new HashSet<>();
         this.malts.add(ingredients);
         malt.getBatches().add(ingredients);
     }

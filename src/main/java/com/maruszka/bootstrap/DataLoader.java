@@ -31,9 +31,10 @@ class DataLoader implements CommandLineRunner{
     private final BeerStyleService beerStyleService;
     private final BatchService batchService;
     private final AdditiveService additiveService;
+    private final IngredientsService ingredientsService;
 
     public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
-                      HopService hopService, YeastService yeastService, BeerStyleService beerStyleService, BatchService batchService, AdditiveService additiveService) {
+                      HopService hopService, YeastService yeastService, BeerStyleService beerStyleService, BatchService batchService, AdditiveService additiveService, IngredientsService ingredientsService) {
         this.maltService = maltService;
         this.producerService = maltProducerService;
         this.countryService = countryService;
@@ -42,6 +43,7 @@ class DataLoader implements CommandLineRunner{
         this.beerStyleService = beerStyleService;
         this.batchService = batchService;
         this.additiveService = additiveService;
+        this.ingredientsService = ingredientsService;
     }
 
     @Override
@@ -275,7 +277,7 @@ class DataLoader implements CommandLineRunner{
 //                .additives(additives)
                 .build();
 //        batch1.getMalts().add(malt);
-        batch1.addMalt(maltService.findById(1L), 500);
+        batch1.addIngredient(maltService.findById(1L), 500);
         batchService.save(batch1);
 
         Batch batch2 = Batch.builder()
@@ -292,9 +294,10 @@ class DataLoader implements CommandLineRunner{
         log.info("Loading data complete");
 
         Set<Batch> batches = batchService.findAll();
-        for (Batch tempBatch : batches) {
-            log.info(tempBatch.toString());
-        }
+        batches.stream().forEach(batch -> log.info(batch.toString()));
+//        for (Batch tempBatch : batches) {
+//            log.info(tempBatch.toString());
+//        }
 
 
     }

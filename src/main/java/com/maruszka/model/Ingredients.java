@@ -17,7 +17,6 @@ public class Ingredients extends BaseEntity{
 
     private Long batchId;
     private Long maltId;
-//    private Enum ingredientType;
 
     @Column(name="amount")
     private int amount;
@@ -31,6 +30,9 @@ public class Ingredients extends BaseEntity{
 //    @PrimaryKeyJoinColumn(name="batchId", referencedColumnName="id")
     @JoinColumn(name="batchId", updatable = false, insertable = false, referencedColumnName = "id")
     private Batch batch;
+
+    @Column(name = "type")
+    private Enum ingredientType;
 
 
 
