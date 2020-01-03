@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class BatchAssociationId implements Serializable {
+public class BatchIngredientAssociationId implements Serializable {
 
     private Long ingredientId;
     private Long batchId;
@@ -19,7 +19,7 @@ public class BatchAssociationId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BatchAssociationId that = (BatchAssociationId) o;
+        BatchIngredientAssociationId that = (BatchIngredientAssociationId) o;
         return getAmount() == that.getAmount() &&
                 getIngredientId().equals(that.getIngredientId()) &&
                 getBatchId().equals(that.getBatchId()) &&

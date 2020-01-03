@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "batch_comments")
-@EqualsAndHashCode(exclude = {"batch"})
+@EqualsAndHashCode(exclude = {"batch"}, callSuper = false)
 public class BatchComments extends BaseEntity {
 
     @OneToOne

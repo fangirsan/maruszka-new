@@ -78,7 +78,7 @@ public class Batch extends BaseEntity {
     private int amountOfPrimingMaterial;
 
     @OneToMany(mappedBy = "batch")
-    private Set<BatchAssociation> ingredients = new HashSet<>();
+    private Set<BatchIngredientAssociation> ingredients = new HashSet<>();
 
     @Builder
     public Batch(Long id, Integer batchNumber, LocalDate creationDate, String designation, BatchComments batchComments, BeerStyle beerStyle) {
@@ -97,7 +97,7 @@ public class Batch extends BaseEntity {
 
     private String getIngredientName() {
         String ingredientList = null;
-        for (BatchAssociation ing : ingredients) {
+        for (BatchIngredientAssociation ing : ingredients) {
             if (ing.getIngredient() instanceof Malt) {
                 if (ingredientList == null) {
                     ingredientList = ing.getIngredient().getMaltName();

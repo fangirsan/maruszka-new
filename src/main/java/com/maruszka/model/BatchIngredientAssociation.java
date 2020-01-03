@@ -11,8 +11,8 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name="batch_ingredient")
-@IdClass(BatchAssociationId.class)
-public class BatchAssociation {
+@IdClass(BatchIngredientAssociationId.class)
+public class BatchIngredientAssociation {
 
     @Id
     private Long ingredientId;

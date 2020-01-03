@@ -23,7 +23,7 @@ public class Ingredient extends BaseEntity {
     protected String maltName;
 
     @OneToMany(mappedBy = "ingredient")
-    private Set<BatchAssociation> batches = new HashSet<>();
+    private Set<BatchIngredientAssociation> batches = new HashSet<>();
 
     public Ingredient(Long id) {
     }

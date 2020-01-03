@@ -1,7 +1,7 @@
 package com.maruszka.services.springdatajpa;
 
 import com.maruszka.model.Batch;
-import com.maruszka.model.BatchAssociation;
+import com.maruszka.model.BatchIngredientAssociation;
 import com.maruszka.model.Ingredient;
 import com.maruszka.repositories.BatchAssociationRepository;
 import com.maruszka.services.BatchAssociationService;
@@ -21,22 +21,22 @@ public class BatchAssociationSDJpaService implements BatchAssociationService {
     }
 
     @Override
-    public Set<BatchAssociation> findAll() {
+    public Set<BatchIngredientAssociation> findAll() {
         return null;
     }
 
     @Override
-    public BatchAssociation findById(Long aLong) {
+    public BatchIngredientAssociation findById(Long aLong) {
         return null;
     }
 
     @Override
-    public BatchAssociation save(BatchAssociation object) {
+    public BatchIngredientAssociation save(BatchIngredientAssociation object) {
         return batchAssociationRepository.save(object);
     }
 
     @Override
-    public void delete(BatchAssociation object) {
+    public void delete(BatchIngredientAssociation object) {
 
     }
 
@@ -48,7 +48,7 @@ public class BatchAssociationSDJpaService implements BatchAssociationService {
     // https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany#Mapping_a_Join_Table_with_Additional_Columns
     @Override
     public void addIngredient(Batch batch, Ingredient ingredient, int amount, String wayOfServing) {
-        BatchAssociation association = new BatchAssociation();
+        BatchIngredientAssociation association = new BatchIngredientAssociation();
         association.setIngredient(ingredient);
         association.setBatch(batch);
         association.setIngredientId(ingredient.getId());

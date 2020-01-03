@@ -75,7 +75,7 @@ public class BatchSDJpaService implements BatchService {
     @Override
     public <T>Set<T> getIngredientByClass(Batch batch, Class<T> clazz) {
         Set<T> ingredientSet = new HashSet<>();
-        for (BatchAssociation ing : batch.getIngredients()) {
+        for (BatchIngredientAssociation ing : batch.getIngredients()) {
             if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
                 ingredientSet.add((T) ing.getIngredient());
             }
