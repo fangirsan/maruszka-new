@@ -1,25 +1,12 @@
 package com.maruszka.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
 import com.maruszka.model.enums.YeastFermentationType;
 import com.maruszka.model.enums.YeastFlocculation;
 import com.maruszka.model.enums.YeastType;
+import lombok.*;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.context.annotation.Configuration;
-
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 @Setter
@@ -28,7 +15,7 @@ import java.math.BigDecimal;
 @Entity
 @ToString
 @Table(name="yeast")
-public class Yeast extends BaseEntity {
+public class Yeast extends Ingredient {
 
     @NotBlank
     @Column(name="yeast_name", unique = true)

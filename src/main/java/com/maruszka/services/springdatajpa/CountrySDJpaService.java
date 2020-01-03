@@ -1,21 +1,19 @@
 package com.maruszka.services.springdatajpa;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
-import com.maruszka.model.Batch;
+import com.maruszka.model.Country;
 import com.maruszka.model.Hop;
 import com.maruszka.model.Malt;
+import com.maruszka.repositories.CountryRepository;
 import com.maruszka.repositories.HopRepository;
 import com.maruszka.repositories.MaltRepository;
+import com.maruszka.services.CountryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.maruszka.model.Country;
-import com.maruszka.repositories.CountryRepository;
-import com.maruszka.services.CountryService;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service

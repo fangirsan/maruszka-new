@@ -1,25 +1,22 @@
 package com.maruszka.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import lombok.*;
-import org.hibernate.validator.constraints.UniqueElements;
 
 @Setter
 @Getter
 @NoArgsConstructor
-@Entity
+@Entity(name = "Malt")
 @ToString
-@Table(name="malt")
-public class Malt extends BaseEntity {
+//@Table(name="malt")
+@DiscriminatorValue("Malt")
+public class Malt extends Ingredient {
 
-    @NotBlank(message="{NotBlank.malt.maltName}")
-    @Column(name="malt_name", unique = true)
-    private String maltName;
+//    @NotBlank(message="{NotBlank.malt.maltName}")
+//    @Column(name="malt_name", unique = true)
+//    private String maltName;
 
     @NotNull
     @ManyToOne(fetch=FetchType.LAZY)
@@ -45,17 +42,17 @@ public class Malt extends BaseEntity {
 //    @ManyToOne(fetch=FetchType.LAZY)
 //    @JoinTable(name="ingredient")
 //    private Set<Batch> batches;
-    /*
-    @OneToMany(mappedBy="employee")
- private List<ProjectAssociation> projects;
-     */
-    @OneToMany(mappedBy = "malt")
-    private Set<Ingredients> batches = new HashSet<>();
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "malt")
+//    private Batch batch;
 
 
     @Builder
+//    public Malt(Long id, String maltName, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
     public Malt(Long id, String maltName, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
         super(id);
+//        this.ingredientType = IngredientType.MALT;
         this.maltName = maltName;
         this.producer = producer;
         this.maltFilling = maltFilling;

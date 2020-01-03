@@ -2,6 +2,7 @@ package com.maruszka.repositories;
 
 import java.util.Set;
 
+import com.maruszka.model.Ingredient;
 import org.springframework.data.repository.CrudRepository;
 
 import com.maruszka.model.Batch;
@@ -14,14 +15,6 @@ public interface BatchRepository extends CrudRepository<Batch, Long> {
     Set<Batch> findAllByBeerStyleLike(BeerStyle beerStyle);
 
     Set<Batch> findByOrderByBatchNumberAsc();
-
-//    Set<Batch> findByHops_id(Long hopIdToDelete);
-//
-//    Set<Batch> findByMalts_id(Long maltIdToDelete);
-//
-//    Set<Batch> findByYeast_id(Long yeastIdToDelete);
-//
-//    Set<Batch> findByAdditives_id(Long additiveIdToDelete);
 
     Set<Batch> findByBeerStyle_id(Long beerStyleToDelete);
 
