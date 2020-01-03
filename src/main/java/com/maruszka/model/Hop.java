@@ -5,8 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -14,7 +12,7 @@ import java.util.Set;
 @Entity
 @ToString
 @Table(name="hop")
-public class Hop extends BaseEntity{
+public class Hop extends Ingredient {
 
     @NotBlank
     @Column(name="hop_name", unique = true)

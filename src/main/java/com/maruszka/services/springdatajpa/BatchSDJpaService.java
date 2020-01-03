@@ -3,14 +3,10 @@ package com.maruszka.services.springdatajpa;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.maruszka.model.BeerStyle;
-import com.maruszka.model.Ingredients;
-import com.maruszka.model.Malt;
-import org.hibernate.Hibernate;
+import com.maruszka.model.*;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.maruszka.model.Batch;
 import com.maruszka.repositories.BatchRepository;
 import com.maruszka.repositories.BeerStyleRepository;
 import com.maruszka.services.BatchService;
@@ -76,17 +72,15 @@ public class BatchSDJpaService implements BatchService {
         return batchRepository.findByOrderByBatchNumberAsc();
     }
 
-    // https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany#Mapping_a_Join_Table_with_Additional_Columns
-//    public void addMalt(Batch batch, Malt malt, int amount) {
-//        Ingredients ingredients = new Ingredients();
-//        ingredients.setMalt(malt);
-//        ingredients.setBatch(batch);
-//        ingredients.setMaltId(malt.getId());
-////        ingredients.setBatchId(this.getId());
-//        ingredients.setBatchId(1L);
-//        ingredients.setAmount(amount);
-//        if(batch.getMalts() == null) batch.malts = new HashSet<>();
-//        this.malts.add(ingredients);
-//        malt.getBatches().add(ingredients);
-//    }
+    @Override
+    public <T>Set<T> getIngredientByClass(Batch batch, Class<T> clazz) {
+        Set<T> ingredientSet = new HashSet<>();
+        for (BatchAssociation ing : batch.getIngredients()) {
+            if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
+                ingredientSet.add((T) ing.getIngredient());
+            }
+        }
+      return (Set<T>) ingredientSet;
+    }
+
 }

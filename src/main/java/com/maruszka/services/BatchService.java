@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.maruszka.model.Batch;
 import com.maruszka.model.BeerStyle;
+import com.maruszka.model.Ingredient;
 
 public interface BatchService extends CrudService<Batch, Long> {
 
@@ -13,4 +14,5 @@ public interface BatchService extends CrudService<Batch, Long> {
 
     Set<Batch> findByOrderByBatchNumberAsc();
 
+    <T>Set<T> getIngredientByClass(Batch batch, Class<T> clazz);
 }

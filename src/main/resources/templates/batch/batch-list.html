@@ -36,7 +36,7 @@
 						<tr>
 							<th>Batch number</th>
 							<th>Beer type</th>
-							<th>Yeast</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,17 +44,14 @@
 						<tr th:remove="all">
 							<td>1</td>
 							<td>Stout</td>
-							<td>WB-06</td>
 						</tr>
 						<tr th:remove="all">
 							<td>2</td>
 							<td>Russian Imperial Stout</td>
-							<td>T-58</td>
 						</tr>
 						<tr th:each="batch: ${batches}">
 							<td th:text="${batch.batchNumber}" />
 							<td th:text="${batch.beerStyle.beerStyleName}" />
-							<td th:text="${batch.yeast.yeastName}" />
 							<td>
 								<div  class="list-nav-buttons">
 									<a href="#" th:href="@{'/batch/' + ${batch.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a>

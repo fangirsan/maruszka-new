@@ -1,124 +1,111 @@
 package com.maruszka.model;
 
-import java.util.*;
-
-import javax.persistence.*;
-
-import com.maruszka.model.enums.IngredientType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
+import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
 @NoArgsConstructor
-//@AllArgsConstructor
-//@Builder
-@Entity
-//@ToString
+@Entity(name = "batch")
 @Table(name="batch")
 public class Batch extends BaseEntity {
 
     @Column(name="batch_number")
     private Integer batchNumber;
 
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
+
+    @Column(name = "fermentation_date")
+    private LocalDate fermentationDate;
+
+    @Column(name = "maturation_date")
+    private LocalDate maturationDate;
+
+    @Column(name = "bottling_date")
+    private LocalDate bottlingDate;
+
+    @Column(name = "designation")
+    private String designation;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private BatchComments batchComments;
+
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="beer_style_id")
     private BeerStyle beerStyle;
 
-//    @ManyToOne(fetch=FetchType.EAGER)
-//    @JoinColumn(name="yeast_id")
-//    private Yeast yeast;
+    @Column(name = "blg1")
+    private BigDecimal blg1;
 
-//    @ManyToMany(fetch=FetchType.LAZY)
-//    @JoinTable(name = "batch_hop",
-//            joinColumns = @JoinColumn(name = "batch_id"),
-//            inverseJoinColumns = @JoinColumn(name = "hop_id"))
-//    private Set<Hop> hops = new HashSet<>();
+    @Column(name = "blg2")
+    private BigDecimal blg2;
 
-//    @ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-//            CascadeType.DETACH, CascadeType.REFRESH})
-//    @JoinTable(name="batch_malt",
-//            joinColumns = @JoinColumn(name="batch_id"),
-//            inverseJoinColumns = @JoinColumn(name="malt_id"))
-//    private Set<Malt> malts = new HashSet<>();
+    @DecimalMin(value = "0", inclusive = false)
+    @Digits(integer=3, fraction=1)
+    @Column(name="volume", precision = 3, scale = 1)
+    private BigDecimal volume;
 
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-//            CascadeType.DETACH, CascadeType.REFRESH})
-//    @JoinTable(name="batch_additive",
-//            joinColumns = @JoinColumn(name="batch_id"),
-//            inverseJoinColumns = @JoinColumn(name="additive_id"))
-//    private Set<Additive> additives = new HashSet<>();
+    @Column(name = "efficiency")
+    private BigDecimal efficiency;
+//    https://www.piwo.org/forums/topic/373-wydajnosc-zacierania/
 
-//    @ManyToMany(fetch=FetchType.LAZY)
-//    @JoinTable(name = "ingredients",
-//            joinColumns = @JoinColumn(name = "batch_id"),
-//            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-//    private Set<Ingredients> ingredients = new HashSet<>();
+    @Column(name = "tinseth_ibu")
+    private BigDecimal TinsethIbu;
 
-    /*
-    @OneToMany(mappedBy="project")
-    private List<ProjectAssociation> employees;
-     */
+    @Column(name = "rager_ibu")
+    private BigDecimal RagerIbu;
+
+    @Column(name = "calculated_ibu")
+    private BigDecimal calculatedIbu;
+
+    @Column(name = "alcohol_volume")
+    private BigDecimal alcoholVolume;
+
+    @Column(name = "priming_material")
+    private String primingMaterial;
+
+    private int amountOfPrimingMaterial;
+
     @OneToMany(mappedBy = "batch")
-//    private Set<Ingredients> malts = new HashSet<>();
-    private Set<Ingredients> malts;
-
-
-    // https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany#Mapping_a_Join_Table_with_Additional_Columns
-    public void addIngredient(Malt malt, int amount) {
-        Ingredients ingredients = new Ingredients();
-        ingredients.setMalt(malt);
-        ingredients.setBatch(this);
-        ingredients.setMaltId(malt.getId());
-//        ingredients.setBatchId(this.getId());
-        ingredients.setBatchId(1L);
-        ingredients.setAmount(amount);
-        if(this.malts == null) this.malts = new HashSet<>();
-        this.malts.add(ingredients);
-        malt.getBatches().add(ingredients);
-    }
+    private Set<BatchAssociation> ingredients = new HashSet<>();
 
     @Builder
-//    public Batch(Long id, Integer batchNumber, BeerStyle beerStyle, Yeast yeast, Set<Hop> hops, Set<Malt> malts, Set<Additive> additives) {
-    public Batch(Long id, Integer batchNumber, BeerStyle beerStyle) {
+    public Batch(Long id, Integer batchNumber, LocalDate creationDate, String designation, BatchComments batchComments, BeerStyle beerStyle) {
         super(id);
         this.batchNumber = batchNumber;
+        this.creationDate = creationDate;
+        this.designation = designation;
+        this.batchComments = batchComments;
         this.beerStyle = beerStyle;
-//        this.yeast = yeast;
-//        this.hops = hops;
-//        this.malts = malts;
-//        this.additives = additives;
     }
 
-    @Override
-    public String toString() {
-
-//        Set<String> hopsName = new HashSet<>();
-//        for (Hop tempHop: hops) {
-//            hopsName.add(tempHop.getHopName());
-//        }
-
-//        Set<String> maltsName = new HashSet<>();
-//        for (Malt tempMalt: malts) {
-//            maltsName.add(tempMalt.getMaltName());
-//        }
-
-//        Set<String> additivesName = new HashSet<>();
-//        for (Additive tempAdditive: additives) {
-//            additivesName.add(tempAdditive.getAdditiveName());
-//        }
-
-        return "Batch{" +
-                "batchNumber=" + batchNumber +
-                ", beerStyle=" + beerStyle.getBeerStyleName() +
-//                ", yeast=" + yeast.getYeastName() +
-//                ", hops=" + hopsName +
-//                ", malts=" + maltsName +
-//                ", additives=" + additivesName +
-                '}';
+    public void setBatchComments(BatchComments comments) {
+        this.batchComments = comments;
+        batchComments.setBatch(this);
     }
 
+    private String getIngredientName() {
+        String ingredientList = null;
+        for (BatchAssociation ing : ingredients) {
+            if (ing.getIngredient() instanceof Malt) {
+                if (ingredientList == null) {
+                    ingredientList = ing.getIngredient().getMaltName();
+                } else {
+                    ingredientList += ing.getIngredient().getMaltName();
+                }
+            }
+        }
+        return ingredientList;
+    }
 }

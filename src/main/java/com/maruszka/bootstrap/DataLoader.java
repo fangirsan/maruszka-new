@@ -1,22 +1,19 @@
 package com.maruszka.bootstrap;
 
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.transaction.Transactional;
-
 import com.maruszka.model.*;
+import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.enums.YeastFermentationType;
+import com.maruszka.model.enums.YeastFlocculation;
+import com.maruszka.model.enums.YeastType;
 import com.maruszka.services.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.maruszka.model.enums.ProducerType;
-import com.maruszka.model.enums.YeastFlocculation;
-import com.maruszka.model.enums.YeastType;
-
-import lombok.extern.slf4j.Slf4j;
+import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -31,10 +28,11 @@ class DataLoader implements CommandLineRunner{
     private final BeerStyleService beerStyleService;
     private final BatchService batchService;
     private final AdditiveService additiveService;
-    private final IngredientsService ingredientsService;
+    private final BatchAssociationService batchAssociationService;
+    private final MashConversionRestService mashConversionRestService;
 
     public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
-                      HopService hopService, YeastService yeastService, BeerStyleService beerStyleService, BatchService batchService, AdditiveService additiveService, IngredientsService ingredientsService) {
+                      HopService hopService, YeastService yeastService, BeerStyleService beerStyleService, BatchService batchService, AdditiveService additiveService, BatchAssociationService batchAssociationService, MashConversionRestService mashConversionRestService) {
         this.maltService = maltService;
         this.producerService = maltProducerService;
         this.countryService = countryService;
@@ -43,7 +41,8 @@ class DataLoader implements CommandLineRunner{
         this.beerStyleService = beerStyleService;
         this.batchService = batchService;
         this.additiveService = additiveService;
-        this.ingredientsService = ingredientsService;
+        this.batchAssociationService = batchAssociationService;
+        this.mashConversionRestService = mashConversionRestService;
     }
 
     @Override
@@ -254,39 +253,55 @@ class DataLoader implements CommandLineRunner{
         additiveService.save(lactose);
         log.info("Additives loaded...");
 
-        // Batch
-        Set<Hop> hops = new HashSet<Hop>();
-        hops.add(hopService.findByHopName("Citra"));
-        hops.add(hopService.findByHopName("Cascade"));
+        // Mash Conversion Rest
+        MashConversionRest mcs = MashConversionRest.builder()
+                .restName("Acid rest")
+                .temp1(35)
+                .temp2(45)
+                .build();
+        mashConversionRestService.save(mcs);
 
-        Set<Malt> malts = new HashSet<Malt>();
-        malts.add(maltService.findByMaltName("Strzegom"));
-        malts.add(maltService.findById(2L));
+        mcs = MashConversionRest.builder()
+                .restName("Ferulic Acid rest")
+                .temp1(43)
+                .temp2(45)
+                .build();
+        mashConversionRestService.save(mcs);
 
-        // Additives
-        Set<Additive> additives = new HashSet<Additive>();
-        additives.add(additiveService.findByAdditiveName("Curacao"));
+        mcs = MashConversionRest.builder()
+                .restName("Protein rest")
+                .temp1(44)
+                .temp2(59)
+                .build();
+        mashConversionRestService.save(mcs);
+
+        mcs = MashConversionRest.builder()
+                .restName("Saccharification rest")
+                .temp1(61)
+                .temp2(71)
+                .build();
+        mashConversionRestService.save(mcs);
+        log.info("Mash conversion rest loaded...");
 
 
+        // Batches
+        BatchComments batchComments = new BatchComments();
+        batchComments.setComment("Test");
         Batch batch1 = Batch.builder()
                 .batchNumber(1)
-                .beerStyle(beerStyleService.findById(1L))
-//                .hops(hops)
-//                .yeast(yeastService.findById(2L))
-//                .malts(malts)
-//                .additives(additives)
+                .creationDate(LocalDate.now())
+                .designation("DS")
+                .beerStyle(beerStyleService.findByBeerStyleName("Dry Stout"))
                 .build();
-//        batch1.getMalts().add(malt);
-        batch1.addIngredient(maltService.findById(1L), 500);
+        batch1.setBatchComments(batchComments);
         batchService.save(batch1);
+        batchAssociationService.addIngredient(batch1, maltService.findByMaltName("Strzegom"), 4000, "Whole mash conversion");
+        batchAssociationService.addIngredient(batch1, maltService.findByMaltName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
+        batchAssociationService.addIngredient(batch1, hopService.findByHopName("Citra"), 30, "120 minutes");
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)
-                .beerStyle(beerStyleService.findById(2L))
-//                .hops(hops)
-//                .yeast(yeastService.findById(1L))
-//                .malts(malts)
-//                .additives(additives)
+                .beerStyle(beerStyleService.findByBeerStyleName("Russian Imperial Stout"))
                 .build();
         batchService.save(batch2);
         log.info("Batch loaded...");
@@ -295,10 +310,11 @@ class DataLoader implements CommandLineRunner{
 
         Set<Batch> batches = batchService.findAll();
         batches.stream().forEach(batch -> log.info(batch.toString()));
-//        for (Batch tempBatch : batches) {
-//            log.info(tempBatch.toString());
-//        }
 
+        Set<Malt> ingredientSet = batchService.getIngredientByClass(batch1, Malt.class);
+        for (Malt malts : ingredientSet) {
+            log.info(malts.getMaltName());
+        }
 
     }
 
