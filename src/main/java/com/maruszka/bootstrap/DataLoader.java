@@ -28,11 +28,15 @@ class DataLoader implements CommandLineRunner{
     private final BeerStyleService beerStyleService;
     private final BatchService batchService;
     private final AdditiveService additiveService;
-    private final BatchAssociationService batchAssociationService;
-    private final MashConversionRestService mashConversionRestService;
+    private final BatchIngredientService batchIngredientService;
+    private final MaltConversionRestService maltConversionRestService;
+    private final BatchMaltConversionRestService batchMaltConversionRestService;
 
     public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
-                      HopService hopService, YeastService yeastService, BeerStyleService beerStyleService, BatchService batchService, AdditiveService additiveService, BatchAssociationService batchAssociationService, MashConversionRestService mashConversionRestService) {
+                      HopService hopService, YeastService yeastService, BeerStyleService beerStyleService,
+                      BatchService batchService, AdditiveService additiveService,
+                      BatchIngredientService batchIngredientService, MaltConversionRestService maltConversionRestService,
+                      BatchMaltConversionRestService batchMaltConversionRestService) {
         this.maltService = maltService;
         this.producerService = maltProducerService;
         this.countryService = countryService;
@@ -41,8 +45,9 @@ class DataLoader implements CommandLineRunner{
         this.beerStyleService = beerStyleService;
         this.batchService = batchService;
         this.additiveService = additiveService;
-        this.batchAssociationService = batchAssociationService;
-        this.mashConversionRestService = mashConversionRestService;
+        this.batchIngredientService = batchIngredientService;
+        this.maltConversionRestService = maltConversionRestService;
+        this.batchMaltConversionRestService = batchMaltConversionRestService;
     }
 
     @Override
@@ -51,7 +56,7 @@ class DataLoader implements CommandLineRunner{
         int maltCount = maltService.findAll().size();
 
         if (maltCount == 0) {
-            log.info("Loading data...");
+            log.info("Loading initial data...");
             loadData();
         }
     }
@@ -253,36 +258,42 @@ class DataLoader implements CommandLineRunner{
         additiveService.save(lactose);
         log.info("Additives loaded...");
 
-        // Mash Conversion Rest
-        MashConversionRest mcs = MashConversionRest.builder()
+        // Malt Conversion Rest
+        MaltConversionRest mcs = MaltConversionRest.builder()
                 .restName("Acid rest")
                 .temp1(35)
                 .temp2(45)
                 .build();
-        mashConversionRestService.save(mcs);
+        maltConversionRestService.save(mcs);
 
-        mcs = MashConversionRest.builder()
+        mcs = MaltConversionRest.builder()
                 .restName("Ferulic Acid rest")
                 .temp1(43)
                 .temp2(45)
                 .build();
-        mashConversionRestService.save(mcs);
+        maltConversionRestService.save(mcs);
 
-        mcs = MashConversionRest.builder()
+        mcs = MaltConversionRest.builder()
                 .restName("Protein rest")
                 .temp1(44)
                 .temp2(59)
                 .build();
-        mashConversionRestService.save(mcs);
+        maltConversionRestService.save(mcs);
 
-        mcs = MashConversionRest.builder()
+        mcs = MaltConversionRest.builder()
                 .restName("Saccharification rest")
                 .temp1(61)
                 .temp2(71)
                 .build();
-        mashConversionRestService.save(mcs);
-        log.info("Mash conversion rest loaded...");
+        maltConversionRestService.save(mcs);
 
+        mcs = MaltConversionRest.builder()
+                .restName("Mashout")
+                .temp1(77)
+                .temp2(78)
+                .build();
+        maltConversionRestService.save(mcs);
+        log.info("Malt conversion rest loaded...");
 
         // Batches
         BatchComments batchComments = new BatchComments();
@@ -295,9 +306,11 @@ class DataLoader implements CommandLineRunner{
                 .build();
         batch1.setBatchComments(batchComments);
         batchService.save(batch1);
-        batchAssociationService.addIngredient(batch1, maltService.findByMaltName("Strzegom"), 4000, "Whole mash conversion");
-        batchAssociationService.addIngredient(batch1, maltService.findByMaltName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
-        batchAssociationService.addIngredient(batch1, hopService.findByHopName("Citra"), 30, "120 minutes");
+        batchIngredientService.addIngredient(batch1, maltService.findByMaltName("Strzegom"), 4000, "Whole mash conversion");
+        batchIngredientService.addIngredient(batch1, maltService.findByMaltName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
+        batchIngredientService.addIngredient(batch1, hopService.findByHopName("Citra"), 30, "120 minutes");
+        batchMaltConversionRestService.addMaltConversionRest(batch1, maltConversionRestService.findByRestName("Mashout"), 10);
+        batchMaltConversionRestService.addMaltConversionRest(batch1, maltConversionRestService.findByRestName("Mashout"), 15);
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)

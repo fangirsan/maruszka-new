@@ -1,10 +1,12 @@
 package com.maruszka.services.springdatajpa;
 
 import com.maruszka.model.Batch;
-import com.maruszka.model.BatchIngredientAssociation;
+import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.model.Ingredient;
-import com.maruszka.repositories.BatchAssociationRepository;
-import com.maruszka.services.BatchAssociationService;
+import com.maruszka.model.MaltConversionRest;
+import com.maruszka.model.association.BatchMaltConversionRest;
+import com.maruszka.repositories.BatchIngredientRepository;
+import com.maruszka.services.BatchIngredientService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -12,31 +14,31 @@ import java.util.Set;
 
 @Service
 @Profile("springdatajpa")
-public class BatchAssociationSDJpaService implements BatchAssociationService {
+public class BatchIngredientServiceImpl implements BatchIngredientService {
 
-    private final BatchAssociationRepository batchAssociationRepository;
+    private final BatchIngredientRepository batchIngredientRepository;
 
-    public BatchAssociationSDJpaService(BatchAssociationRepository batchAssociationRepository) {
-        this.batchAssociationRepository = batchAssociationRepository;
+    public BatchIngredientServiceImpl(BatchIngredientRepository batchIngredientRepository) {
+        this.batchIngredientRepository = batchIngredientRepository;
     }
 
     @Override
-    public Set<BatchIngredientAssociation> findAll() {
+    public Set<BatchIngredient> findAll() {
         return null;
     }
 
     @Override
-    public BatchIngredientAssociation findById(Long aLong) {
+    public BatchIngredient findById(Long aLong) {
         return null;
     }
 
     @Override
-    public BatchIngredientAssociation save(BatchIngredientAssociation object) {
-        return batchAssociationRepository.save(object);
+    public BatchIngredient save(BatchIngredient object) {
+        return batchIngredientRepository.save(object);
     }
 
     @Override
-    public void delete(BatchIngredientAssociation object) {
+    public void delete(BatchIngredient object) {
 
     }
 
@@ -48,7 +50,7 @@ public class BatchAssociationSDJpaService implements BatchAssociationService {
     // https://en.wikibooks.org/wiki/Java_Persistence/ManyToMany#Mapping_a_Join_Table_with_Additional_Columns
     @Override
     public void addIngredient(Batch batch, Ingredient ingredient, int amount, String wayOfServing) {
-        BatchIngredientAssociation association = new BatchIngredientAssociation();
+        BatchIngredient association = new BatchIngredient();
         association.setIngredient(ingredient);
         association.setBatch(batch);
         association.setIngredientId(ingredient.getId());

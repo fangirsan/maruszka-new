@@ -129,7 +129,7 @@ public class MaltController {
             });
             return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("MALT_NAME", "MALT", malt.getMaltName()) && malt.isNew()) {
+            if (duplicateCheck.isDuplicate("IN_NAME", "INGREDIENT", malt.getMaltName()) && malt.isNew()) {
                 bindingResult.rejectValue("maltName", "duplicate", "Duplicate name");
                 log.info("Malt with given name: [" + malt.getMaltName() + "] already exists");
 

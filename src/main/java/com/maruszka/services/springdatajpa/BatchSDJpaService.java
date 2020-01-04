@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.maruszka.model.*;
+import com.maruszka.model.association.BatchIngredient;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -75,7 +76,7 @@ public class BatchSDJpaService implements BatchService {
     @Override
     public <T>Set<T> getIngredientByClass(Batch batch, Class<T> clazz) {
         Set<T> ingredientSet = new HashSet<>();
-        for (BatchIngredientAssociation ing : batch.getIngredients()) {
+        for (BatchIngredient ing : batch.getIngredients()) {
             if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
                 ingredientSet.add((T) ing.getIngredient());
             }

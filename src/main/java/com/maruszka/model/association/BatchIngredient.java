@@ -1,5 +1,7 @@
-package com.maruszka.model;
+package com.maruszka.model.association;
 
+import com.maruszka.model.Batch;
+import com.maruszka.model.Ingredient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,8 +13,8 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name="batch_ingredient")
-@IdClass(BatchIngredientAssociationId.class)
-public class BatchIngredientAssociation {
+@IdClass(BatchIngredientId.class)
+public class BatchIngredient {
 
     @Id
     private Long ingredientId;

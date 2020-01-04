@@ -1,11 +1,13 @@
 package com.maruszka.services;
 
 import com.maruszka.model.Batch;
-import com.maruszka.model.BatchIngredientAssociation;
 import com.maruszka.model.Ingredient;
+import com.maruszka.model.MaltConversionRest;
+import com.maruszka.model.association.BatchIngredient;
 
-public interface BatchAssociationService extends CrudService<BatchIngredientAssociation, Long> {
+public interface BatchIngredientService extends CrudService<BatchIngredient, Long> {
 
     void addIngredient(Batch batch, Ingredient ingredient, int amount, String wayOfServing);
 
 }
+

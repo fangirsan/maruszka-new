@@ -1,5 +1,7 @@
 package com.maruszka.model;
 
+import com.maruszka.model.association.BatchIngredient;
+import com.maruszka.model.association.BatchMaltConversionRest;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -78,7 +80,10 @@ public class Batch extends BaseEntity {
     private int amountOfPrimingMaterial;
 
     @OneToMany(mappedBy = "batch")
-    private Set<BatchIngredientAssociation> ingredients = new HashSet<>();
+    private Set<BatchIngredient> ingredients = new HashSet<>();
+
+    @OneToMany(mappedBy = "batch")
+    private Set<BatchMaltConversionRest> rests = new HashSet<>();
 
     @Builder
     public Batch(Long id, Integer batchNumber, LocalDate creationDate, String designation, BatchComments batchComments, BeerStyle beerStyle) {
@@ -97,7 +102,7 @@ public class Batch extends BaseEntity {
 
     private String getIngredientName() {
         String ingredientList = null;
-        for (BatchIngredientAssociation ing : ingredients) {
+        for (BatchIngredient ing : ingredients) {
             if (ing.getIngredient() instanceof Malt) {
                 if (ingredientList == null) {
                     ingredientList = ing.getIngredient().getMaltName();
