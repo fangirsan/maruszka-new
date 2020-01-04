@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/maruszka_dev?serverTimezone=Europe/Warsaw&useJDBCCompliantTimezoneShift=true
+    url: jdbc:mysql://localhost:3306/maruszka_dev?useTimezone=true&serverTimezone=UTC&characterEncoding=utf8
     username: maruszka_dev_user
     password: maruszka
     platform: mysql
