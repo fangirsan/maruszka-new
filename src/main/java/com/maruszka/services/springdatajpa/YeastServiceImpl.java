@@ -16,13 +16,12 @@ import com.maruszka.services.YeastService;
 
 @Slf4j
 @Service
-@Profile("springdatajpa")
-public class YeastSDJpaService implements YeastService {
+public class YeastServiceImpl implements YeastService {
 
     private final YeastRepository yeastRepository;
     private final BatchRepository batchRepository;
 
-    public YeastSDJpaService(YeastRepository yeastRepository, BatchRepository batchRepository) {
+    public YeastServiceImpl(YeastRepository yeastRepository, BatchRepository batchRepository) {
         this.yeastRepository = yeastRepository;
         this.batchRepository = batchRepository;
     }

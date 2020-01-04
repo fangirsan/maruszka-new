@@ -17,13 +17,12 @@ import java.util.Set;
 
 @Slf4j
 @Service
-@Profile("springdatajpa")
-public class AdditiveSDJpaService implements AdditiveService {
+public class AdditiveServiceImpl implements AdditiveService {
 
     private final AdditiveRepository additiveRepository;
     private final BatchRepository batchRepository;
 
-    public AdditiveSDJpaService(AdditiveRepository additiveRepository, BatchRepository batchRepository) {
+    public AdditiveServiceImpl(AdditiveRepository additiveRepository, BatchRepository batchRepository) {
         this.additiveRepository = additiveRepository;
         this.batchRepository = batchRepository;
     }

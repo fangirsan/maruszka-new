@@ -17,14 +17,13 @@ import java.util.Set;
 
 @Slf4j
 @Service
-@Profile("springdatajpa")
-public class CountrySDJpaService implements CountryService {
+public class CountryServiceImpl implements CountryService {
 
     private final CountryRepository countryRepository;
     private final MaltRepository maltRepository;
     private final HopRepository hopRepository;
 
-    public CountrySDJpaService(CountryRepository countryRepository, MaltRepository maltRepository, HopRepository hopRepository) {
+    public CountryServiceImpl(CountryRepository countryRepository, MaltRepository maltRepository, HopRepository hopRepository) {
         this.countryRepository = countryRepository;
         this.maltRepository = maltRepository;
         this.hopRepository = hopRepository;

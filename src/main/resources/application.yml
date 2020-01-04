@@ -1,0 +1,11 @@
+spring:
+    mvc:
+        favicon:
+            enabled: false
+    output:
+        ansi:
+            enabled: ALWAYS
+logging:
+    level:
+        com:
+            maruszka: DEBUG

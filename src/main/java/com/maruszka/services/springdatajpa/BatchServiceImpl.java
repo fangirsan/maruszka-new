@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.maruszka.model.*;
 import com.maruszka.model.association.BatchIngredient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,14 @@ import com.maruszka.repositories.BatchRepository;
 import com.maruszka.repositories.BeerStyleRepository;
 import com.maruszka.services.BatchService;
 
+@Slf4j
 @Service
-@Profile("springdatajpa")
-public class BatchSDJpaService implements BatchService {
+public class BatchServiceImpl implements BatchService {
 
     private final BatchRepository batchRepository;
     private final BeerStyleRepository beerStyleRepository;
 
-    public BatchSDJpaService(BatchRepository batchRepository, BeerStyleRepository beerStyleRepository) {
+    public BatchServiceImpl(BatchRepository batchRepository, BeerStyleRepository beerStyleRepository) {
         this.batchRepository = batchRepository;
         this.beerStyleRepository = beerStyleRepository;
     }

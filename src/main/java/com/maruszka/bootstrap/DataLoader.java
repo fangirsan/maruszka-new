@@ -7,7 +7,9 @@ import com.maruszka.model.enums.YeastFlocculation;
 import com.maruszka.model.enums.YeastType;
 import com.maruszka.services.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -18,6 +20,7 @@ import java.util.Set;
 @Slf4j
 @Component
 @Transactional
+@Profile("default")
 class DataLoader implements CommandLineRunner{
 
     private final MaltService maltService;
@@ -32,6 +35,7 @@ class DataLoader implements CommandLineRunner{
     private final MaltConversionRestService maltConversionRestService;
     private final BatchMaltConversionRestService batchMaltConversionRestService;
 
+    @Autowired
     public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
                       HopService hopService, YeastService yeastService, BeerStyleService beerStyleService,
                       BatchService batchService, AdditiveService additiveService,
@@ -114,6 +118,7 @@ class DataLoader implements CommandLineRunner{
                 .country(countryService.findByCountryName("Poland"))
                 .producer(producerService.findByProducerName("Malt Europ"))
                 .build();
+        maltService.save(malt);
 
         Malt malt2 = Malt.builder()
                 .maltName("Strzegom")

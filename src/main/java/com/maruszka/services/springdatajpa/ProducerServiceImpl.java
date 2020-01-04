@@ -20,14 +20,13 @@ import com.maruszka.services.ProducerService;
 
 @Slf4j
 @Service
-@Profile("springdatajpa")
-public class ProcuerSDJpaService implements ProducerService {
+public class ProducerServiceImpl implements ProducerService {
 
     private final ProducerRepository producerRepository;
     private final MaltRepository maltRepository;
     private final YeastRepository yeastRepository;
 
-    public ProcuerSDJpaService(ProducerRepository maltProducerRepository, MaltRepository maltRepository, YeastRepository yeastRepository) {
+    public ProducerServiceImpl(ProducerRepository maltProducerRepository, MaltRepository maltRepository, YeastRepository yeastRepository) {
         this.producerRepository = maltProducerRepository;
         this.maltRepository = maltRepository;
         this.yeastRepository = yeastRepository;

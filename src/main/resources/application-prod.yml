@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/maruszka_prod?serverTimezone=Europe/Warsaw&useJDBCCompliantTimezoneShift=true
+    username: maruszka_prod_user
+    password: maruszka
+    platform: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
+    show-sql: false

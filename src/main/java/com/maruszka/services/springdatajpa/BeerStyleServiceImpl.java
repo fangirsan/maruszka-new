@@ -16,13 +16,12 @@ import com.maruszka.services.BeerStyleService;
 
 @Slf4j
 @Service
-@Profile("springdatajpa")
-public class BeerStyleSDJpaService implements BeerStyleService {
+public class BeerStyleServiceImpl implements BeerStyleService {
 
     private final BeerStyleRepository beerStyleRepository;
     private final BatchRepository batchRepository;
 
-    public BeerStyleSDJpaService(BeerStyleRepository beerStyleRepository, BatchRepository batchRepository) {
+    public BeerStyleServiceImpl(BeerStyleRepository beerStyleRepository, BatchRepository batchRepository) {
         this.beerStyleRepository = beerStyleRepository;
         this.batchRepository = batchRepository;
     }

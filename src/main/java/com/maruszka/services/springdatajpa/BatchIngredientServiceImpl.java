@@ -7,13 +7,14 @@ import com.maruszka.model.MaltConversionRest;
 import com.maruszka.model.association.BatchMaltConversionRest;
 import com.maruszka.repositories.BatchIngredientRepository;
 import com.maruszka.services.BatchIngredientService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Slf4j
 @Service
-@Profile("springdatajpa")
 public class BatchIngredientServiceImpl implements BatchIngredientService {
 
     private final BatchIngredientRepository batchIngredientRepository;

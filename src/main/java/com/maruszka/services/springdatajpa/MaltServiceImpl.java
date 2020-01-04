@@ -20,14 +20,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@Profile("springdatajpa")
-public class MaltSDJpaService implements MaltService {
+public class MaltServiceImpl implements MaltService {
 
     private final MaltRepository maltRepository;
     private final BatchRepository batchRepository;
 
     @Autowired
-    public MaltSDJpaService(MaltRepository maltRepository, BatchRepository batchRepository) {
+    public MaltServiceImpl(MaltRepository maltRepository, BatchRepository batchRepository) {
         this.maltRepository = maltRepository;
         this.batchRepository = batchRepository;
     }

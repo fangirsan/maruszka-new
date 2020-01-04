@@ -18,13 +18,12 @@ import com.maruszka.services.HopService;
 
 @Slf4j
 @Service
-@Profile("springdatajpa")
-public class HopSDJpaService implements HopService {
+public class HopServiceImpl implements HopService {
 
     private final HopRepository hopRepository;
     private final BatchRepository batchRepository;
 
-    public HopSDJpaService(HopRepository hopRepository, BatchRepository batchRepository) {
+    public HopServiceImpl(HopRepository hopRepository, BatchRepository batchRepository) {
         this.hopRepository = hopRepository;
         this.batchRepository = batchRepository;
     }

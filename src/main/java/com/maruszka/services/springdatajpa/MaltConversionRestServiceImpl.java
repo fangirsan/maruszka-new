@@ -16,7 +16,6 @@ import java.util.Set;
 
 @Slf4j
 @Service
-@Profile("springdatajpa")
 public class MaltConversionRestServiceImpl implements MaltConversionRestService {
 
     private final MaltConversionRestRepository maltConversionRestRepository;
