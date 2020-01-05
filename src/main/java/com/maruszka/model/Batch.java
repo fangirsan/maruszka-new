@@ -1,7 +1,7 @@
 package com.maruszka.model;
 
 import com.maruszka.model.association.BatchIngredient;
-import com.maruszka.model.association.BatchMaltConversionRest;
+import com.maruszka.model.association.BatchMashTemperature;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -83,7 +83,7 @@ public class Batch extends BaseEntity {
     private Set<BatchIngredient> ingredients = new HashSet<>();
 
     @OneToMany(mappedBy = "batch")
-    private Set<BatchMaltConversionRest> rests = new HashSet<>();
+    private Set<BatchMashTemperature> mashTemperature = new HashSet<>();
 
     @Builder
     public Batch(Long id, Integer batchNumber, LocalDate creationDate, String designation, BatchComments batchComments, BeerStyle beerStyle) {

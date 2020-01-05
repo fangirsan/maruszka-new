@@ -1,7 +1,6 @@
 package com.maruszka.model.association;
 
 import com.maruszka.model.Batch;
-import com.maruszka.model.MaltConversionRest;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,12 +11,12 @@ import javax.persistence.*;
 @Getter
 @ToString
 @Entity
-@Table(name="batch_malt_conversion")
-@IdClass(BatchMaltConversionId.class)
-public class BatchMaltConversionRest {
+@Table(name="batch_mash_temperature")
+@IdClass(BatchMashTemperatureId.class)
+public class BatchMashTemperature {
 
     @Id
-    private Long maltConversionId;
+    private Long mashTemperatureId;
 
     @Id
     private Long batchId;

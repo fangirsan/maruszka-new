@@ -32,15 +32,15 @@ class DataLoader implements CommandLineRunner{
     private final BatchService batchService;
     private final AdditiveService additiveService;
     private final BatchIngredientService batchIngredientService;
-    private final MaltConversionRestService maltConversionRestService;
-    private final BatchMaltConversionRestService batchMaltConversionRestService;
+    private final MashTemperatureService mashTemperatureService;
+    private final BatchMashTemperatureService batchMashTemperatureService;
 
     @Autowired
     public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
                       HopService hopService, YeastService yeastService, BeerStyleService beerStyleService,
                       BatchService batchService, AdditiveService additiveService,
-                      BatchIngredientService batchIngredientService, MaltConversionRestService maltConversionRestService,
-                      BatchMaltConversionRestService batchMaltConversionRestService) {
+                      BatchIngredientService batchIngredientService, MashTemperatureService mashTemperatureService,
+                      BatchMashTemperatureService batchMashTemperatureService) {
         this.maltService = maltService;
         this.producerService = maltProducerService;
         this.countryService = countryService;
@@ -50,8 +50,8 @@ class DataLoader implements CommandLineRunner{
         this.batchService = batchService;
         this.additiveService = additiveService;
         this.batchIngredientService = batchIngredientService;
-        this.maltConversionRestService = maltConversionRestService;
-        this.batchMaltConversionRestService = batchMaltConversionRestService;
+        this.mashTemperatureService = mashTemperatureService;
+        this.batchMashTemperatureService = batchMashTemperatureService;
     }
 
     @Override
@@ -264,40 +264,40 @@ class DataLoader implements CommandLineRunner{
         log.info("Additives loaded...");
 
         // Malt Conversion Rest
-        MaltConversionRest mcs = MaltConversionRest.builder()
+        MashTemperature mcs = MashTemperature.builder()
                 .restName("Acid rest")
                 .temp1(35)
                 .temp2(45)
                 .build();
-        maltConversionRestService.save(mcs);
+        mashTemperatureService.save(mcs);
 
-        mcs = MaltConversionRest.builder()
+        mcs = MashTemperature.builder()
                 .restName("Ferulic Acid rest")
                 .temp1(43)
                 .temp2(45)
                 .build();
-        maltConversionRestService.save(mcs);
+        mashTemperatureService.save(mcs);
 
-        mcs = MaltConversionRest.builder()
+        mcs = MashTemperature.builder()
                 .restName("Protein rest")
                 .temp1(44)
                 .temp2(59)
                 .build();
-        maltConversionRestService.save(mcs);
+        mashTemperatureService.save(mcs);
 
-        mcs = MaltConversionRest.builder()
+        mcs = MashTemperature.builder()
                 .restName("Saccharification rest")
                 .temp1(61)
                 .temp2(71)
                 .build();
-        maltConversionRestService.save(mcs);
+        mashTemperatureService.save(mcs);
 
-        mcs = MaltConversionRest.builder()
+        mcs = MashTemperature.builder()
                 .restName("Mashout")
                 .temp1(77)
                 .temp2(78)
                 .build();
-        maltConversionRestService.save(mcs);
+        mashTemperatureService.save(mcs);
         log.info("Malt conversion rest loaded...");
 
         // Batches
@@ -314,14 +314,17 @@ class DataLoader implements CommandLineRunner{
         batchIngredientService.addIngredient(batch1, maltService.findByName("Strzegom"), 4000, "Whole mash conversion");
         batchIngredientService.addIngredient(batch1, maltService.findByName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
         batchIngredientService.addIngredient(batch1, hopService.findByName("Citra"), 30, "120 minutes");
-        batchMaltConversionRestService.addMaltConversionRest(batch1, maltConversionRestService.findByRestName("Mashout"), 10);
-        batchMaltConversionRestService.addMaltConversionRest(batch1, maltConversionRestService.findByRestName("Mashout"), 15);
+        batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Mashout"), 10);
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)
                 .beerStyle(beerStyleService.findByBeerStyleName("Russian Imperial Stout"))
                 .build();
         batchService.save(batch2);
+        batchIngredientService.addIngredient(batch2, maltService.findByName("Pale Ale"), 2500, "Whole mash conversion");
+        batchIngredientService.addIngredient(batch2, maltService.findByName("Jęczmień palony"), 50, "Whole mash conversion");
+        batchIngredientService.addIngredient(batch2, hopService.findByName("Cascade"), 50, "90 minutes");
+        batchMashTemperatureService.addMashTemperature(batch2, mashTemperatureService.findByName("Mashout"), 10);
         log.info("Batch loaded...");
 
         log.info("Loading data complete");
@@ -334,6 +337,17 @@ class DataLoader implements CommandLineRunner{
             log.info(malts.getName());
         }
 
+//        for (Batch tempBatch : batchService.findAllByBeerTypeLike()) {
+//            StringBuilder message = new StringBuilder();
+//            message.append("Beers that are ");
+//            message.append("Russian Imperial Stout:");
+//            if (tempBatch.getBeerStyle().getBeerStyleName() == "Russian Imperial Stout") {
+//                message.append(" ," + tempBatch.getBatchNumber().toString());
+//            }
+//            log.info(message.toString());
+//        }
+        Set<Batch> batchesByBeerStyle = batchService.findAllByBeerTypeLike(beerStyleService.findByBeerStyleName("Russian Imperial Stout"));
+        batchesByBeerStyle.stream().forEach(batch -> log.info(batch.getBatchNumber().toString()));
     }
 
 }

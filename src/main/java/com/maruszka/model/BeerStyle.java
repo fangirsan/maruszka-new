@@ -2,6 +2,7 @@ package com.maruszka.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
 
@@ -15,6 +16,8 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -101,6 +104,9 @@ public class BeerStyle extends BaseEntity {
     @IntegerNotNullConstraint
     @Column(name = "ibu2")
     private Integer ibu2;
+
+//    @OneToMany(mappedBy = "beerStyle")
+//    private Set<Batch> batches = new HashSet<>();
 
     public BigDecimal getOriginalGravity1() {
         return this.originalGravity1 = calculateBallingToGravity(originalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);

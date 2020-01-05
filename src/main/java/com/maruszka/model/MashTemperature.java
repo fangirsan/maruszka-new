@@ -1,13 +1,9 @@
 package com.maruszka.model;
 
-import com.maruszka.model.association.BatchMaltConversionRest;
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -16,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table
-public class MaltConversionRest extends BaseEntity {
+public class MashTemperature extends BaseEntity {
 
     // https://byo.com/article/the-science-of-step-mashing/
     // https://grainfather.com/step-mashing-what-is-it-and-why-do-it-2/
@@ -34,4 +30,5 @@ public class MaltConversionRest extends BaseEntity {
 //    public MaltConversionRest(Long id, Set<BatchMaltConversionRest> batches) {
 //        this.batches = batches;
 //    }
+
 }

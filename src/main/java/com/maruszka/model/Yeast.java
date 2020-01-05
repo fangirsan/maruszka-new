@@ -42,7 +42,7 @@ public class Yeast extends Ingredient {
     @Column(name="fermentation_type")
     private YeastFermentationType yeastFermentationType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="producer_id")
     private Producer producer;
 
