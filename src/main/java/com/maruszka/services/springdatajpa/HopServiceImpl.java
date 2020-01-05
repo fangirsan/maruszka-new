@@ -6,10 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.maruszka.exceptions.NotFoundException;
-import com.maruszka.model.Batch;
 import com.maruszka.repositories.BatchRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.maruszka.model.Hop;
@@ -37,15 +35,15 @@ public class HopServiceImpl implements HopService {
     }
 
     @Override
-    public Set<String> findAllHopNames() {
+    public Set<String> findAllNames() {
 
-        Set<String> maltNames = new HashSet<>();
+        Set<String> names = new HashSet<>();
 
         for (Hop tempHop : hopRepository.findAll()) {
-            maltNames.add(tempHop.getHopName().toLowerCase());
+            names.add(tempHop.getName().toLowerCase());
         }
 
-        return maltNames;
+        return names;
     }
 
     @Override
@@ -97,17 +95,17 @@ public class HopServiceImpl implements HopService {
     }
 
     @Override
-    public Hop findByHopName(String hopName) {
-        return hopRepository.findByHopName(hopName);
+    public Hop findByName(String name) {
+        return hopRepository.findByName(name);
     }
 
     @Override
-    public List<Hop> findAllByHopNameLike(String hopName) {
-        return hopRepository.findAllByHopNameLike(hopName);
+    public List<Hop> findAllByNameLike(String name) {
+        return hopRepository.findAllByNameLike(name);
     }
 
     @Override
-    public Set<Hop> findByOrderByHopNameAsc() {
-        return hopRepository.findByOrderByHopNameAsc();
+    public Set<Hop> findByOrderByNameAsc() {
+        return hopRepository.findByOrderByNameAsc();
     }
 }

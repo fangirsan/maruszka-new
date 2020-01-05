@@ -10,8 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 @Entity(name = "Malt")
 @ToString
-//@Table(name="malt")
-@DiscriminatorValue("Malt")
+@Table(name="malt")
+//@DiscriminatorValue("Malt")
 public class Malt extends Ingredient {
 
 //    @NotBlank(message="{NotBlank.malt.maltName}")
@@ -36,24 +36,10 @@ public class Malt extends Ingredient {
     @JoinColumn(name="country_id")
     private Country country;
 
-//    @ManyToMany(mappedBy="malts")
-//    private Set<Batch> batches;
-
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinTable(name="ingredient")
-//    private Set<Batch> batches;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "malt")
-//    private Batch batch;
-
-
     @Builder
-//    public Malt(Long id, String maltName, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
-    public Malt(Long id, String maltName, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
+    public Malt(Long id, String name, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
         super(id);
-//        this.ingredientType = IngredientType.MALT;
-        this.maltName = maltName;
+        this.name = name;
         this.producer = producer;
         this.maltFilling = maltFilling;
         this.maltEbc = maltEbc;

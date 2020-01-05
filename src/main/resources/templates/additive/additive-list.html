@@ -47,7 +47,7 @@
 							<td>Lactose</td>
 						</tr>
 						<tr th:each="additive: ${additives}">
-							<td th:text="${additive.additiveName}" />
+							<td th:text="${additive.name}" />
 							<td>
 								<div  class="list-nav-buttons">
 									<a href="#" th:href="@{'/additive/' + ${additive.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a>

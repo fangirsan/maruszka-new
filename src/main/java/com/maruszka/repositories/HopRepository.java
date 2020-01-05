@@ -9,11 +9,11 @@ import com.maruszka.model.Hop;
 
 public interface HopRepository extends CrudRepository<Hop, Long> {
 
-    Hop findByHopName(String hopName);
+    Hop findByName(String name);
 
-    List<Hop> findAllByHopNameLike(String hopName);
+    List<Hop> findAllByNameLike(String name);
 
-    Set<Hop> findByOrderByHopNameAsc();
+    Set<Hop> findByOrderByNameAsc();
 
     Set<Hop> findByCountry_id(Long countryIdToDelete);
 }

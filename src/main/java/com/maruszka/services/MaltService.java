@@ -7,12 +7,12 @@ import com.maruszka.model.Malt;
 
 public interface MaltService extends CrudService<Malt, Long> {
 
-    Malt findByMaltName(String maltName);
+    Malt findByName(String name);
 
-    List<Malt> findAllByMaltNameLike(String maltName);
+    List<Malt> findAllByNameLike(String name);
 
-    Set<Malt> findByOrderByMaltNameAsc();
+    Set<Malt> findByOrderByNameAsc();
 
-    Set<String> findAllMaltNames();
+    Set<String> findAllNames();
 
 }

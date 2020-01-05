@@ -7,10 +7,8 @@ import java.util.Set;
 
 import com.maruszka.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import com.maruszka.model.Batch;
 import com.maruszka.model.Malt;
 import com.maruszka.repositories.BatchRepository;
 import com.maruszka.repositories.MaltRepository;
@@ -41,15 +39,15 @@ public class MaltServiceImpl implements MaltService {
     }
 
     @Override
-    public Set<String> findAllMaltNames() {
+    public Set<String> findAllNames() {
 
-        Set<String> maltNames = new HashSet<>();
+        Set<String> name = new HashSet<>();
 
         for (Malt tempMalt : maltRepository.findAll()) {
-            maltNames.add(tempMalt.getMaltName().toLowerCase());
+            name.add(tempMalt.getName().toLowerCase());
         }
 
-        return maltNames;
+        return name;
     }
 
     @Override
@@ -102,18 +100,18 @@ public class MaltServiceImpl implements MaltService {
     }
 
     @Override
-    public Malt findByMaltName(String maltName) {
-        return maltRepository.findByMaltName(maltName);
+    public Malt findByName(String name) {
+        return maltRepository.findByName(name);
     }
 
     @Override
-    public Set<Malt> findByOrderByMaltNameAsc() {
-        return maltRepository.findByOrderByMaltNameAsc();
+    public Set<Malt> findByOrderByNameAsc() {
+        return maltRepository.findByOrderByNameAsc();
     }
 
     @Override
-    public List<Malt> findAllByMaltNameLike(String maltName) {
-        return maltRepository.findAllByMaltNameLike(maltName);
+    public List<Malt> findAllByNameLike(String name) {
+        return maltRepository.findAllByNameLike(name);
     }
 
 }

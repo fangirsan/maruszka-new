@@ -31,7 +31,7 @@ public class AdditiveController {
     @GetMapping("/list")
     public String getAdditive(Model model) {
 
-        Set<Additive> additives = additiveService.findByOrderByAdditiveNameAsc();
+        Set<Additive> additives = additiveService.findByOrderByNameAsc();
         model.addAttribute("additives", additives);
 
         return "additive/additive-list";
@@ -80,9 +80,9 @@ public class AdditiveController {
             });
             return VIEWS_ADDITIVE_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("ADDITIVE_NAME", "ADDITIVE", additive.getAdditiveName()) && additive.isNew()) {
-                bindingResult.rejectValue("additiveName", "duplicate", "Duplicate name");
-                log.info("Additive with given name: [" + additive.getAdditiveName() + "] already exists");
+            if (duplicateCheck.isDuplicate("NAME", "INGREDIENT", additive.getName(), Additive.class.getSimpleName()) && additive.isNew()) {
+                bindingResult.rejectValue("name", "duplicate", "Duplicate name");
+                log.info("Additive with given name: [" + additive.getName() + "] already exists");
 
                 return VIEWS_ADDITIVE_CREATE_OR_UPDATE_FORM;
             } else {

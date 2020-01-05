@@ -111,7 +111,7 @@ class DataLoader implements CommandLineRunner{
 
         // Malt
         Malt malt = Malt.builder()
-                .maltName("Pale Ale")
+                .name("Pale Ale")
                 .maltFilling(100)
                 .maltEbc(3)
                 .maltUsage("All")
@@ -121,7 +121,7 @@ class DataLoader implements CommandLineRunner{
         maltService.save(malt);
 
         Malt malt2 = Malt.builder()
-                .maltName("Strzegom")
+                .name("Strzegom")
                 .maltFilling(100)
                 .maltEbc(3)
                 .maltUsage("All")
@@ -131,7 +131,7 @@ class DataLoader implements CommandLineRunner{
         maltService.save(malt2);
 
         Malt malt3 = Malt.builder()
-                .maltName("Jęczmień palony")
+                .name("Jęczmień palony")
                 .maltFilling(10)
                 .maltEbc(1200)
                 .maltUsage("Dark beers")
@@ -143,7 +143,7 @@ class DataLoader implements CommandLineRunner{
 
         // Hop
         Hop hop = Hop.builder()
-                .hopName("Citra")
+                .name("Citra")
                 .bitterHop(true)
                 .aromaHop(true)
                 .alphaAcidMin(new BigDecimal("12.3"))
@@ -153,7 +153,7 @@ class DataLoader implements CommandLineRunner{
         hopService.save(hop);
 
         Hop hop2 = Hop.builder()
-                .hopName("Magnum")
+                .name("Magnum")
                 .bitterHop(true)
                 .aromaHop(false)
                 .alphaAcidMin(new BigDecimal("10"))
@@ -163,7 +163,7 @@ class DataLoader implements CommandLineRunner{
         hopService.save(hop2);
 
         Hop cascade = Hop.builder()
-                .hopName("Cascade")
+                .name("Cascade")
                 .bitterHop(false)
                 .aromaHop(true)
                 .alphaAcidMin(new BigDecimal("5"))
@@ -175,7 +175,7 @@ class DataLoader implements CommandLineRunner{
 
         // Yeast
         Yeast yeast = Yeast.builder()
-                .yeastName("SafAle US-05")
+                .name("SafAle US-05")
                 .alcoholTolerance(new BigDecimal(9))
                 .flocculation(YeastFlocculation.Medium)
                 .fermentationTempMin(new BigDecimal(15))
@@ -187,7 +187,7 @@ class DataLoader implements CommandLineRunner{
         yeastService.save(yeast);
 
         Yeast yeast2 = Yeast.builder()
-                .yeastName("SafAle T-58")
+                .name("SafAle T-58")
                 .alcoholTolerance(new BigDecimal(10))
                 .flocculation(YeastFlocculation.Medium)
                 .fermentationTempMin(new BigDecimal(15))
@@ -199,7 +199,7 @@ class DataLoader implements CommandLineRunner{
         yeastService.save(yeast2);
 
         Yeast nullYeast = Yeast.builder()
-                .yeastName("N/A")
+                .name("N/A")
                 .build();
         yeastService.save(nullYeast);
         log.info("Yeasts loaded...");
@@ -253,12 +253,12 @@ class DataLoader implements CommandLineRunner{
 
         // Additive
         Additive curacao = Additive.builder()
-                .additiveName("Curacao")
+                .name("Curacao")
                 .build();
         additiveService.save(curacao);
 
         Additive lactose = Additive.builder()
-                .additiveName("Lactose")
+                .name("Lactose")
                 .build();
         additiveService.save(lactose);
         log.info("Additives loaded...");
@@ -311,9 +311,9 @@ class DataLoader implements CommandLineRunner{
                 .build();
         batch1.setBatchComments(batchComments);
         batchService.save(batch1);
-        batchIngredientService.addIngredient(batch1, maltService.findByMaltName("Strzegom"), 4000, "Whole mash conversion");
-        batchIngredientService.addIngredient(batch1, maltService.findByMaltName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
-        batchIngredientService.addIngredient(batch1, hopService.findByHopName("Citra"), 30, "120 minutes");
+        batchIngredientService.addIngredient(batch1, maltService.findByName("Strzegom"), 4000, "Whole mash conversion");
+        batchIngredientService.addIngredient(batch1, maltService.findByName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
+        batchIngredientService.addIngredient(batch1, hopService.findByName("Citra"), 30, "120 minutes");
         batchMaltConversionRestService.addMaltConversionRest(batch1, maltConversionRestService.findByRestName("Mashout"), 10);
         batchMaltConversionRestService.addMaltConversionRest(batch1, maltConversionRestService.findByRestName("Mashout"), 15);
 
@@ -331,7 +331,7 @@ class DataLoader implements CommandLineRunner{
 
         Set<Malt> ingredientSet = batchService.getIngredientByClass(batch1, Malt.class);
         for (Malt malts : ingredientSet) {
-            log.info(malts.getMaltName());
+            log.info(malts.getName());
         }
 
     }

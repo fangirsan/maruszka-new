@@ -2,12 +2,10 @@ package com.maruszka.services.springdatajpa;
 
 import com.maruszka.exceptions.NotFoundException;
 import com.maruszka.model.Additive;
-import com.maruszka.model.Batch;
 import com.maruszka.repositories.AdditiveRepository;
 import com.maruszka.repositories.BatchRepository;
 import com.maruszka.services.AdditiveService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -37,15 +35,15 @@ public class AdditiveServiceImpl implements AdditiveService {
     }
 
     @Override
-    public Set<String> findAllAdditiveNames() {
+    public Set<String> findAllNames() {
 
-        Set<String> additiveNames = new HashSet<>();
+        Set<String> names = new HashSet<>();
 
         for (Additive tempAdditive : additiveRepository.findAll()) {
-            additiveNames.add(tempAdditive.getAdditiveName().toLowerCase());
+            names.add(tempAdditive.getName().toLowerCase());
         }
 
-        return additiveNames;
+        return names;
     }
 
     @Override
@@ -94,17 +92,17 @@ public class AdditiveServiceImpl implements AdditiveService {
     }
 
     @Override
-    public Additive findByAdditiveName(String additiveName) {
-        return additiveRepository.findByAdditiveName(additiveName);
+    public Additive findByName(String name) {
+        return additiveRepository.findByName(name);
     }
 
     @Override
-    public Set<Additive> findByOrderByAdditiveNameAsc() {
-        return additiveRepository.findByOrderByAdditiveNameAsc();
+    public Set<Additive> findByOrderByNameAsc() {
+        return additiveRepository.findByOrderByNameAsc();
     }
 
     @Override
-    public List<Additive> findAllByAdditiveNameLike(String additiveName) {
-        return additiveRepository.findAllByAdditiveNameLike(additiveName);
+    public List<Additive> findAllByNameLike(String name) {
+        return additiveRepository.findAllByNameLike(name);
     }
 }

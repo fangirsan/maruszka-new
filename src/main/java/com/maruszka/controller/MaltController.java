@@ -59,12 +59,12 @@ public class MaltController {
     @GetMapping("/find/result")
     public String processFindForm(Malt malt, BindingResult result, Model model) {
 
-        if (malt.getMaltName() == null) {
-            malt.setMaltName(""); // empty string signifies broadest possible search
+        if (malt.getName() == null) {
+            malt.setName(""); // empty string signifies broadest possible search
         }
 
         // find malt by maltName
-        List<Malt> results = maltService.findAllByMaltNameLike("%" + malt.getMaltName() + "%");
+        List<Malt> results = maltService.findAllByNameLike("%" + malt.getName() + "%");
 
         if (results.isEmpty()) {
             // no result
@@ -99,7 +99,7 @@ public class MaltController {
     @GetMapping("/list")
     public String getMalts(Model model) {
 
-        Set<Malt> malts = maltService.findByOrderByMaltNameAsc();
+        Set<Malt> malts = maltService.findByOrderByNameAsc();
         model.addAttribute("malts", malts);
         return "malt/malt-list";
     }
@@ -129,9 +129,9 @@ public class MaltController {
             });
             return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("IN_NAME", "INGREDIENT", malt.getMaltName()) && malt.isNew()) {
-                bindingResult.rejectValue("maltName", "duplicate", "Duplicate name");
-                log.info("Malt with given name: [" + malt.getMaltName() + "] already exists");
+            if (duplicateCheck.isDuplicate("NAME", "INGREDIENT", malt.getName(), Malt.class.getSimpleName()) && malt.isNew()) {
+                bindingResult.rejectValue("name", "duplicate", "Duplicate name");
+                log.info("Malt with given name: [" + malt.getName() + "] already exists");
 
                 return VIEWS_MALT_CREATE_OR_UPDATE_FORM;
             } else {

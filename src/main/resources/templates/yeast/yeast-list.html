@@ -55,7 +55,7 @@
 							<td>10</td>
 						</tr>
 						<tr th:each="yeast: ${yeasts}">
-							<td th:text="${yeast.yeastName}" />
+							<td th:text="${yeast.name}" />
 							<td th:text="${yeast.yeastFermentationType.getDescription()}" />
 							<td th:text="${yeast.yeastType}" />
 							<td th:text="${yeast.alcoholTolerance}" />

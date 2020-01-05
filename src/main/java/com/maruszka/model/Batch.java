@@ -105,9 +105,9 @@ public class Batch extends BaseEntity {
         for (BatchIngredient ing : ingredients) {
             if (ing.getIngredient() instanceof Malt) {
                 if (ingredientList == null) {
-                    ingredientList = ing.getIngredient().getMaltName();
+                    ingredientList = ing.getIngredient().getName();
                 } else {
-                    ingredientList += ing.getIngredient().getMaltName();
+                    ingredientList += ing.getIngredient().getName();
                 }
             }
         }

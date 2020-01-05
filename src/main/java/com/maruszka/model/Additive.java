@@ -2,10 +2,9 @@ package com.maruszka.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 @Setter
 @Getter
@@ -13,18 +12,16 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @ToString
 @Table(name="additive")
+//@DiscriminatorValue("Additive")
 public class Additive extends Ingredient {
 
-    @NotBlank(message="{NotBlank.additive.additiveName}")
-    @Column(name="additive_name", unique = true)
-    private String additiveName;
-
-//    @ManyToMany(mappedBy="additives")
-//    private Set<Batch> batches;
+//    @NotBlank(message="{NotBlank.additive.additiveName}")
+//    @Column(name="additive_name", unique = true)
+//    private String additiveName;
 
     @Builder
-    public Additive(Long id, String additiveName) {
+    public Additive(Long id, String name) {
         super(id);
-        this.additiveName = additiveName;
+        this.name = name;
     }
 }

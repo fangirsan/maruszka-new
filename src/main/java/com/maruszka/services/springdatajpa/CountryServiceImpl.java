@@ -8,7 +8,6 @@ import com.maruszka.repositories.HopRepository;
 import com.maruszka.repositories.MaltRepository;
 import com.maruszka.services.CountryService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -59,7 +58,7 @@ public class CountryServiceImpl implements CountryService {
         Set<Malt> malts = maltRepository.findByCountry_id(countryIdToDelete);
         if (malts.size() != 0 ) {
             for (Malt tempMalt : malts) {
-                log.debug("Detaching country from malt: " + tempMalt.getMaltName());
+                log.debug("Detaching country from malt: " + tempMalt.getName());
                 tempMalt.setCountry(findByCountryName("N/A"));
             }
         }
@@ -67,7 +66,7 @@ public class CountryServiceImpl implements CountryService {
         Set<Hop> hops = hopRepository.findByCountry_id(countryIdToDelete);
         if (hops.size() != 0) {
             for (Hop tempHop : hops) {
-                log.debug("Detaching country from hop: " + tempHop.getHopName());
+                log.debug("Detaching country from hop: " + tempHop.getName());
                 tempHop.setCountry(findByCountryName("N/A"));
             }
         }

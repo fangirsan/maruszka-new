@@ -37,10 +37,10 @@
 							</div>
 							<div class="form-field-input">
 								<input type="text" class="form-control"
-									th:field="*{maltName}" th:errorclass="has-error"/>
-								<div class="form-error" th:if="${#fields.hasErrors('maltName')}">
+									th:field="*{name}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('name')}">
 									<ul>
-										<li th:each="err : ${#fields.errors('maltName')}" th:text="${err}"/>
+										<li th:each="err : ${#fields.errors('name')}" th:text="${err}"/>
 									</ul>
 								</div>
 							</div>

@@ -7,12 +7,12 @@ import java.util.Set;
 
 public interface AdditiveService extends CrudService<Additive, Long> {
 
-    Additive findByAdditiveName(String additiveName);
+    Additive findByName(String additiveName);
 
-    List<Additive> findAllByAdditiveNameLike(String additiveName);
+    List<Additive> findAllByNameLike(String additiveName);
 
-    Set<Additive> findByOrderByAdditiveNameAsc();
+    Set<Additive> findByOrderByNameAsc();
 
-    Set<String> findAllAdditiveNames();
+    Set<String> findAllNames();
 
 }

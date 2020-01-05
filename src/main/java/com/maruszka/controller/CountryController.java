@@ -73,7 +73,7 @@ public class CountryController {
             });
             return VIEWS_COUNTRY_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("COUNTRY_NAME", "COUNTRY", country.getCountryName()) && country.isNew()) {
+            if (duplicateCheck.isDuplicate("COUNTRY_NAME", "COUNTRY", country.getCountryName(), Country.class.getSimpleName()) && country.isNew()) {
                 bindingResult.rejectValue("countryName", "duplicate", "Duplicate name");
                 log.info("Country with given name: [" + country.getCountryName() + "] already exists");
 

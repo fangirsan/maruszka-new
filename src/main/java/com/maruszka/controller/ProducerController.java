@@ -73,7 +73,7 @@ public class ProducerController {
             });
             return VIEWS_PRODUCER_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("PRODUCER_NAME", "PRODUCER", producer.getProducerName()) && producer.isNew()) {
+            if (duplicateCheck.isDuplicate("PRODUCER_NAME", "PRODUCER", producer.getProducerName(), Producer.class.getSimpleName()) && producer.isNew()) {
                 bindingResult.rejectValue("producerName", "duplicate", "Duplicate name");
                 log.info("Producer with given name: [" + producer.getProducerName() + "] already exists");
 

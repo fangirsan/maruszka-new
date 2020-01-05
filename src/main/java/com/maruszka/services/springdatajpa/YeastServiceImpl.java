@@ -4,10 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.maruszka.model.Batch;
 import com.maruszka.repositories.BatchRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.maruszka.model.Yeast;
@@ -68,22 +66,22 @@ public class YeastServiceImpl implements YeastService {
     }
 
     @Override
-    public Yeast findByYeastName(String yeastName) {
-        return yeastRepository.findByYeastName(yeastName);
+    public Yeast findByName(String name) {
+        return yeastRepository.findByName(name);
     }
 
     @Override
-    public List<Yeast> findAllByYeastNameLike(String YeastName) {
-        return yeastRepository.findAllByYeastNameLike(YeastName);
+    public List<Yeast> findAllByNameLike(String name) {
+        return yeastRepository.findAllByNameLike(name);
     }
 
     @Override
-    public Set<Yeast> findByOrderByYeastNameAsc() {
+    public Set<Yeast> findByOrderByNameAsc() {
 
-        Set<Yeast> yeasts = yeastRepository.findByOrderByYeastNameAsc();
+        Set<Yeast> yeasts = yeastRepository.findByOrderByNameAsc();
 
         // do not show N/A in the Yeast list
-        yeasts.removeIf(yeast -> yeast.getYeastName().equals("N/A"));
+        yeasts.removeIf(yeast -> yeast.getName().equals("N/A"));
 
         return yeasts;
     }

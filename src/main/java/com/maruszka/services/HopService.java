@@ -7,11 +7,11 @@ import com.maruszka.model.Hop;
 
 public interface HopService extends CrudService<Hop, Long> {
 
-    Set<String> findAllHopNames();
+    Set<String> findAllNames();
 
-    Hop findByHopName(String hopName);
+    Hop findByName(String hopName);
 	
-	List<Hop> findAllByHopNameLike(String hopName);
+	List<Hop> findAllByNameLike(String hopName);
 
-    Set<Hop> findByOrderByHopNameAsc();
+    Set<Hop> findByOrderByNameAsc();
 }

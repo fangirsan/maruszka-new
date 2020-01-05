@@ -8,10 +8,10 @@ import java.util.Set;
 
 public interface AdditiveRepository extends CrudRepository<Additive, Long> {
 
-    Additive findByAdditiveName(String additiveName);
+    Additive findByName(String name);
 
-    List<Additive> findAllByAdditiveNameLike(String additiveName);
+    List<Additive> findAllByNameLike(String name);
 
-    Set<Additive> findByOrderByAdditiveNameAsc();
+    Set<Additive> findByOrderByNameAsc();
 
 }

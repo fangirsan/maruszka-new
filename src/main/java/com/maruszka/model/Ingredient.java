@@ -15,13 +15,12 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-//@MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "in_type")
+@DiscriminatorColumn(name = "type")
 public class Ingredient extends BaseEntity {
 
-    @Column(name="in_name", unique = true)
-    protected String maltName;
+    @Column(name="name")
+    protected String name;
 
     @OneToMany(mappedBy = "ingredient")
     private Set<BatchIngredient> batches = new HashSet<>();

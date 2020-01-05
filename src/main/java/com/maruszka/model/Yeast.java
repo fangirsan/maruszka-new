@@ -17,9 +17,9 @@ import java.math.BigDecimal;
 @Table(name="yeast")
 public class Yeast extends Ingredient {
 
-    @NotBlank
-    @Column(name="yeast_name", unique = true)
-    private String yeastName;
+//    @NotBlank
+//    @Column(name="yeast_name", unique = true)
+//    private String yeastName;
 
     @Enumerated(EnumType.STRING)
     @Column(name="yeast_type")
@@ -47,10 +47,10 @@ public class Yeast extends Ingredient {
     private Producer producer;
 
     @Builder
-    public Yeast(Long id, String yeastName, YeastType yeastType, BigDecimal fermentationTempMin, BigDecimal fermentationTempMax,
+    public Yeast(Long id, String name, YeastType yeastType, BigDecimal fermentationTempMin, BigDecimal fermentationTempMax,
                  BigDecimal alcoholTolerance, YeastFlocculation flocculation, Producer producer, YeastFermentationType yeastFermentationType) {
         super(id);
-        this.yeastName = yeastName;
+        this.name = name;
         this.yeastType = yeastType;
         this.fermentationTempMin = fermentationTempMin;
         this.fermentationTempMax = fermentationTempMax;

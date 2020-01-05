@@ -9,11 +9,11 @@ import com.maruszka.model.Yeast;
 
 public interface YeastRepository extends CrudRepository<Yeast, Long> {
 
-    Yeast findByYeastName(String yeastName);
+    Yeast findByName(String name);
 
-    List<Yeast> findAllByYeastNameLike(String YeastName);
+    List<Yeast> findAllByNameLike(String name);
 
-    Set<Yeast> findByOrderByYeastNameAsc();
+    Set<Yeast> findByOrderByNameAsc();
 
     Set<Yeast> findByProducer_id(Long producerIdToDelete);
 

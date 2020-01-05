@@ -9,11 +9,11 @@ import com.maruszka.model.Malt;
 
 public interface MaltRepository extends CrudRepository<Malt, Long> {
 
-    Malt findByMaltName(String maltName);
+    Malt findByName(String name);
 
-    List<Malt> findAllByMaltNameLike(String maltName);
+    List<Malt> findAllByNameLike(String name);
 
-    Set<Malt> findByOrderByMaltNameAsc();
+    Set<Malt> findByOrderByNameAsc();
 
     Set<Malt> findByCountry_id(Long countryIdToDelete);
 

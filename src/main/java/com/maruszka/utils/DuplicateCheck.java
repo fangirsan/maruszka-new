@@ -15,9 +15,9 @@ public class DuplicateCheck {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public boolean isDuplicate(String fieldName, String tableName, String lookUpObject) {
+    public boolean isDuplicate(String fieldName, String tableName, String lookUpObject, String type) {
 
-        String SQL_TO_CHECK_DUPLICATES = String.format("select %s from %s", fieldName, tableName);
+        String SQL_TO_CHECK_DUPLICATES = String.format("select %s from %s where TYPE = '%s' and NAME = '%s'", fieldName, tableName, type, lookUpObject);
         List<String> result = jdbcTemplate.queryForList(SQL_TO_CHECK_DUPLICATES, String.class);
 
         List<String> lowerCaseResult = result.stream()

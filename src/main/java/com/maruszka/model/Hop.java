@@ -14,9 +14,9 @@ import java.math.BigDecimal;
 @Table(name="hop")
 public class Hop extends Ingredient {
 
-    @NotBlank
-    @Column(name="hop_name", unique = true)
-    private String hopName;
+//    @NotBlank
+//    @Column(name="hop_name", unique = true)
+//    private String hopName;
 
     @Column(name="alpha_acid_min", precision = 3, scale = 1)
     private BigDecimal alphaAcidMin;
@@ -34,14 +34,11 @@ public class Hop extends Ingredient {
     @JoinColumn(name="country_id")
     private Country country;
 
-//    @ManyToMany(mappedBy="hops")
-//    private Set<Batch> batches;
-
     @Builder
-    public Hop(Long id, String hopName, BigDecimal alphaAcidMin, BigDecimal alphaAcidMax, boolean bitterHop, boolean aromaHop,
+    public Hop(Long id, String name, BigDecimal alphaAcidMin, BigDecimal alphaAcidMax, boolean bitterHop, boolean aromaHop,
                Country country) {
         super(id);
-        this.hopName = hopName;
+        this.name = name;
         this.alphaAcidMin = alphaAcidMin;
         this.alphaAcidMax = alphaAcidMax;
         this.bitterHop = bitterHop;

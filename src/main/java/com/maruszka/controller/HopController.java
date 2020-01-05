@@ -60,7 +60,7 @@ public class HopController {
     @GetMapping("/list")
     public String getHops(Model model) {
 
-        Set<Hop> hops = hopService.findByOrderByHopNameAsc();
+        Set<Hop> hops = hopService.findByOrderByNameAsc();
 
         for (Hop tempHop : hops) {
             if (tempHop.getCountry() == null) {
@@ -98,9 +98,9 @@ public class HopController {
             });
             return VIEWS_HOP_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("HOP_NAME", "HOP", hop.getHopName()) && hop.isNew()) {
-                bindingResult.rejectValue("hopName", "duplicate", "Duplicate name");
-                log.info("Hop with given name: [" + hop.getHopName() + "] already exists");
+            if (duplicateCheck.isDuplicate("NAME", "INGREDIENT", hop.getName(), Hop.class.getSimpleName()) && hop.isNew()) {
+                bindingResult.rejectValue("name", "duplicate", "Duplicate name");
+                log.info("Hop with given name: [" + hop.getName() + "] already exists");
 
                 return VIEWS_HOP_CREATE_OR_UPDATE_FORM;
             } else {

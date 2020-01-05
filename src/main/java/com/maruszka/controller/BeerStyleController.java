@@ -74,27 +74,12 @@ public class BeerStyleController {
             });
             return VIEWS_BEER_STYLE_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("BEER_STYLE_NAME", "BEER_STYLE", beerStyle.getBeerStyleName()) && beerStyle.isNew()) {
+            if (duplicateCheck.isDuplicate("BEER_STYLE_NAME", "BEER_STYLE", beerStyle.getBeerStyleName(), BeerStyle.class.getSimpleName()) && beerStyle.isNew()) {
                 bindingResult.rejectValue("beerStyleName", "duplicate", "Duplicate name");
                 log.info("Beer Style with given name: [" + beerStyle.getBeerStyleName() + "] already exists");
 
                 return VIEWS_BEER_STYLE_CREATE_OR_UPDATE_FORM;
             } else {
-
-                // Use logic from model
-//                if (beerStyle.getOriginalBLG1() != null) {
-//                    beerStyle.setOriginalGravity1(beerStyle.calculateBallingToGravity(beerStyle.getOriginalBLG1()).setScale(3, BigDecimal.ROUND_HALF_UP));
-//                }
-//                if (beerStyle.getFinalBLG1() != null) {
-//                    this.finalGravity1 = calculateBallingToGravity(finalBLG1).setScale(3, BigDecimal.ROUND_HALF_UP);
-//                }
-//                if (beerStyle.getOriginalBLG2() != null) {
-//                    this.originalGravity2 = calculateBallingToGravity(originalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
-//                }
-//                if (beerStyle.getFinalBLG1() != null) {
-//                    this.finalGravity2 = calculateBallingToGravity(finalBLG2).setScale(3, BigDecimal.ROUND_HALF_UP);
-//                }
-
                 BeerStyle savedBeerStyle = beerStyleService.save(beerStyle);
                 return "redirect:/beerStyle/" + savedBeerStyle.getId();
             }

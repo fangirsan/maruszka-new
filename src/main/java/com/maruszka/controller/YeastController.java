@@ -63,7 +63,7 @@ public class YeastController {
     @GetMapping("/list")
     public String getYeasts(Model model) {
 
-        Set<Yeast> yeasts = yeastService.findByOrderByYeastNameAsc();
+        Set<Yeast> yeasts = yeastService.findByOrderByNameAsc();
         model.addAttribute("yeasts", yeasts);
 
         return "yeast/yeast-list";
@@ -94,9 +94,9 @@ public class YeastController {
             });
             return VIEWS_YEAST_CREATE_OR_UPDATE_FORM;
         } else {
-            if (duplicateCheck.isDuplicate("YEAST_NAME", "YEAST", yeast.getYeastName()) && yeast.isNew()) {
-                bindingResult.rejectValue("yeastName", "duplicate", "Duplicate name");
-                log.info("Yeast with given name: [" + yeast.getYeastName() + "] already exists");
+            if (duplicateCheck.isDuplicate("NAME", "INGREDIENT", yeast.getName(), Yeast.class.getSimpleName()) && yeast.isNew()) {
+                bindingResult.rejectValue("name", "duplicate", "Duplicate name");
+                log.info("Yeast with given name: [" + yeast.getName() + "] already exists");
 
                 return VIEWS_YEAST_CREATE_OR_UPDATE_FORM;
             } else {

@@ -11,7 +11,6 @@ import com.maruszka.model.enums.ProducerType;
 import com.maruszka.repositories.MaltRepository;
 import com.maruszka.repositories.YeastRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.maruszka.model.Producer;
@@ -61,7 +60,7 @@ public class ProducerServiceImpl implements ProducerService {
         Set<Malt> malts = maltRepository.findByProducer_id(producerIdToDelete);
         if (malts.size() != 0) {
             for (Malt tempMalt : malts) {
-                log.debug("Detaching " + producerName + " from malt: " + tempMalt.getMaltName());
+                log.debug("Detaching " + producerName + " from malt: " + tempMalt.getName());
                 tempMalt.setProducer(findByProducerName("N/A"));
             }
         }
@@ -69,7 +68,7 @@ public class ProducerServiceImpl implements ProducerService {
         Set<Yeast> yeasts = yeastRepository.findByProducer_id(producerIdToDelete);
         if (yeasts.size() != 0) {
             for (Yeast tempYeast : yeasts) {
-                log.debug("Detaching " + producerName + " from yeast: " + tempYeast.getYeastName());
+                log.debug("Detaching " + producerName + " from yeast: " + tempYeast.getName());
                 tempYeast.setProducer(findByProducerName("N/A"));
             }
         }
