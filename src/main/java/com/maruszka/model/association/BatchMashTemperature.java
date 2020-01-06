@@ -1,6 +1,7 @@
 package com.maruszka.model.association;
 
 import com.maruszka.model.Batch;
+import com.maruszka.model.MashTemperature;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,9 +26,9 @@ public class BatchMashTemperature {
     @Column
     private Integer minutes;
 
-//    @ManyToOne
-//    @JoinColumn(name = "maltConversionRestId", updatable = false, insertable = false, referencedColumnName = "id")
-//    private MaltConversionRest maltConversionRest;
+    @ManyToOne
+    @JoinColumn(name = "mashTemperatureId", updatable = false, insertable = false, referencedColumnName = "id")
+    private MashTemperature mashTemperature;
 
     @ManyToOne
     @JoinColumn(name = "batchId", updatable = false, insertable = false, referencedColumnName = "id")

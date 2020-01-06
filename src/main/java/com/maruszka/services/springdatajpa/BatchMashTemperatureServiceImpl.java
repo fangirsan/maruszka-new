@@ -8,6 +8,7 @@ import com.maruszka.services.BatchMashTemperatureService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
@@ -48,11 +49,16 @@ public class BatchMashTemperatureServiceImpl implements BatchMashTemperatureServ
     @Override
     public void addMashTemperature(Batch batch, MashTemperature mashTemperature, Integer minutes) {
         BatchMashTemperature association = new BatchMashTemperature();
+        association.setMashTemperature(mashTemperature);
         association.setBatch(batch);
         association.setMashTemperatureId(mashTemperature.getId());
         association.setBatchId(batch.getId());
         association.setMinutes(minutes);
         batch.getMashTemperature().add(association);
+        if (mashTemperature.getBatches() == null) {
+            mashTemperature.setBatches(new HashSet<>());
+        }
+        mashTemperature.getBatches().add(association);
         /*
          I don't need bidirectional relation, so there will be no option to search for batch from perspective of
          object MashTemperature

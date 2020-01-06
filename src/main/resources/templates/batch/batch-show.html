@@ -34,6 +34,7 @@
 						<div class="display-field-name">
 							<label>Date:</label>
 						</div>
+
 						<div class="form-field-input">
 							<p th:text="${batch.creationDate}">Creation date</p>
 						</div>
@@ -48,13 +49,22 @@
 						</div>
 					</div>
 
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Water for mashing:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.mashingWaterAmount} + ' liters'">Water for mashing</p>
+						</div>
+					</div>
+
 					<div class="display-field-name">
 						<label>Malts:</label>
 					</div>
 					<table class="table">
 						<thead class="thead">
 							<tr>
-								<th>Malt</th>
+								<th>Name</th>
 								<th>Amount</th>
 								<th>EBC</th>
 							</tr>
@@ -73,14 +83,96 @@
 						</tbody>
 					</table>
 
+					<div class="display-field-name">
+						<label>Hops:</label>
+					</div>
+					<table class="table">
+						<thead class="thead">
+						<tr>
+							<th>Name</th>
+							<th>Alpha Acid</th>
+							<th>Amount</th>
+							<th>Time</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:remove="all">
+							<td>Citra</td>
+							<td>13.8</td>
+							<td>40</td>
+							<td>90 minutes</td>
+						</tr>
+						<tr th:each="entry: ${hops}">
+							<td th:text="${entry.getIngredient().getName()}" />
+							<td th:text="${(entry.getIngredient().getAlphaAcidMin() + entry.getIngredient().getAlphaAcidMax()) / 2}" />
+							<td th:text="${entry.getAmount()}" />
+							<td th:text="${entry.getWayOfServing()}" />
+						</tr>
+						</tbody>
+					</table>
 
-<!--					<div class="bottom-nav-buttons">-->
-<!--						<ul>-->
-<!--							<li><a href="#" th:href="@{'/malt/list'}"><img th:src="@{/images/list.png}" title="list"></a></li>-->
-<!--							<li><a href="#" th:href="@{'/malt/' + ${malt.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a></li>-->
-<!--							<li><a href="#" th:href="@{'/malt/delete/' + ${malt.id}}"><img th:src="@{/images/delete.png}" title="delete"></a></li>-->
-<!--						</ul>-->
-<!--					</div>-->
+<!--				Additives-->
+					<div class="display-field-name">
+						<label>Additives:</label>
+					</div>
+					<table class="table">
+						<thead class="thead">
+						<tr>
+							<th>Name</th>
+							<th>Serving notes</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:remove="all">
+							<td>Lactose</td>
+							<td>Start of maturing</td>
+						</tr>
+						<tr th:each="entry: ${additives}">
+							<td th:text="${entry.getIngredient().getName()}" />
+							<td th:text="${entry.getWayOfServing()}" />
+						</tr>
+						</tbody>
+					</table>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Water for lautering:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.lauteringWaterAmount} + ' liters'">Water for lautering</p>
+						</div>
+					</div>
+
+<!--				Mashing Temperatures-->
+					<div class="display-field-name">
+						<label>Mashing temperatures:</label>
+					</div>
+					<table class="table">
+						<thead class="thead">
+						<tr>
+							<th>Name</th>
+							<th>Minutes</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:remove="all">
+							<td>Saccharification rest</td>
+							<td>45 minutes</td>
+						</tr>
+						<tr th:each="batchMashTemperature: ${temperatures}">
+							<td th:text="${batchMashTemperature.getMashTemperature().getRestName()}" />
+							<td th:text="${batchMashTemperature.minutes}" />
+						</tr>
+						</tbody>
+					</table>
+
+					<div class="bottom-nav-buttons">
+						<ul>
+							<li><a href="#" th:href="@{'/batch/list'}"><img th:src="@{/images/list.png}" title="list"></a></li>
+							<li><a href="#" th:href="@{'/batch/' + ${batch.id} + '/edit'}"><img th:src="@{/images/update.png}" title="update"></a></li>
+							<li><a href="#" th:href="@{'/batch/delete/' + ${batch.id}}"><img th:src="@{/images/delete.png}" title="delete"></a></li>
+						</ul>
+					</div>
 
 				</div>
 			</div>

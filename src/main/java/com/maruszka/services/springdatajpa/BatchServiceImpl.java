@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.maruszka.model.*;
 import com.maruszka.model.association.BatchIngredient;
+import com.maruszka.model.association.BatchMashTemperature;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -84,24 +85,34 @@ public class BatchServiceImpl implements BatchService {
                 ingredientSet.add((T) ing.getIngredient());
             }
         }
-      return (Set<T>) ingredientSet;
+      return ingredientSet;
     }
 
     @Override
     public <T> Map<T, Integer> getIngredientMapByClass(Batch batch, Class<T> clazz) {
         Map<T, Integer> ingredientMap = new HashMap<>();
-//        batch.getIngredients().stream()
-//                .forEach(ingredient -> {
-//                    if (ingredient.getClass().isAssignableFrom(clazz)) {
-//                        ingredientMap.put((T) ingredient, ingredient.getAmount());
-//                    }
-//                });
-        for (BatchIngredient ing : batch.getIngredients()) {
+        batch.getIngredients().stream().forEach(ing -> {
             if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
                 ingredientMap.put((T) ing.getIngredient(), ing.getAmount());
             }
-        }
+        });
         return ingredientMap;
+    }
+
+    @Override
+    public <T>Set<BatchIngredient> getBatchIngredientsByIngredient(Batch batch, Class<T> clazz) {
+        Set<BatchIngredient> ingredients = new HashSet<>();
+        batch.getIngredients().stream().forEach(ingredient -> {
+            if (ingredient.getIngredient().getClass().isAssignableFrom(clazz)) {
+                ingredients.add(ingredient);
+            }
+        });
+        return ingredients;
+    }
+
+    @Override
+    public Set<BatchMashTemperature> getBatchMashTemperature(Batch batch) {
+        return batch.getMashTemperature();
     }
 
 }

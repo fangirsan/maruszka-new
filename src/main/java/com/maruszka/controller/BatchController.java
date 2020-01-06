@@ -1,7 +1,7 @@
 package com.maruszka.controller;
 
-import com.maruszka.model.Batch;
-import com.maruszka.model.Malt;
+import com.maruszka.model.*;
+import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.services.BatchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +29,10 @@ class BatchController {
         Batch batchToShow = batchService.findById(batchId);
 
         mav.addObject(batchService.findById(batchId));
-//        mav.addObject("malts", batchService.getIngredientSetByClass(batchToShow, Malt.class));
         mav.addObject("malts", batchService.getIngredientMapByClass(batchToShow, Malt.class));
-
+        mav.addObject("hops", batchService.getBatchIngredientsByIngredient(batchToShow, Hop.class));
+        mav.addObject("additives", batchService.getBatchIngredientsByIngredient(batchToShow, Additive.class));
+        mav.addObject("temperatures", batchService.getBatchMashTemperature(batchToShow));
         return mav;
     }
 

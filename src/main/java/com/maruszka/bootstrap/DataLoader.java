@@ -1,6 +1,7 @@
 package com.maruszka.bootstrap;
 
 import com.maruszka.model.*;
+import com.maruszka.model.association.BatchMashTemperature;
 import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.enums.YeastFermentationType;
 import com.maruszka.model.enums.YeastFlocculation;
@@ -265,6 +266,11 @@ class DataLoader implements CommandLineRunner{
         additiveService.save(lactose);
         log.info("Additives loaded...");
 
+        Additive water = Additive.builder()
+                .name("Water")
+                .build();
+        additiveService.save(water);
+
         // Malt Conversion Rest
         MashTemperature mcs = MashTemperature.builder()
                 .restName("Acid rest")
@@ -310,13 +316,18 @@ class DataLoader implements CommandLineRunner{
                 .creationDate(LocalDate.now())
                 .designation("DS")
                 .beerStyle(beerStyleService.findByBeerStyleName("Dry Stout"))
+                .boilingTime(90)
+                .mashingWaterAmount(15)
+                .lauteringWaterAmount(15)
                 .build();
         batch1.setBatchComments(batchComments);
         batchService.save(batch1);
         batchIngredientService.addIngredient(batch1, maltService.findByName("Strzegom"), 4000, "Whole mash conversion");
         batchIngredientService.addIngredient(batch1, maltService.findByName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
         batchIngredientService.addIngredient(batch1, hopService.findByName("Citra"), 30, "120 minutes");
+        batchIngredientService.addIngredient(batch1, additiveService.findByName("Lactose"), 30, "Added at the start of maturing");
         batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Mashout"), 10);
+        batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Saccharification rest"), 45);
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)
@@ -325,28 +336,32 @@ class DataLoader implements CommandLineRunner{
         batchService.save(batch2);
         batchIngredientService.addIngredient(batch2, maltService.findByName("Pale Ale"), 2500, "Whole mash conversion");
         batchIngredientService.addIngredient(batch2, maltService.findByName("Jęczmień palony"), 50, "Whole mash conversion");
-        batchIngredientService.addIngredient(batch2, hopService.findByName("Cascade"), 50, "90 minutes");
         batchMashTemperatureService.addMashTemperature(batch2, mashTemperatureService.findByName("Mashout"), 10);
         log.info("Batch loaded...");
 
         log.info("Loading data complete");
 
-        Set<Batch> batches = batchService.findAll();
-        batches.stream().forEach(batch -> log.info(batch.toString()));
-
-        Set<Malt> ingredientSet = batchService.getIngredientSetByClass(batch1, Malt.class);
-        for (Malt malts : ingredientSet) {
-            log.info(malts.getName());
-        }
-
-        HashMap<Malt, Integer> ingredientMap = (HashMap<Malt, Integer>) batchService.getIngredientMapByClass(batch1, Malt.class);
-            for (Map.Entry<Malt, Integer> mapEntry : ingredientMap.entrySet()) {
-                log.info(mapEntry.getKey().getName() + " - " + mapEntry.getValue());
-            }
-
-
-        Set<Batch> batchesByBeerStyle = batchService.findAllByBeerTypeLike(beerStyleService.findByBeerStyleName("Russian Imperial Stout"));
-        batchesByBeerStyle.stream().forEach(batch -> log.info(batch.getBatchNumber().toString()));
+//        Set<Batch> batches = batchService.findAll();
+//        batches.stream().forEach(batch -> log.info(batch.toString()));
+//
+//        Set<Malt> ingredientSet = batchService.getIngredientSetByClass(batch1, Malt.class);
+//        for (Malt malts : ingredientSet) {
+//            log.info(malts.getName());
+//        }
+//
+//        HashMap<Malt, Integer> ingredientMap = (HashMap<Malt, Integer>) batchService.getIngredientMapByClass(batch1, Malt.class);
+//            for (Map.Entry<Malt, Integer> mapEntry : ingredientMap.entrySet()) {
+//                log.info(mapEntry.getKey().getName() + " - " + mapEntry.getValue());
+//            }
+//
+//
+//        Set<Batch> batchesByBeerStyle = batchService.findAllByBeerTypeLike(beerStyleService.findByBeerStyleName("Russian Imperial Stout"));
+//        batchesByBeerStyle.stream().forEach(batch -> log.info(batch.getBatchNumber().toString()));
+//
+//        Set<BatchMashTemperature> tempTemperatures = batch1.getMashTemperature();
+//        tempTemperatures.stream().forEach(t -> {
+//            log.info(t.getMashTemperature().getRestName());
+//        });
     }
 
 }

@@ -1,9 +1,13 @@
 package com.maruszka.model;
 
+import com.maruszka.model.association.BatchMashTemperature;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -24,11 +28,10 @@ public class MashTemperature extends BaseEntity {
     private Integer temp2;
     private String description;
 
-//    @OneToMany(mappedBy = "maltConversionRest")
-//    private Set<BatchMaltConversionRest> batches = new HashSet<>();
-//
-//    public MaltConversionRest(Long id, Set<BatchMaltConversionRest> batches) {
-//        this.batches = batches;
-//    }
+    @OneToMany(mappedBy = "mashTemperature")
+    private Set<BatchMashTemperature> batches = new HashSet<>();
+
+    public MashTemperature(Long id) {
+    }
 
 }

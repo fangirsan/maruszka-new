@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -52,8 +50,13 @@ public class Batch extends BaseEntity {
     @Max(20)
     private Integer lauteringWaterAmount;
 
+    @Max(20)
+    private Integer mashingWaterAmount;
+
     @Enumerated(EnumType.STRING)
     private LauteringType lauteringType;
+
+    private Integer boilingTime;
 
     @Column(name = "blg1")
     private BigDecimal blg1;
@@ -94,13 +97,17 @@ public class Batch extends BaseEntity {
     private Set<BatchMashTemperature> mashTemperature = new HashSet<>();
 
     @Builder
-    public Batch(Long id, Integer batchNumber, LocalDate creationDate, String designation, BatchComments batchComments, BeerStyle beerStyle) {
+    public Batch(Long id, Integer batchNumber, LocalDate creationDate, String designation, BatchComments batchComments,
+                 BeerStyle beerStyle, Integer boilingTime, Integer mashingWaterAmount, Integer lauteringWaterAmount) {
         super(id);
         this.batchNumber = batchNumber;
         this.creationDate = creationDate;
         this.designation = designation;
         this.batchComments = batchComments;
         this.beerStyle = beerStyle;
+        this.boilingTime = boilingTime;
+        this.mashingWaterAmount = mashingWaterAmount;
+        this.lauteringWaterAmount = lauteringWaterAmount;
     }
 
     public void setBatchComments(BatchComments comments) {
@@ -108,17 +115,4 @@ public class Batch extends BaseEntity {
         batchComments.setBatch(this);
     }
 
-//    private String getIngredientName() {
-//        String ingredientList = null;
-//        for (BatchIngredient ing : ingredients) {
-//            if (ing.getIngredient() instanceof Malt) {
-//                if (ingredientList == null) {
-//                    ingredientList = ing.getIngredient().getName();
-//                } else {
-//                    ingredientList += ing.getIngredient().getName();
-//                }
-//            }
-//        }
-//        return ingredientList;
-//    }
 }
