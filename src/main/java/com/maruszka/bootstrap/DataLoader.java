@@ -326,6 +326,7 @@ class DataLoader implements CommandLineRunner{
         batchIngredientService.addIngredient(batch1, maltService.findByName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
         batchIngredientService.addIngredient(batch1, hopService.findByName("Citra"), 30, "120 minutes");
         batchIngredientService.addIngredient(batch1, additiveService.findByName("Lactose"), 30, "Added at the start of maturing");
+        batchIngredientService.addIngredient(batch1, yeastService.findByName("SafAle US-05"), 0, "Re-hydrated");
         batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Mashout"), 10, 2);
         batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Saccharification rest"), 45, 1);
 

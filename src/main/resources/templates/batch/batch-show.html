@@ -58,6 +58,15 @@
 						</div>
 					</div>
 
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Water for lautering:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.lauteringWaterAmount} + ' liters'">Water for lautering</p>
+						</div>
+					</div>
+
 					<div class="display-field-name">
 						<label>Malts:</label>
 					</div>
@@ -134,14 +143,28 @@
 						</tbody>
 					</table>
 
-					<div class="form-row">
-						<div class="display-field-name">
-							<label>Water for lautering:</label>
-						</div>
-						<div class="form-field-input">
-							<p th:text="${batch.lauteringWaterAmount} + ' liters'">Water for lautering</p>
-						</div>
+<!--				Yeasts-->
+					<div class="display-field-name">
+						<label>Yeasts:</label>
 					</div>
+					<table class="table">
+						<thead class="thead">
+						<tr>
+							<th>Name</th>
+							<th>Comments</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:remove="all">
+							<td>SafAle US-05</td>
+							<td>Re-hydrated</td>
+						</tr>
+						<tr th:each="entry: ${yeasts}">
+							<td th:text="${entry.getIngredient().getName()}" />
+							<td th:text="${entry.getWayOfServing()}" />
+						</tr>
+						</tbody>
+					</table>
 
 <!--				Mashing Temperatures-->
 					<div class="display-field-name">
@@ -166,6 +189,86 @@
 						</tbody>
 					</table>
 
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Original plato:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.blg1}">Original plato</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Final plato:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.blg2}">Final plato</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Efficiency:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.efficiency}">Efficiency</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Maturing start date:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.maturationDate}">Maturing start date</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>IBU:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.calculatedIbu}">IBU</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Alcohol by volume:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.alcoholVolume}">Alcohol by volume</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Priming material:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.primingMaterial}">Priming material</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Amount of priming material:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.amountOfPrimingMaterial}">Amount of priming material</p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="display-field-name">
+							<label>Bottling date:</label>
+						</div>
+						<div class="form-field-input">
+							<p th:text="${batch.bottlingDate}">Bottling date</p>
+						</div>
+					</div>
 					<div class="bottom-nav-buttons">
 						<ul>
 							<li><a href="#" th:href="@{'/batch/list'}"><img th:src="@{/images/list.png}" title="list"></a></li>

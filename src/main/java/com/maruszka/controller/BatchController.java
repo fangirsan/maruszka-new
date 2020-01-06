@@ -33,6 +33,7 @@ class BatchController {
         mav.addObject("hops", batchService.getBatchIngredientsByIngredient(batchToShow, Hop.class));
         mav.addObject("additives", batchService.getBatchIngredientsByIngredient(batchToShow, Additive.class));
         mav.addObject("temperatures", batchService.getBatchMashTemperature(batchToShow));
+        mav.addObject("yeasts", batchService.getBatchIngredientsByIngredient(batchToShow, Yeast.class));
         return mav;
     }
 
