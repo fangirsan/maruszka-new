@@ -1,6 +1,8 @@
 package com.maruszka.services.springdatajpa;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import com.maruszka.model.*;
@@ -75,7 +77,7 @@ public class BatchServiceImpl implements BatchService {
     }
 
     @Override
-    public <T>Set<T> getIngredientByClass(Batch batch, Class<T> clazz) {
+    public <T>Set<T> getIngredientSetByClass(Batch batch, Class<T> clazz) {
         Set<T> ingredientSet = new HashSet<>();
         for (BatchIngredient ing : batch.getIngredients()) {
             if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
@@ -83,6 +85,23 @@ public class BatchServiceImpl implements BatchService {
             }
         }
       return (Set<T>) ingredientSet;
+    }
+
+    @Override
+    public <T> Map<T, Integer> getIngredientMapByClass(Batch batch, Class<T> clazz) {
+        Map<T, Integer> ingredientMap = new HashMap<>();
+//        batch.getIngredients().stream()
+//                .forEach(ingredient -> {
+//                    if (ingredient.getClass().isAssignableFrom(clazz)) {
+//                        ingredientMap.put((T) ingredient, ingredient.getAmount());
+//                    }
+//                });
+        for (BatchIngredient ing : batch.getIngredients()) {
+            if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
+                ingredientMap.put((T) ing.getIngredient(), ing.getAmount());
+            }
+        }
+        return ingredientMap;
     }
 
 }

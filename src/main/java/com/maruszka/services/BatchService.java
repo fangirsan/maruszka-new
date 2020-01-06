@@ -1,5 +1,6 @@
 package com.maruszka.services;
 
+import java.util.Map;
 import java.util.Set;
 
 import com.maruszka.model.Batch;
@@ -14,5 +15,7 @@ public interface BatchService extends CrudService<Batch, Long> {
 
     Set<Batch> findByOrderByBatchNumberAsc();
 
-    <T>Set<T> getIngredientByClass(Batch batch, Class<T> clazz);
+    <T>Set<T> getIngredientSetByClass(Batch batch, Class<T> clazz);
+
+    <T> Map<T, Integer> getIngredientMapByClass(Batch batch, Class<T> clazz);
 }

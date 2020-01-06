@@ -1,6 +1,7 @@
 package com.maruszka.controller;
 
 import com.maruszka.model.Batch;
+import com.maruszka.model.Malt;
 import com.maruszka.services.BatchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +28,9 @@ class BatchController {
         ModelAndView mav = new ModelAndView("batch/batch-show");
         Batch batchToShow = batchService.findById(batchId);
 
-//        if (batchToShow.getCountry() == null) {
-//            batchToShow.setCountry(countryService.findByCountryName("N/A"));
-//        }
-
         mav.addObject(batchService.findById(batchId));
-//        mav.addObject("malts", batchToShow.getMalts());
+//        mav.addObject("malts", batchService.getIngredientSetByClass(batchToShow, Malt.class));
+        mav.addObject("malts", batchService.getIngredientMapByClass(batchToShow, Malt.class));
 
         return mav;
     }

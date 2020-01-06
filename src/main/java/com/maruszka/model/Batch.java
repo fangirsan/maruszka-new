@@ -2,6 +2,7 @@ package com.maruszka.model;
 
 import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.model.association.BatchMashTemperature;
+import com.maruszka.model.enums.LauteringType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -46,6 +48,12 @@ public class Batch extends BaseEntity {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="beer_style_id")
     private BeerStyle beerStyle;
+
+    @Max(20)
+    private Integer lauteringWaterAmount;
+
+    @Enumerated(EnumType.STRING)
+    private LauteringType lauteringType;
 
     @Column(name = "blg1")
     private BigDecimal blg1;
@@ -100,17 +108,17 @@ public class Batch extends BaseEntity {
         batchComments.setBatch(this);
     }
 
-    private String getIngredientName() {
-        String ingredientList = null;
-        for (BatchIngredient ing : ingredients) {
-            if (ing.getIngredient() instanceof Malt) {
-                if (ingredientList == null) {
-                    ingredientList = ing.getIngredient().getName();
-                } else {
-                    ingredientList += ing.getIngredient().getName();
-                }
-            }
-        }
-        return ingredientList;
-    }
+//    private String getIngredientName() {
+//        String ingredientList = null;
+//        for (BatchIngredient ing : ingredients) {
+//            if (ing.getIngredient() instanceof Malt) {
+//                if (ingredientList == null) {
+//                    ingredientList = ing.getIngredient().getName();
+//                } else {
+//                    ingredientList += ing.getIngredient().getName();
+//                }
+//            }
+//        }
+//        return ingredientList;
+//    }
 }

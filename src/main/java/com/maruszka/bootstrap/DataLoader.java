@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Slf4j
@@ -332,20 +334,17 @@ class DataLoader implements CommandLineRunner{
         Set<Batch> batches = batchService.findAll();
         batches.stream().forEach(batch -> log.info(batch.toString()));
 
-        Set<Malt> ingredientSet = batchService.getIngredientByClass(batch1, Malt.class);
+        Set<Malt> ingredientSet = batchService.getIngredientSetByClass(batch1, Malt.class);
         for (Malt malts : ingredientSet) {
             log.info(malts.getName());
         }
 
-//        for (Batch tempBatch : batchService.findAllByBeerTypeLike()) {
-//            StringBuilder message = new StringBuilder();
-//            message.append("Beers that are ");
-//            message.append("Russian Imperial Stout:");
-//            if (tempBatch.getBeerStyle().getBeerStyleName() == "Russian Imperial Stout") {
-//                message.append(" ," + tempBatch.getBatchNumber().toString());
-//            }
-//            log.info(message.toString());
-//        }
+        HashMap<Malt, Integer> ingredientMap = (HashMap<Malt, Integer>) batchService.getIngredientMapByClass(batch1, Malt.class);
+            for (Map.Entry<Malt, Integer> mapEntry : ingredientMap.entrySet()) {
+                log.info(mapEntry.getKey().getName() + " - " + mapEntry.getValue());
+            }
+
+
         Set<Batch> batchesByBeerStyle = batchService.findAllByBeerTypeLike(beerStyleService.findByBeerStyleName("Russian Imperial Stout"));
         batchesByBeerStyle.stream().forEach(batch -> log.info(batch.getBatchNumber().toString()));
     }
