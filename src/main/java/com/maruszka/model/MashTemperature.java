@@ -29,7 +29,8 @@ public class MashTemperature extends BaseEntity {
     private String description;
 
     @OneToMany(mappedBy = "mashTemperature")
-    private Set<BatchMashTemperature> batches = new HashSet<>();
+//    private Set<BatchMashTemperature> batches = new HashSet<>();
+    private Set<BatchMashTemperature> batches;
 
     public MashTemperature(Long id) {
     }

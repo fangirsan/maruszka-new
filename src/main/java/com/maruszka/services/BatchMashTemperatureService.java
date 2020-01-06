@@ -6,6 +6,6 @@ import com.maruszka.model.association.BatchMashTemperature;
 
 public interface BatchMashTemperatureService extends CrudService<BatchMashTemperature, Long> {
 
-    void addMashTemperature(Batch batch, MashTemperature mashTemperature, Integer minutes);
+    void addMashTemperature(Batch batch, MashTemperature mashTemperature, Integer minutes, Integer sequence);
 
 }

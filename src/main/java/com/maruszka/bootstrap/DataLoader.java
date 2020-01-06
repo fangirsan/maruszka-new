@@ -326,8 +326,8 @@ class DataLoader implements CommandLineRunner{
         batchIngredientService.addIngredient(batch1, maltService.findByName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
         batchIngredientService.addIngredient(batch1, hopService.findByName("Citra"), 30, "120 minutes");
         batchIngredientService.addIngredient(batch1, additiveService.findByName("Lactose"), 30, "Added at the start of maturing");
-        batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Mashout"), 10);
-        batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Saccharification rest"), 45);
+        batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Mashout"), 10, 2);
+        batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Saccharification rest"), 45, 1);
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)
@@ -336,7 +336,7 @@ class DataLoader implements CommandLineRunner{
         batchService.save(batch2);
         batchIngredientService.addIngredient(batch2, maltService.findByName("Pale Ale"), 2500, "Whole mash conversion");
         batchIngredientService.addIngredient(batch2, maltService.findByName("Jęczmień palony"), 50, "Whole mash conversion");
-        batchMashTemperatureService.addMashTemperature(batch2, mashTemperatureService.findByName("Mashout"), 10);
+        batchMashTemperatureService.addMashTemperature(batch2, mashTemperatureService.findByName("Mashout"), 10, 1);
         log.info("Batch loaded...");
 
         log.info("Loading data complete");

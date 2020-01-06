@@ -26,6 +26,10 @@ public class BatchMashTemperature {
     @Column
     private Integer minutes;
 
+    @Id
+    @Column
+    private Integer sequence;
+
     @ManyToOne
     @JoinColumn(name = "mashTemperatureId", updatable = false, insertable = false, referencedColumnName = "id")
     private MashTemperature mashTemperature;

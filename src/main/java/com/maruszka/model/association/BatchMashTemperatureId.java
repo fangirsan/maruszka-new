@@ -13,6 +13,7 @@ public class BatchMashTemperatureId implements Serializable {
     private Long mashTemperatureId;
     private Long batchId;
     private Integer minutes;
+    private Integer sequence;
 
     @Override
     public boolean equals(Object o) {
@@ -21,11 +22,12 @@ public class BatchMashTemperatureId implements Serializable {
         BatchMashTemperatureId that = (BatchMashTemperatureId) o;
         return mashTemperatureId.equals(that.mashTemperatureId) &&
                 batchId.equals(that.batchId) &&
-                minutes.equals(that.minutes);
+                minutes.equals(that.minutes) &&
+                sequence.equals(that.sequence);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mashTemperatureId, batchId, minutes);
+        return Objects.hash(mashTemperatureId, batchId, minutes, sequence);
     }
 }

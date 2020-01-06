@@ -1,9 +1,7 @@
 package com.maruszka.services.springdatajpa;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.maruszka.model.*;
 import com.maruszka.model.association.BatchIngredient;
@@ -112,7 +110,11 @@ public class BatchServiceImpl implements BatchService {
 
     @Override
     public Set<BatchMashTemperature> getBatchMashTemperature(Batch batch) {
-        return batch.getMashTemperature();
+        Set<BatchMashTemperature> sortedSet = batch.getMashTemperature().stream()
+                .sorted(Comparator.comparing(bmt -> bmt.getMashTemperature().getTemp1()))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        return sortedSet;
     }
 
 }

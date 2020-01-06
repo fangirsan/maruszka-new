@@ -47,22 +47,19 @@ public class BatchMashTemperatureServiceImpl implements BatchMashTemperatureServ
     }
 
     @Override
-    public void addMashTemperature(Batch batch, MashTemperature mashTemperature, Integer minutes) {
+    public void addMashTemperature(Batch batch, MashTemperature mashTemperature, Integer minutes, Integer sequence) {
         BatchMashTemperature association = new BatchMashTemperature();
         association.setMashTemperature(mashTemperature);
         association.setBatch(batch);
         association.setMashTemperatureId(mashTemperature.getId());
         association.setBatchId(batch.getId());
         association.setMinutes(minutes);
+        association.setSequence(sequence);
         batch.getMashTemperature().add(association);
         if (mashTemperature.getBatches() == null) {
             mashTemperature.setBatches(new HashSet<>());
         }
         mashTemperature.getBatches().add(association);
-        /*
-         I don't need bidirectional relation, so there will be no option to search for batch from perspective of
-         object MashTemperature
-         */
         this.save(association);
 
     }
