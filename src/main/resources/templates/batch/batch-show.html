@@ -67,6 +67,7 @@
 						</div>
 					</div>
 
+<!--				Malts-->
 					<div class="display-field-name">
 						<label>Malts:</label>
 					</div>
@@ -85,13 +86,17 @@
 								<td>3</td>
 							</tr>
 							<tr th:each="entry: ${malts}">
-								<td th:text="${entry.key.getName()}" />
-								<td th:text="${entry.value}" />
-								<td th:text="${entry.key.getMaltEbc()}" />
+<!--								<td th:text="${entry.key.getName()}" />-->
+<!--								<td th:text="${entry.value}" />-->
+<!--								<td th:text="${entry.key.getMaltEbc()}" />-->
+								<td th:text="${entry.getIngredient().getName()}" />
+								<td th:text="${entry.getAmount()}" />
+								<td th:text="${entry.getIngredient().getMaltEbc()}" />
 							</tr>
 						</tbody>
 					</table>
 
+<!--				Hops-->
 					<div class="display-field-name">
 						<label>Hops:</label>
 					</div>

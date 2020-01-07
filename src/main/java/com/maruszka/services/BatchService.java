@@ -17,9 +17,9 @@ public interface BatchService extends CrudService<Batch, Long> {
 
     Set<Batch> findByOrderByBatchNumberAsc();
 
-    <T>Set<T> getIngredientSetByClass(Batch batch, Class<T> clazz);
-
-    <T> Map<T, Integer> getIngredientMapByClass(Batch batch, Class<T> clazz);
+//    <T>Set<T> getIngredientSetByClass(Batch batch, Class<T> clazz);
+//
+//    <T> Map<T, Integer> getIngredientMapByClass(Batch batch, Class<T> clazz);
 
     <T>Set<BatchIngredient> getBatchIngredientsByIngredient(Batch batch, Class<T> clazz);
 

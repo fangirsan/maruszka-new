@@ -29,7 +29,7 @@ class BatchController {
         Batch batchToShow = batchService.findById(batchId);
 
         mav.addObject(batchService.findById(batchId));
-        mav.addObject("malts", batchService.getIngredientMapByClass(batchToShow, Malt.class));
+        mav.addObject("malts", batchService.getBatchIngredientsByIngredient(batchToShow, Malt.class));
         mav.addObject("hops", batchService.getBatchIngredientsByIngredient(batchToShow, Hop.class));
         mav.addObject("additives", batchService.getBatchIngredientsByIngredient(batchToShow, Additive.class));
         mav.addObject("temperatures", batchService.getBatchMashTemperature(batchToShow));

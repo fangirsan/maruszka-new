@@ -75,27 +75,27 @@ public class BatchServiceImpl implements BatchService {
         return batchRepository.findByOrderByBatchNumberAsc();
     }
 
-    @Override
-    public <T>Set<T> getIngredientSetByClass(Batch batch, Class<T> clazz) {
-        Set<T> ingredientSet = new HashSet<>();
-        for (BatchIngredient ing : batch.getIngredients()) {
-            if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
-                ingredientSet.add((T) ing.getIngredient());
-            }
-        }
-      return ingredientSet;
-    }
-
-    @Override
-    public <T> Map<T, Integer> getIngredientMapByClass(Batch batch, Class<T> clazz) {
-        Map<T, Integer> ingredientMap = new HashMap<>();
-        batch.getIngredients().stream().forEach(ing -> {
-            if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
-                ingredientMap.put((T) ing.getIngredient(), ing.getAmount());
-            }
-        });
-        return ingredientMap;
-    }
+//    @Override
+//    public <T>Set<T> getIngredientSetByClass(Batch batch, Class<T> clazz) {
+//        Set<T> ingredientSet = new HashSet<>();
+//        for (BatchIngredient ing : batch.getIngredients()) {
+//            if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
+//                ingredientSet.add((T) ing.getIngredient());
+//            }
+//        }
+//      return ingredientSet;
+//    }
+//
+//    @Override
+//    public <T> Map<T, Integer> getIngredientMapByClass(Batch batch, Class<T> clazz) {
+//        Map<T, Integer> ingredientMap = new HashMap<>();
+//        batch.getIngredients().stream().forEach(ing -> {
+//            if (ing.getIngredient().getClass().isAssignableFrom(clazz) ) {
+//                ingredientMap.put((T) ing.getIngredient(), ing.getAmount());
+//            }
+//        });
+//        return ingredientMap;
+//    }
 
     @Override
     public <T>Set<BatchIngredient> getBatchIngredientsByIngredient(Batch batch, Class<T> clazz) {
