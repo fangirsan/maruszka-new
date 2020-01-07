@@ -23,7 +23,7 @@ import java.util.Set;
 @Slf4j
 @Component
 @Transactional
-@Profile("default")
+//@Profile("dev")
 class DataLoader implements CommandLineRunner{
 
     private final MaltService maltService;

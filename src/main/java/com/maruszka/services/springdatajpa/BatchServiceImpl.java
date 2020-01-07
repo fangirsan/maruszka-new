@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.maruszka.repositories.BatchRepository;
 import com.maruszka.repositories.BeerStyleRepository;
 import com.maruszka.services.BatchService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -71,6 +72,7 @@ public class BatchServiceImpl implements BatchService {
     }
 
     @Override
+    @Transactional
     public Set<Batch> findByOrderByBatchNumberAsc() {
         return batchRepository.findByOrderByBatchNumberAsc();
     }

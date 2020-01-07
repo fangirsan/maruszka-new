@@ -1,6 +1,7 @@
 package com.maruszka;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import static org.springframework.boot.SpringApplication.run;
 
