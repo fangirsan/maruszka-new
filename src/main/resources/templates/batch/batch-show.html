@@ -34,9 +34,8 @@
 						<div class="display-field-name">
 							<label>Date:</label>
 						</div>
-
 						<div class="form-field-input">
-							<p th:text="${batch.creationDate}">Creation date</p>
+							<p th:text="${#temporals.format(batch.creationDate, 'dd-MM-yyyy')}">Creation date</p>
 						</div>
 					</div>
 
@@ -86,9 +85,6 @@
 								<td>3</td>
 							</tr>
 							<tr th:each="entry: ${malts}">
-<!--								<td th:text="${entry.key.getName()}" />-->
-<!--								<td th:text="${entry.value}" />-->
-<!--								<td th:text="${entry.key.getMaltEbc()}" />-->
 								<td th:text="${entry.getIngredient().getName()}" />
 								<td th:text="${entry.getAmount()}" />
 								<td th:text="${entry.getIngredient().getMaltEbc()}" />
@@ -179,16 +175,20 @@
 						<thead class="thead">
 						<tr>
 							<th>Name</th>
+							<th>Temperature range</th>
 							<th>Minutes</th>
 						</tr>
 						</thead>
 						<tbody>
 						<tr th:remove="all">
 							<td>Saccharification rest</td>
+							<td>1 - 2</td>
 							<td>45 minutes</td>
 						</tr>
 						<tr th:each="batchMashTemperature: ${temperatures}">
 							<td th:text="${batchMashTemperature.getMashTemperature().getRestName()}" />
+							<td th:text="${batchMashTemperature.getMashTemperature().getTemp1()
+								+ ' - ' + batchMashTemperature.getMashTemperature().getTemp2()}" />
 							<td th:text="${batchMashTemperature.minutes}" />
 						</tr>
 						</tbody>
