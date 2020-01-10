@@ -1,7 +1,6 @@
 package com.maruszka.bootstrap;
 
 import com.maruszka.model.*;
-import com.maruszka.model.association.BatchMashTemperature;
 import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.enums.YeastFermentationType;
 import com.maruszka.model.enums.YeastFlocculation;
@@ -10,15 +9,12 @@ import com.maruszka.services.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Slf4j
 @Component
@@ -313,7 +309,7 @@ class DataLoader implements CommandLineRunner{
         batchComments.setComment("Test");
         Batch batch1 = Batch.builder()
                 .batchNumber(1)
-                .creationDate(LocalDate.now())
+                .creationDate(LocalDateTime.now())
                 .designation("DS")
                 .beerStyle(beerStyleService.findByBeerStyleName("Dry Stout"))
                 .boilingTime(90)

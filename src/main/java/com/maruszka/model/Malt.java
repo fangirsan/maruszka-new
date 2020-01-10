@@ -1,9 +1,9 @@
 package com.maruszka.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Setter
 @Getter

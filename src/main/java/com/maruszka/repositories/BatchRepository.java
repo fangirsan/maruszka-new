@@ -1,12 +1,10 @@
 package com.maruszka.repositories;
 
-import java.util.Set;
-
-import com.maruszka.model.Ingredient;
-import org.springframework.data.repository.CrudRepository;
-
 import com.maruszka.model.Batch;
 import com.maruszka.model.BeerStyle;
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.Set;
 
 public interface BatchRepository extends CrudRepository<Batch, Long> {
 

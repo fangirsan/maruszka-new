@@ -1,16 +1,15 @@
 package com.maruszka.services.springdatajpa;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import com.maruszka.model.Yeast;
 import com.maruszka.repositories.BatchRepository;
+import com.maruszka.repositories.YeastRepository;
+import com.maruszka.services.YeastService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import com.maruszka.model.Yeast;
-import com.maruszka.repositories.YeastRepository;
-import com.maruszka.services.YeastService;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service

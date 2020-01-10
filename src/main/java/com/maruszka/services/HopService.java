@@ -1,9 +1,9 @@
 package com.maruszka.services;
 
+import com.maruszka.model.Hop;
+
 import java.util.List;
 import java.util.Set;
-
-import com.maruszka.model.Hop;
 
 public interface HopService extends CrudService<Hop, Long> {
 

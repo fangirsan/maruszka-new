@@ -1,10 +1,10 @@
 package com.maruszka.repositories;
 
-import java.util.List;
-import java.util.Set;
-
 import com.maruszka.model.BeerStyle;
 import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+import java.util.Set;
 
 public interface BeerStyleRepository extends CrudRepository<BeerStyle, Long> {
 

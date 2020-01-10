@@ -64,7 +64,7 @@
 								<label>Creation date:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="date" class="form-control"	th:field="*{creationDate}" th:errorclass="has-error"/>
+								<input type="date" class="form-control" th:field="*{creationDate}" th:errorclass="has-error"/>
 								<div class="form-error" th:if="${#fields.hasErrors('creationDate')}">
 									<ul>
 										<li th:each="err : ${#fields.errors('creationDate')}" th:text="${err}"/>

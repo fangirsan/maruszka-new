@@ -1,9 +1,9 @@
 package com.maruszka.services;
 
+import com.maruszka.model.Yeast;
+
 import java.util.List;
 import java.util.Set;
-
-import com.maruszka.model.Yeast;
 
 public interface YeastService extends CrudService<Yeast, Long> {
 

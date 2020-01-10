@@ -7,11 +7,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +30,7 @@ public class Batch extends BaseEntity {
     private Integer batchNumber;
 
     @Column(name = "creation_date")
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
 
     @Column(name = "fermentation_date")
     private LocalDate fermentationDate;
@@ -97,7 +101,7 @@ public class Batch extends BaseEntity {
     private Set<BatchMashTemperature> mashTemperature = new HashSet<>();
 
     @Builder
-    public Batch(Long id, Integer batchNumber, LocalDate creationDate, String designation, BatchComments batchComments,
+    public Batch(Long id, Integer batchNumber, LocalDateTime creationDate, String designation, BatchComments batchComments,
                  BeerStyle beerStyle, Integer boilingTime, Integer mashingWaterAmount, Integer lauteringWaterAmount) {
         super(id);
         this.batchNumber = batchNumber;

@@ -1,8 +1,8 @@
 package com.maruszka.services;
 
-import java.util.Set;
-
 import com.maruszka.model.Country;
+
+import java.util.Set;
 
 public interface CountryService extends CrudService<Country, Long> {
 

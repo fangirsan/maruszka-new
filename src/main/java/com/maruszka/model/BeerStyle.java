@@ -1,23 +1,18 @@
 package com.maruszka.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.*;
-
 import com.maruszka.constraints.bigDecimal.BigDecimalNotNullConstraint;
 import com.maruszka.constraints.integer.IntegerNotNullConstraint;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.HashSet;
-import java.util.Set;
 
 @Setter
 @Getter

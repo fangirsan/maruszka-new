@@ -1,21 +1,20 @@
 package com.maruszka.services.springdatajpa;
 
+import com.maruszka.model.Malt;
+import com.maruszka.model.Producer;
+import com.maruszka.model.Yeast;
+import com.maruszka.model.enums.ProducerType;
+import com.maruszka.repositories.MaltRepository;
+import com.maruszka.repositories.ProducerRepository;
+import com.maruszka.repositories.YeastRepository;
+import com.maruszka.services.ProducerService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
-import com.maruszka.model.Malt;
-import com.maruszka.model.Yeast;
-import com.maruszka.model.enums.ProducerType;
-import com.maruszka.repositories.MaltRepository;
-import com.maruszka.repositories.YeastRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import com.maruszka.model.Producer;
-import com.maruszka.repositories.ProducerRepository;
-import com.maruszka.services.ProducerService;
 
 @Slf4j
 @Service

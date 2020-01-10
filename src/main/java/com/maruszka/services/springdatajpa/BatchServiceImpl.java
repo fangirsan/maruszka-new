@@ -1,19 +1,21 @@
 package com.maruszka.services.springdatajpa;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-import com.maruszka.model.*;
+import com.maruszka.model.Batch;
+import com.maruszka.model.BeerStyle;
 import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.model.association.BatchMashTemperature;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
 import com.maruszka.repositories.BatchRepository;
 import com.maruszka.repositories.BeerStyleRepository;
 import com.maruszka.services.BatchService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service

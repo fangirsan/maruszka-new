@@ -2,7 +2,6 @@ package com.maruszka.model;
 
 import lombok.*;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 

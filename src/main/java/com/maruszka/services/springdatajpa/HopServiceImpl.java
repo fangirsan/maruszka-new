@@ -1,18 +1,17 @@
 package com.maruszka.services.springdatajpa;
 
+import com.maruszka.exceptions.NotFoundException;
+import com.maruszka.model.Hop;
+import com.maruszka.repositories.BatchRepository;
+import com.maruszka.repositories.HopRepository;
+import com.maruszka.services.HopService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
-import com.maruszka.exceptions.NotFoundException;
-import com.maruszka.repositories.BatchRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import com.maruszka.model.Hop;
-import com.maruszka.repositories.HopRepository;
-import com.maruszka.services.HopService;
 
 @Slf4j
 @Service

@@ -1,11 +1,10 @@
 package com.maruszka.repositories;
 
-import java.util.List;
-import java.util.Set;
-
+import com.maruszka.model.Hop;
 import org.springframework.data.repository.CrudRepository;
 
-import com.maruszka.model.Hop;
+import java.util.List;
+import java.util.Set;
 
 public interface HopRepository extends CrudRepository<Hop, Long> {
 

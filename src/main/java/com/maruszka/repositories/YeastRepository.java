@@ -1,11 +1,10 @@
 package com.maruszka.repositories;
 
-import java.util.List;
-import java.util.Set;
-
+import com.maruszka.model.Yeast;
 import org.springframework.data.repository.CrudRepository;
 
-import com.maruszka.model.Yeast;
+import java.util.List;
+import java.util.Set;
 
 public interface YeastRepository extends CrudRepository<Yeast, Long> {
 

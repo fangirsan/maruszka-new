@@ -1,13 +1,11 @@
 package com.maruszka.services;
 
-import java.util.Map;
-import java.util.Set;
-
 import com.maruszka.model.Batch;
 import com.maruszka.model.BeerStyle;
-import com.maruszka.model.Ingredient;
 import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.model.association.BatchMashTemperature;
+
+import java.util.Set;
 
 public interface BatchService extends CrudService<Batch, Long> {
 

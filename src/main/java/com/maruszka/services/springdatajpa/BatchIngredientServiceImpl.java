@@ -1,8 +1,8 @@
 package com.maruszka.services.springdatajpa;
 
 import com.maruszka.model.Batch;
-import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.model.Ingredient;
+import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.repositories.BatchIngredientRepository;
 import com.maruszka.services.BatchIngredientService;
 import lombok.extern.slf4j.Slf4j;

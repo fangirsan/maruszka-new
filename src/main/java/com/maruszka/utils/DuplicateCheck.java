@@ -27,4 +27,9 @@ public class DuplicateCheck {
         return lowerCaseResult.contains(lookUpObject.toLowerCase());
     }
 
+    public boolean isDuplicate(Integer batchId) {
+
+        return false;
+    }
+
 }

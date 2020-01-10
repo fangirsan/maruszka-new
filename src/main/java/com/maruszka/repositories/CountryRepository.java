@@ -1,10 +1,9 @@
 package com.maruszka.repositories;
 
-import java.util.Set;
-
+import com.maruszka.model.Country;
 import org.springframework.data.repository.CrudRepository;
 
-import com.maruszka.model.Country;
+import java.util.Set;
 
 public interface CountryRepository extends CrudRepository<Country, Long> {
 

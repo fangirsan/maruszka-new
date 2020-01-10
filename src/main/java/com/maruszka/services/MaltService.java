@@ -1,9 +1,9 @@
 package com.maruszka.services;
 
+import com.maruszka.model.Malt;
+
 import java.util.List;
 import java.util.Set;
-
-import com.maruszka.model.Malt;
 
 public interface MaltService extends CrudService<Malt, Long> {
 
