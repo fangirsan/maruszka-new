@@ -33,12 +33,12 @@ class SpringMvcConfiguration implements WebMvcConfigurer{
         return lci;
     }
 
-//    private ISpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
-//        SpringTemplateEngine engine = new SpringTemplateEngine();
-//        engine.addDialect(new Java8TimeDialect());
-//        engine.setTemplateResolver(templateResolver);
-//        return engine;
-//    }
+    private ISpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.addDialect(new Java8TimeDialect());
+        engine.setTemplateResolver(templateResolver);
+        return engine;
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

@@ -328,6 +328,7 @@ class DataLoader implements CommandLineRunner{
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)
+                .creationDate(LocalDateTime.now())
                 .beerStyle(beerStyleService.findByBeerStyleName("Russian Imperial Stout"))
                 .build();
         batchService.save(batch2);

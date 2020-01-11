@@ -83,7 +83,7 @@ class BatchController {
     }
 
     @PostMapping("/saveBatch")
-    public String saveOrUpdate(@Valid @ModelAttribute("batch") Batch batch, BindingResult bindingResult) {
+    public String saveOrUpdate(@RequestParam ("creationDate") LocalDateTime date, @Valid @ModelAttribute("batch") Batch batch, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {

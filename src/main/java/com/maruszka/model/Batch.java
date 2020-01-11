@@ -10,9 +10,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,7 +27,8 @@ public class Batch extends BaseEntity {
     @Column(name="batch_number")
     private Integer batchNumber;
 
-    @Column(name = "creation_date")
+    @Column(name = "creation_date", nullable = false)
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDateTime creationDate;
 
     @Column(name = "fermentation_date")
@@ -93,6 +92,10 @@ public class Batch extends BaseEntity {
     private String primingMaterial;
 
     private int amountOfPrimingMaterial;
+
+//    public void setCreationDate(String creationDate) {
+//        this.creationDate = LocalDate.parse(creationDate).atStartOfDay();
+//    }
 
     @OneToMany(mappedBy = "batch")
     private Set<BatchIngredient> ingredients = new HashSet<>();
