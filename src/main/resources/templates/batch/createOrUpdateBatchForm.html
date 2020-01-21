@@ -74,6 +74,96 @@
 						</div>
 
 						<div class="form-row">
+							<div class="form-field-name">
+								<label>Cap designation:</label>
+							</div>
+							<div class="form-field-input">
+								<input type="text" class="form-control"	th:field="*{designation}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('designation')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('designation')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Water for mashing:</label>
+							</div>
+							<div class="form-field-input">
+								<input type="number" class="form-control"	th:field="*{mashingWaterAmount}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('mashingWaterAmount')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('mashingWaterAmount')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Water for lautering:</label>
+							</div>
+							<div class="form-field-input">
+								<input type="number" class="form-control"	th:field="*{lauteringWaterAmount}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('lauteringWaterAmount')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('lauteringWaterAmount')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Original and final plato:</label>
+							</div>
+							<div class="form-field-input-2-in-row">
+								<input type="number" step="any" class="form-control" th:field="*{blg1}" th:errorclass="has-error"/> -
+								<input type="number" step="any" class="form-control" th:field="*{blg2}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('blg1')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('blg1')}" th:text="${err}"/>
+									</ul>
+								</div>
+								<div class="form-error" th:if="${#fields.hasErrors('blg2')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('blg2')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Maturation date:</label>
+							</div>
+							<div class="form-field-input">
+								<input type="date" class="form-control" th:field="*{maturationDate}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('maturationDate')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('maturationDate')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-field-name">
+								<label>Bottling date:</label>
+							</div>
+							<div class="form-field-input">
+								<input type="date" class="form-control" th:field="*{bottlingDate}" th:errorclass="has-error"/>
+								<div class="form-error" th:if="${#fields.hasErrors('bottlingDate')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('bottlingDate')}" th:text="${err}"/>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
 							<div class="form-field-submit">
 								<button class="submit-button" type="submit">Submit</button>
 							</div>

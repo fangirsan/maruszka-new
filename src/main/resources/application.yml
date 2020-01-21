@@ -1,5 +1,5 @@
-server:
-  port: ${port}
+#server:
+#  port: ${port}
 spring:
     mvc:
         favicon:

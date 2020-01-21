@@ -83,7 +83,7 @@ class BatchController {
     }
 
     @PostMapping("/saveBatch")
-    public String saveOrUpdate(@RequestParam ("creationDate") LocalDateTime date, @Valid @ModelAttribute("batch") Batch batch, BindingResult bindingResult) {
+    public String saveOrUpdate(@Valid @ModelAttribute("batch") Batch batch, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {
@@ -98,6 +98,7 @@ class BatchController {
                 return VIEWS_BATCH_CREATE_OR_UPDATE_FORM;
             } else {
                 Batch savedBatch = batchService.save(batch);
+                batchService.calculateEfficiency(batch);
                 return "redirect:/batch/" + savedBatch.getId();
             }
         }

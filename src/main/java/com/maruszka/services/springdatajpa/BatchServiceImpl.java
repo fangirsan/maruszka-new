@@ -2,6 +2,8 @@ package com.maruszka.services.springdatajpa;
 
 import com.maruszka.model.Batch;
 import com.maruszka.model.BeerStyle;
+import com.maruszka.model.Hop;
+import com.maruszka.model.Malt;
 import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.model.association.BatchMashTemperature;
 import com.maruszka.repositories.BatchRepository;
@@ -11,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -23,6 +27,8 @@ public class BatchServiceImpl implements BatchService {
 
     private final BatchRepository batchRepository;
     private final BeerStyleRepository beerStyleRepository;
+    private static final BigDecimal efficiencyMultiplier = new BigDecimal(1.05);
+    private static final BigDecimal zero = BigDecimal.ZERO;
 
     public BatchServiceImpl(BatchRepository batchRepository, BeerStyleRepository beerStyleRepository) {
         this.batchRepository = batchRepository;
@@ -119,6 +125,32 @@ public class BatchServiceImpl implements BatchService {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
         return sortedSet;
+    }
+
+    @Override
+    public BigDecimal calculateEfficiency(Batch batch) {
+//        (ilość litrów brzeczki * jej Blg *1.05)/(ile kg zasypu)
+        BigDecimal efficiency = null;
+        Set<Integer> malts = new HashSet<>();
+
+        Integer maltAmount = 0;
+        if (batch.getIngredients() != null ) {
+            batch.getIngredients().stream().forEach((malt -> {
+                if (malt.getIngredient().getClass().isAssignableFrom(Malt.class)) {
+                    malts.add(malt.getAmount());
+                }
+            }));
+            maltAmount = malts.stream()
+                    .reduce(0, Integer::sum);
+        }
+
+        if (batch.getVolume() != zero || batch.getBlg1() != zero || maltAmount != 0) {
+            efficiency = (batch.getVolume()
+                    .multiply(batch.getBlg1())
+                    .multiply(efficiencyMultiplier))
+                    .divide(BigDecimal.valueOf(maltAmount / 1000));
+        }
+        return efficiency;
     }
 
 }

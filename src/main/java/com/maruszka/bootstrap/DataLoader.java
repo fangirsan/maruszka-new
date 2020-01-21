@@ -13,8 +13,10 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Slf4j
 @Component
@@ -309,18 +311,24 @@ class DataLoader implements CommandLineRunner{
         batchComments.setComment("Test");
         Batch batch1 = Batch.builder()
                 .batchNumber(1)
-                .creationDate(LocalDateTime.now())
+                .creationDate(LocalDate.now())
                 .designation("DS")
                 .beerStyle(beerStyleService.findByBeerStyleName("Dry Stout"))
                 .boilingTime(90)
                 .mashingWaterAmount(15)
                 .lauteringWaterAmount(15)
+                .maturationDate(LocalDate.now().plusDays(5))
+                .bottlingDate(LocalDate.now().plusDays(10))
+                .blg1(new BigDecimal(20.5))
+                .blg2(new BigDecimal(5.5))
+                .volume(new BigDecimal(18.5))
                 .build();
         batch1.setBatchComments(batchComments);
         batchService.save(batch1);
         batchIngredientService.addIngredient(batch1, maltService.findByName("Strzegom"), 4000, "Whole mash conversion");
         batchIngredientService.addIngredient(batch1, maltService.findByName("Jęczmień palony"), 100, "10 minutes before end of mash conversion");
         batchIngredientService.addIngredient(batch1, hopService.findByName("Citra"), 30, "120 minutes");
+        batchIngredientService.addIngredient(batch1, hopService.findByName("Cascade"), 30, "10 minutes");
         batchIngredientService.addIngredient(batch1, additiveService.findByName("Lactose"), 30, "Added at the start of maturing");
         batchIngredientService.addIngredient(batch1, yeastService.findByName("SafAle US-05"), 0, "Re-hydrated");
         batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Mashout"), 10, 2);
@@ -328,8 +336,10 @@ class DataLoader implements CommandLineRunner{
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)
-                .creationDate(LocalDateTime.now())
+                .creationDate(LocalDate.now())
                 .beerStyle(beerStyleService.findByBeerStyleName("Russian Imperial Stout"))
+                .blg1(new BigDecimal(20.5))
+                .blg2(new BigDecimal(5.5))
                 .build();
         batchService.save(batch2);
         batchIngredientService.addIngredient(batch2, maltService.findByName("Pale Ale"), 2500, "Whole mash conversion");
@@ -360,6 +370,7 @@ class DataLoader implements CommandLineRunner{
 //        tempTemperatures.stream().forEach(t -> {
 //            log.info(t.getMashTemperature().getRestName());
 //        });
+        
     }
 
 }

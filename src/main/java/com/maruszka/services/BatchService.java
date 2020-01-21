@@ -5,6 +5,7 @@ import com.maruszka.model.BeerStyle;
 import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.model.association.BatchMashTemperature;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 public interface BatchService extends CrudService<Batch, Long> {
@@ -22,4 +23,6 @@ public interface BatchService extends CrudService<Batch, Long> {
     <T>Set<BatchIngredient> getBatchIngredientsByIngredient(Batch batch, Class<T> clazz);
 
     Set<BatchMashTemperature> getBatchMashTemperature(Batch batch);
+
+    BigDecimal calculateEfficiency(Batch batch);
 }

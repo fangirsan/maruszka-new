@@ -25,6 +25,11 @@
 		<div class="wrapper">
 			<div class="main">
 				<div class="page-title">
+					<!--/*@thymesVar id="beerStyleName" type="java.lang.String"*/-->
+					<!--/*@thymesVar id="beerStyle" type="com.maruszka.model.BeerStyle"*/-->
+					<!--/*@thymesVar id="batch" type="com.maruszka.model.Batch"*/-->
+					<!--/*@thymesVar id="batchNumber" type="java.lang.Integer"*/-->
+					<!--/*@thymesVar id="batch" type="com.maruszka.model.Batch"*/-->
 					<p th:text="${batch.batchNumber + ' - ' + batch.beerStyle.beerStyleName}">Malt name</p>
 				</div>
 
@@ -35,7 +40,9 @@
 							<label>Date:</label>
 						</div>
 						<div class="form-field-input">
-							<p th:text="${#temporals.format(batch.creationDate, 'dd-MM-yyyy')}">Creation date</p>
+							<!--/*@thymesVar id="creationDate" type="java.time.LocalDate"*/-->
+							<!--/*@thymesVar id="batch" type="com.maruszka.model.Batch"*/-->
+							<p th:text="${batch.creationDate}">Creation date</p>
 						</div>
 					</div>
 
@@ -44,6 +51,7 @@
 							<label>Cap designation:</label>
 						</div>
 						<div class="form-field-input">
+							<!--/*@thymesVar id="batch" type="com.maruszka.model.Batch"*/-->
 							<p th:text="${batch.designation}">Cap designation</p>
 						</div>
 					</div>
@@ -53,6 +61,7 @@
 							<label>Water for mashing:</label>
 						</div>
 						<div class="form-field-input">
+							<!--/*@thymesVar id="batch" type="com.maruszka.model.Batch"*/-->
 							<p th:text="${batch.mashingWaterAmount} + ' liters'">Water for mashing</p>
 						</div>
 					</div>
@@ -62,6 +71,7 @@
 							<label>Water for lautering:</label>
 						</div>
 						<div class="form-field-input">
+							<!--/*@thymesVar id="batch" type="com.maruszka.model.Batch"*/-->
 							<p th:text="${batch.lauteringWaterAmount} + ' liters'">Water for lautering</p>
 						</div>
 					</div>
@@ -144,29 +154,6 @@
 						</tbody>
 					</table>
 
-<!--				Yeasts-->
-					<div class="display-field-name">
-						<label>Yeasts:</label>
-					</div>
-					<table class="table">
-						<thead class="thead">
-						<tr>
-							<th>Name</th>
-							<th>Comments</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr th:remove="all">
-							<td>SafAle US-05</td>
-							<td>Re-hydrated</td>
-						</tr>
-						<tr th:each="entry: ${yeasts}">
-							<td th:text="${entry.getIngredient().getName()}" />
-							<td th:text="${entry.getWayOfServing()}" />
-						</tr>
-						</tbody>
-					</table>
-
 <!--				Mashing Temperatures-->
 					<div class="display-field-name">
 						<label>Mashing temperatures:</label>
@@ -194,21 +181,49 @@
 						</tbody>
 					</table>
 
+					<!--				Yeasts-->
+					<div class="display-field-name">
+						<label>Yeasts:</label>
+					</div>
+					<table class="table">
+						<thead class="thead">
+						<tr>
+							<th>Name</th>
+							<th>Comments</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:remove="all">
+							<td>SafAle US-05</td>
+							<td>Re-hydrated</td>
+						</tr>
+						<tr th:each="entry: ${yeasts}">
+							<td th:text="${entry.getIngredient().getName()}" />
+							<td th:text="${entry.getWayOfServing()}" />
+						</tr>
+						</tbody>
+					</table>
+
 					<div class="form-row">
 						<div class="display-field-name">
-							<label>Original plato:</label>
+							<label>Original and final plato:</label>
 						</div>
 						<div class="form-field-input">
-							<p th:text="${batch.blg1}">Original plato</p>
+<!--							<span th:text="${someObject.someProperty != null} ? ${someObject.someProperty} : 'null value!'">someValue</span>-->
+							<p>
+								<span th:text="${batch.blg1}"/>
+								 -
+								<span th:text="${batch.blg2} ? ${batch.blg2} : 'TBD'"/>
+							</p>
 						</div>
 					</div>
 
 					<div class="form-row">
 						<div class="display-field-name">
-							<label>Final plato:</label>
+							<label>Wort volume:</label>
 						</div>
 						<div class="form-field-input">
-							<p th:text="${batch.blg2}">Final plato</p>
+							<p th:text="${batch.volume}">Wort volume</p>
 						</div>
 					</div>
 
