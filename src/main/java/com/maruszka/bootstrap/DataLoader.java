@@ -333,6 +333,7 @@ class DataLoader implements CommandLineRunner{
         batchIngredientService.addIngredient(batch1, yeastService.findByName("SafAle US-05"), 0, "Re-hydrated");
         batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Mashout"), 10, 2);
         batchMashTemperatureService.addMashTemperature(batch1, mashTemperatureService.findByName("Saccharification rest"), 45, 1);
+//        batchService.calculateEfficiency(batch1);
 
         Batch batch2 = Batch.builder()
                 .batchNumber(2)

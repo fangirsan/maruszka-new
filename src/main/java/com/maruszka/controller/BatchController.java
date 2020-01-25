@@ -1,6 +1,7 @@
 package com.maruszka.controller;
 
 import com.maruszka.model.*;
+import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.services.BatchService;
 import com.maruszka.services.BeerStyleService;
 import com.maruszka.utils.DuplicateCheck;
@@ -69,8 +70,8 @@ class BatchController {
     @GetMapping("/new")
     public String initCreationForm(Model model) {
 
-        Batch batch = new Batch();
-        model.addAttribute("batch", batch);
+        model.addAttribute("batch", new Batch());
+        model.addAttribute("batchIngredient", new BatchIngredient());
 
         return VIEWS_BATCH_CREATE_OR_UPDATE_FORM;
     }
@@ -98,7 +99,7 @@ class BatchController {
                 return VIEWS_BATCH_CREATE_OR_UPDATE_FORM;
             } else {
                 Batch savedBatch = batchService.save(batch);
-                batchService.calculateEfficiency(batch);
+//                batchService.calculateEfficiency(batch);
                 return "redirect:/batch/" + savedBatch.getId();
             }
         }

@@ -148,7 +148,8 @@ public class BatchServiceImpl implements BatchService {
             efficiency = (batch.getVolume()
                     .multiply(batch.getBlg1())
                     .multiply(efficiencyMultiplier))
-                    .divide(BigDecimal.valueOf(maltAmount / 1000));
+                    .divide(BigDecimal.valueOf(maltAmount)
+                            .divide(BigDecimal.valueOf(1000)));
         }
         return efficiency;
     }

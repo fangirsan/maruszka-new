@@ -277,7 +277,7 @@
 							<label>Amount of priming material:</label>
 						</div>
 						<div class="form-field-input">
-							<p th:text="${batch.amountOfPrimingMaterial}">Amount of priming material</p>
+							<p th:text="${batch.amountOfPrimingMaterial} ? ${batch.amountOfPrimingMaterial} : 'TBD'">Amount of priming material</p>
 						</div>
 					</div>
 
