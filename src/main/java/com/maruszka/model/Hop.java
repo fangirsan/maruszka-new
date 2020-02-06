@@ -36,7 +36,8 @@ public class Hop extends Ingredient {
     @Builder
     public Hop(Long id, String name, BigDecimal alphaAcidMin, BigDecimal alphaAcidMax, boolean bitterHop, boolean aromaHop,
                Country country) {
-        super(id);
+//        super(id)
+        this.id = id;
         this.name = name;
         this.alphaAcidMin = alphaAcidMin;
         this.alphaAcidMax = alphaAcidMax;

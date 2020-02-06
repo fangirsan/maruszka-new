@@ -20,7 +20,8 @@ public class Additive extends Ingredient {
 
     @Builder
     public Additive(Long id, String name) {
-        super(id);
+//        super(id);
+        this.id = id;
         this.name = name;
     }
 }

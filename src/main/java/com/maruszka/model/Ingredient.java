@@ -25,7 +25,7 @@ public class Ingredient extends BaseEntity {
     @OneToMany(mappedBy = "ingredient")
     private Set<BatchIngredient> batches = new HashSet<>();
 
-    public Ingredient(Long id) {
-    }
+    //    public Ingredient(Long id) {
+//    }
 
 }

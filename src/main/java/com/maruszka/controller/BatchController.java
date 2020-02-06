@@ -4,6 +4,7 @@ import com.maruszka.model.*;
 import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.services.BatchService;
 import com.maruszka.services.BeerStyleService;
+import com.maruszka.services.MaltService;
 import com.maruszka.utils.DuplicateCheck;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -32,16 +33,24 @@ class BatchController {
     private final BatchService batchService;
     private final DuplicateCheck duplicateCheck;
     private final BeerStyleService beerStyleService;
+    private final MaltService maltService;
 
-    public BatchController(BatchService batchService, DuplicateCheck duplicateCheck, BeerStyleService beerStyleService) {
+    public BatchController(BatchService batchService, DuplicateCheck duplicateCheck, BeerStyleService beerStyleService,
+                           MaltService maltService) {
         this.batchService = batchService;
         this.duplicateCheck = duplicateCheck;
         this.beerStyleService = beerStyleService;
+        this.maltService = maltService;
     }
 
     @ModelAttribute("beerStyles")
     public Set<BeerStyle> populateBeerStyles() {
         return beerStyleService.findByOrderByBeerStyleAsc();
+    }
+
+    @ModelAttribute("malts")
+    public Set<Malt> populateMalts() {
+        return maltService.findByOrderByNameAsc();
     }
 
     @GetMapping("/{batchId}")
@@ -70,8 +79,9 @@ class BatchController {
     @GetMapping("/new")
     public String initCreationForm(Model model) {
 
-        model.addAttribute("batch", new Batch());
-        model.addAttribute("batchIngredient", new BatchIngredient());
+        model.addAttribute("batchForm", new BatchForm());
+//        model.addAttribute("batch", new Batch());
+//        model.addAttribute("batchIngredient", new BatchIngredient());
 
         return VIEWS_BATCH_CREATE_OR_UPDATE_FORM;
     }

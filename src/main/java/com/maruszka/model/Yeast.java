@@ -48,7 +48,8 @@ public class Yeast extends Ingredient {
     @Builder
     public Yeast(Long id, String name, YeastType yeastType, BigDecimal fermentationTempMin, BigDecimal fermentationTempMax,
                  BigDecimal alcoholTolerance, YeastFlocculation flocculation, Producer producer, YeastFermentationType yeastFermentationType) {
-        super(id);
+//        super(id);
+        this.id = id;
         this.name = name;
         this.yeastType = yeastType;
         this.fermentationTempMin = fermentationTempMin;

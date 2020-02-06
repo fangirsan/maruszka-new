@@ -36,9 +36,11 @@ public class Malt extends Ingredient {
     @JoinColumn(name="country_id")
     private Country country;
 
+
+
     @Builder
     public Malt(Long id, String name, Country country, Producer producer, int maltFilling, int maltEbc, String maltUsage) {
-        super(id);
+        this.id = id;
         this.name = name;
         this.producer = producer;
         this.maltFilling = maltFilling;
