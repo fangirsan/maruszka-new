@@ -141,8 +141,19 @@
 <!--								</td>-->
 <!--							</tr>-->
 							<tr th:each="entry: ${malts}">
-								<td th:text="${entry.getIngredient().getName()}" />
-								<td th:text="${entry.getAmount()}" />
+<!--								<td th:text="${entry.getIngredient().getName()}" />-->
+                                <td>
+                                    <select class="form-control" th:value="*{ingredients}">-->
+                                        <option th:each="ingredients : ${malts}"
+                                                th:value="${ingredients}"
+                                                th:text="${ingredients}">
+                                        </option>
+                                    </select>
+                                </td>
+<!--								<td th:text="${entry.getAmount()}" />-->
+                                <td>
+                                  <input type="text" class="form-control"	th:field="*{batchNumber}" />
+                                </td>
 							</tr>
 							</tbody>
 						</table>

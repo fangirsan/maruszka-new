@@ -125,7 +125,7 @@ td, th {
 	margin-top: 15px;
 	width: 50%;
 	font-size: initial;
-	vertical-align:middle;
+	vertical-align:top;
 }
 
 .form-field-name {
