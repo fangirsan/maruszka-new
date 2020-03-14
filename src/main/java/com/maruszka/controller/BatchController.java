@@ -79,9 +79,9 @@ class BatchController {
     @GetMapping("/new")
     public String initCreationForm(Model model) {
 
-        model.addAttribute("batchForm", new BatchForm());
-//        model.addAttribute("batch", new Batch());
-//        model.addAttribute("batchIngredient", new BatchIngredient());
+//        model.addAttribute("batchForm", new BatchForm());
+        model.addAttribute("batch", new Batch());
+        model.addAttribute("batchIngredient", new BatchIngredient());
 
         return VIEWS_BATCH_CREATE_OR_UPDATE_FORM;
     }
@@ -89,12 +89,18 @@ class BatchController {
     @GetMapping("/{batchId}/edit")
     public String initUpdateBatchForm(@PathVariable("batchId") Long batchId, Model model) {
 
-        model.addAttribute("batch", batchService.findById(batchId));
+        Batch batchToUpdate = batchService.findById(batchId);
+
+        model.addAttribute("batch", batchToUpdate);
+        model.addAttribute("malts", batchService.getBatchIngredientsByIngredient(batchToUpdate, Malt.class));
         return VIEWS_BATCH_CREATE_OR_UPDATE_FORM;
     }
 
     @PostMapping("/saveBatch")
-    public String saveOrUpdate(@Valid @ModelAttribute("batch") Batch batch, BindingResult bindingResult) {
+//    public String saveOrUpdate(@Valid @ModelAttribute("batch") Batch batch, BindingResult bindingResult) {
+    public String saveOrUpdate(@Valid @ModelAttribute("batchForm") BatchForm batchForm, BindingResult bindingResult) {
+
+        Batch batch = batchForm.getBatch();
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> {

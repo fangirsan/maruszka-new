@@ -53,7 +53,7 @@ public class Batch extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private BatchComments batchComments;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="beer_style_id")
     private BeerStyle beerStyle;
 

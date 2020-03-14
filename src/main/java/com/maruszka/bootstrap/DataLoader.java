@@ -1,6 +1,8 @@
 package com.maruszka.bootstrap;
 
+import com.maruszka.dao.BatchDao;
 import com.maruszka.model.*;
+import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.model.enums.ProducerType;
 import com.maruszka.model.enums.YeastFermentationType;
 import com.maruszka.model.enums.YeastFlocculation;
@@ -17,6 +19,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -35,13 +38,14 @@ class DataLoader implements CommandLineRunner{
     private final BatchIngredientService batchIngredientService;
     private final MashTemperatureService mashTemperatureService;
     private final BatchMashTemperatureService batchMashTemperatureService;
+    private final BatchDao batchDao;
 
     @Autowired
     public DataLoader(MaltService maltService, ProducerService maltProducerService, CountryService countryService,
                       HopService hopService, YeastService yeastService, BeerStyleService beerStyleService,
                       BatchService batchService, AdditiveService additiveService,
                       BatchIngredientService batchIngredientService, MashTemperatureService mashTemperatureService,
-                      BatchMashTemperatureService batchMashTemperatureService) {
+                      BatchMashTemperatureService batchMashTemperatureService, BatchDao batchDao) {
         this.maltService = maltService;
         this.producerService = maltProducerService;
         this.countryService = countryService;
@@ -53,6 +57,7 @@ class DataLoader implements CommandLineRunner{
         this.batchIngredientService = batchIngredientService;
         this.mashTemperatureService = mashTemperatureService;
         this.batchMashTemperatureService = batchMashTemperatureService;
+        this. batchDao = batchDao;
     }
 
     @Override
@@ -371,6 +376,12 @@ class DataLoader implements CommandLineRunner{
 //        tempTemperatures.stream().forEach(t -> {
 //            log.info(t.getMashTemperature().getRestName());
 //        });
+
+        Set<BatchIngredient> allByBatchId = batchIngredientService.findAllByBatchId(1L);
+        BatchForm batchForm = batchDao.composeBatchForm(1L);
+
+//        Set<BatchIngredient> allBatchIngredientsFtomBatch = batchService.getI
+        log.info("end...");
         
     }
 

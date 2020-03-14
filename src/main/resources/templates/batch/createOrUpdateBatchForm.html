@@ -28,19 +28,19 @@
 					<p th:text="#{beerStyle.form.title}" />
 				</div>
 				<div class="form">
-					<form th:object="${batchForm}" th:action="@{'/batch/saveBatch'}" method="post">
+					<form th:object="${batch}" th:action="@{'/batch/saveBatch'}" method="post">
 <!--					<form th:object="${batch}" th:action="@{'/batch/saveBatch'}" method="post">-->
 <!--					<form th:action="@{'/batch/saveBatch'}" method="post">-->
-						<input type="hidden" name ="id" th:field="*{batch.id}">
+						<input type="hidden" name ="id" th:field="*{id}">
 
 						<div class="form-row">
 							<div class="form-field-name">
 								<label>Batch number:</label>
 							</div>
 							<div class="form-field-input">
-								<input type="text" class="form-control"	th:field="*{batch.batchNumber}"
-									   th:errorclass="has-error" name="batch.batchNumber"/>
-								<div class="form-error" th:if="${#fields.hasErrors('batch.batchNumber')}">
+								<input type="text" class="form-control"	th:field="*{batchNumber}"
+									   th:errorclass="has-error" name="batchNumber"/>
+								<div class="form-error" th:if="${#fields.hasErrors('batchNumber')}">
 									<ul>
 										<li th:each="err : ${#fields.errors('batchNumber')}" th:text="${err}"/>
 									</ul>
@@ -48,19 +48,19 @@
 							</div>
 						</div>
 
-						<div class="form-row">
-							<div class="form-field-name">
-								<label>Beer style:</label>
-							</div>
-							<div class="form-field-input">
-								<select class="form-control" th:field="*{batch.beerStyle.id}">
-									<option th:each="beerStyle : ${beerStyles}"
-											th:value="${beerStyle?.id}"
-											th:text="${beerStyle?.beerStyleName}">
-									</option>
-								</select>
-							</div>
-						</div>
+<!--						<div class="form-row">-->
+<!--							<div class="form-field-name">-->
+<!--								<label>Beer style:</label>-->
+<!--							</div>-->
+<!--							<div class="form-field-input">-->
+<!--								<select class="form-control" th:field="*{batch.beerStyle.id}">-->
+<!--									<option th:each="beerStyle : ${beerStyles}"-->
+<!--											th:value="${beerStyle?.id}"-->
+<!--											th:text="${beerStyle?.beerStyleName}">-->
+<!--									</option>-->
+<!--								</select>-->
+<!--							</div>-->
+<!--						</div>-->
 
 <!--						<div class="form-row">-->
 <!--							<div class="form-field-name">-->
@@ -118,31 +118,30 @@
 <!--							</div>-->
 <!--						</div>-->
 
-<!--						<table class="table">-->
-<!--							<thead class="thead">-->
-<!--							<tr>-->
-<!--								<th>Name</th>-->
-<!--								<th>Amount</th>-->
-<!--							</tr>-->
-<!--							</thead>-->
-<!--							<tbody>-->
-<!--							<tr th:remove="all">-->
-<!--								<td>Pale Ale</td>-->
-<!--								<td>4000</td>-->
-<!--							</tr>-->
-<!--							<tr>-->
-<!--								<td>-->
-<!--									<select class="form-control" th:value="*{malt.id}">-->
-<!--										<option th:each="malt : ${malts}"-->
-<!--												th:value="${malt?.id}"-->
-<!--												th:text="${malt?.name}">-->
-<!--										</option>-->
-<!--									</select>-->
-<!--								</td>-->
-<!--							</tr>-->
-
-<!--							</tbody>-->
-<!--						</table>-->
+						<table class="table">
+							<thead class="thead">
+							<tr>
+								<th>Name</th>
+								<th>Amount</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr th:remove="all">
+								<td>Pale Ale</td>
+								<td>4000</td>
+							</tr>
+							<tr>
+								<td>
+									<select class="form-control" th:value="*{ingredients}">
+										<option th:each="ingredients : ${malts}"
+												th:value="${ingredients}"
+												th:text="${ingredients}">
+										</option>
+									</select>
+								</td>
+							</tr>
+							</tbody>
+						</table>
 
 <!--						<div class="form-row">-->
 <!--							<div class="form-field-name">-->

@@ -6,6 +6,7 @@ import com.maruszka.model.association.BatchIngredient;
 import com.maruszka.repositories.BatchIngredientRepository;
 import com.maruszka.services.BatchIngredientService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -16,6 +17,7 @@ public class BatchIngredientServiceImpl implements BatchIngredientService {
 
     private final BatchIngredientRepository batchIngredientRepository;
 
+    @Autowired
     public BatchIngredientServiceImpl(BatchIngredientRepository batchIngredientRepository) {
         this.batchIngredientRepository = batchIngredientRepository;
     }
@@ -58,6 +60,12 @@ public class BatchIngredientServiceImpl implements BatchIngredientService {
         batch.getIngredients().add(association);
         ingredient.getBatches().add(association);
         this.save(association);
+    }
+
+    @Override
+    public Set<BatchIngredient> findAllByBatchId(Long batchId) {
+
+        return batchIngredientRepository.findAllByBatchId(batchId);
     }
 
 }

@@ -1,17 +1,20 @@
 package com.maruszka.model;
 
 import com.maruszka.model.association.BatchIngredient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Set;
 
 @Getter
 @Setter
+@Builder
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+
 public class BatchForm {
 
     private Batch batch;
-    private BatchIngredient batchIngredient;
+    private Set<BatchIngredient> batchIngredient;
 
 }

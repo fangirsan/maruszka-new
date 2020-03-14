@@ -10,6 +10,7 @@ import com.maruszka.repositories.BatchRepository;
 import com.maruszka.repositories.BeerStyleRepository;
 import com.maruszka.services.BatchService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,7 @@ public class BatchServiceImpl implements BatchService {
     private static final BigDecimal efficiencyMultiplier = new BigDecimal(1.05);
     private static final BigDecimal zero = BigDecimal.ZERO;
 
+    @Autowired
     public BatchServiceImpl(BatchRepository batchRepository, BeerStyleRepository beerStyleRepository) {
         this.batchRepository = batchRepository;
         this.beerStyleRepository = beerStyleRepository;
@@ -63,15 +65,13 @@ public class BatchServiceImpl implements BatchService {
         batchRepository.deleteById(id);
     }
 
+    // TODO: this should return SET
     @Override
     public Batch findBatchByBeerType(BeerStyle beerStyle) {
+
         Batch theBatch = batchRepository.findBatchByBeerStyle(beerStyle);
-//        if(theBatch!=null){
-//            Hibernate.initialize(theBatch.getHops());
-//        }
 
         return theBatch;
-//		return batchRepository.findBatchByBeerType(beerType);
     }
 
     @Override
