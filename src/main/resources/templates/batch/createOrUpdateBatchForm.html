@@ -130,15 +130,19 @@
 								<td>Pale Ale</td>
 								<td>4000</td>
 							</tr>
-							<tr>
-								<td>
-									<select class="form-control" th:value="*{ingredients}">
-										<option th:each="ingredients : ${malts}"
-												th:value="${ingredients}"
-												th:text="${ingredients}">
-										</option>
-									</select>
-								</td>
+<!--							<tr>-->
+<!--								<td>-->
+<!--									<select class="form-control" th:value="*{ingredients}">-->
+<!--										<option th:each="ingredients : ${malts}"-->
+<!--												th:value="${ingredients}"-->
+<!--												th:text="${ingredients}">-->
+<!--										</option>-->
+<!--									</select>-->
+<!--								</td>-->
+<!--							</tr>-->
+							<tr th:each="entry: ${malts}">
+								<td th:text="${entry.getIngredient().getName()}" />
+								<td th:text="${entry.getAmount()}" />
 							</tr>
 							</tbody>
 						</table>
